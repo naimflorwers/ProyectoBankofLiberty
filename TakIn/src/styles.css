@@ -1,0 +1,8 @@
+/* src/styles.css */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Asegura que el cuerpo de la página ocupe toda la altura */
+  font-family: Arial, sans-serif; /* Puedes definir una fuente global aquí */
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>EliminarCuenta</title>
+    <link rel="stylesheet" href="cerrar-cuenta.css">
+</head>
+<body>
+<div class="container">
+  
+  <div class="header">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <span class="title">TakIn</span>
+  </div>
+
+ 
+  <div class="form-card">
+    <form>
+      <div class="row-full">
+        <label>Nombre completo</label>
+        <input type="text" />
+      </div>
+
+      <div class="row-full">
+        <label>Número de cuenta bancaria</label>
+        <input type="text" />
+      </div>
+
+      <div class="button-container">
+        <button type="button" [routerLink]="['/cuenta-eliminada']">CANCELAR CUENTA</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

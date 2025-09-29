@@ -1,0 +1,26 @@
+<div class="main-container">
+  <header class="header">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <span class="title">TakIn</span>
+    <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
+  </header>
+
+  <div class="content">
+    <div class="cp-section">
+      <div class="cp-item">
+        <img src="assets/abrir-cuenta.svg" alt="Transferencia" class="cp-icon" />
+        <button class="button" [routerLink]="['/transferencia']">Transferencia</button>
+      </div>
+
+      <div class="cp-item">
+        <img src="assets/cerrar-cuenta.svg" alt="Ingresar Dinero" class="cp-icon" />
+        <button class="button" [routerLink]="['/ingresar-dinero']">Ingresar Dinero</button>
+      </div>
+
+      <div class="cp-item">
+        <img src="assets/prestamo.svg" alt="Retirar Dinero" class="cp-icon" />
+        <button class="button" [routerLink]="['/retirar-dinero']">Retirar Dinero</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUENTA ELIMINADA COMPLETADA</title>
+    <link rel="stylesheet" href="cuenta-eliminada.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Navbar -->
+        <header class="header">
+            <img src="assets/logo.png" alt="Logo TakIn" class="logo" />
+            <span class="title">TakIn</span>
+            <span class="user-icon">&#128100;</span>
+        </header>
+
+        <!-- Contenido de confirmación -->
+        <div class="container">
+            <div class="confirmation-box">
+                <div class="check-icon">✔️</div>
+                <h2 class="confirmation-text">Cuenta Eliminada Correctamente</h2>
+
+                <div class="details">
+                    <div><strong>No. de cuenta</strong> <a href="#">15633488</a></div>
+                    <div><strong>Fecha y hora</strong> <a href="#">04/09/2025 09:45 AM</a></div>
+                    <div><strong>Nombre</strong> <a href="#">Juan Pérez Gomez</a></div>
+                </div>
+
+                <button class="btn-aceptar" [routerLink]="['/menu-ejecutivo']">ACEPTAR</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Cuenta</title>
+    <link rel="stylesheet" href="crear-cuenta.css">
+</head>
+<body>
+    <div class="container">
+  <div class="header">
+    <img src="assets/logo.png" alt="Logo TakIn" class="logo">
+    <span class="title">Bank of Liberty</span>
+  </div>
+
+  <div class="form-card">
+    <form>
+      
+      <h4>Datos Personales</h4>
+      <div class="row">
+        <div class="col">
+          <label>Nombre completo</label>
+          <input type="text" />
+        </div>
+        <div class="col">
+          <label>Fecha de Nacimiento</label>
+          <input type="date" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>CURP</label>
+          <input type="text" />
+        </div>
+        <div class="col">
+          <label>Nacionalidad</label>
+          <input type="text" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label>Identificación Oficial</label>
+          <input type="text" />
+        </div>
+        <div class="col">
+          <label>Número de Teléfono</label>
+          <input type="text" />
+        </div>
+      </div>
+
+      <div class="row-full">
+        <label>Domicilio</label>
+        <input type="text" />
+      </div>
+
+      <div class="row-full">
+        <label>Correo Electrónico</label>
+        <input type="email" />
+      </div>
+
+      
+      <h4>Datos Laborales</h4>
+      <div class="row">
+        <div class="col">
+          <label>Puesto Laboral</label>
+          <input type="text" />
+        </div>
+        <div class="col">
+          <label>Nombre de la empresa</label>
+          <input type="text" />
+        </div>
+      </div>
+
+      <div class="row-full">
+        <label>Domicilio de la empresa</label>
+        <input type="text" />
+      </div>
+
+      
+      <h4>Datos Financieros</h4>
+      <div class="row">
+        <div class="col">
+          <label>Fuente de Ingresos</label>
+          <input type="text" />
+        </div>
+        <div class="col">
+          <label>Ingresos Mensuales Aproximados</label>
+          <input type="text" />
+        </div>
+      </div>
+
+      <div class="row-full">
+        <label>Beneficiarios en caso de Fallecimiento</label>
+        <input type="text" />
+      </div>
+
+      
+      <div class="button-container">
+        <button type="button" [routerLink]="['/cuenta-creada']">REGISTRAR</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

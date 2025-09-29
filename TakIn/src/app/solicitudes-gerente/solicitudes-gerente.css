@@ -1,0 +1,130 @@
+:host {
+  display: block;
+  background-color: #3b5970;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h3 {
+  font-size: 2.5em;
+  line-height: 1.2;
+  color: #FEE568;
+}
+
+/* Navbar ajustado */
+.header {
+  width: 100%;                 /* Ocupa todo el ancho */
+  background-color: #85b4d1;
+  padding: 8px 20px;           /* Menos alto verticalmente */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  height: 70px;
+  width: 70px;
+}
+
+.main-content {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 50px;
+}
+
+.title-bar {
+  background-color: #375d79;
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.solicitud-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #ccc;
+  border-bottom: 1px solid #aaa;
+  color: #333;
+}
+
+.solicitud-item.empty {
+  color: transparent;
+}
+
+.solicitud-item:nth-child(even) {
+  background-color: #ddd;
+}
+
+.status-icon {
+  font-size: 1.2em;
+  margin-right: 20px;
+}
+
+.icon-pending {
+  color: #555;
+}
+
+.icon-rejected {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.icon-approved {
+  color: #27ae60;
+  font-weight: bold;
+}
+
+.solicitud-nombre {
+  flex-grow: 1;
+}
+
+.solicitud-fecha {
+  font-weight: bold;
+}
+
+/* Footer y botón */
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.regresar-btn {
+  background-color: #2c3e50;
+  color: white;
+  border: 2px solid #5f7a90;
+  padding: 12px 40px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: all 0.2s ease-in-out;
+  max-width: 100%;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.regresar-btn:hover {
+  background-color: #34495e;
+  transform: translateY(-2px);
+}
+
+.solicitud-link {
+  text-decoration: none; 
+  color: inherit;      
+  display: block;    
+}

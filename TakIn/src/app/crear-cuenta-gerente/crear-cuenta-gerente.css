@@ -1,0 +1,106 @@
+/* HTML y body deben crecer según el contenido */
+html {
+  height: auto;
+  min-height: 100%;
+  background-color: #33658A;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #33658A;
+  min-height: 100%;
+}
+
+/* Contenedor principal */
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px; /* espacio debajo del formulario */
+  box-sizing: border-box;
+}
+
+/* Navbar / Header (NO TOCAR) */
+.header {
+  background-color: #86BBD8;
+  color: rgb(0, 0, 0);
+  width: 100%;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.header .logo {
+  height: 70px;
+  width: 70px;
+}
+
+.header .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* FORMULARIO */
+.form-card {
+  background-color: #5fa9c7;
+  margin: 20px;
+  padding: 20px;
+  width: 80%;
+  max-width: 800px;
+  border-radius: 8px;
+}
+
+h4 {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.row, .row-full {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.row-full {
+  flex-direction: column;
+}
+
+label {
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 6px;
+  border-radius: 15px;
+  border: none;
+  outline: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 8px 25px;
+  background-color: #20316b;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #20316b;
+}

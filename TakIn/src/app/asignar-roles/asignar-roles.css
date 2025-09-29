@@ -1,0 +1,132 @@
+/* Reset básico */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+  background: #8fc3e6; /* mismo color de fondo */
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Para que todos los elementos hereden box-sizing */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Contenedor principal full screen */
+.main-container {
+  background: #8fc3e6;
+  border: none;            /* sin bordes externos */
+  border-radius: 0;        /* sin esquinas redondeadas */
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #7bb0d6;
+  padding: 10px 30px;
+  border-bottom: 6px solid #29577a;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  font-size: 2rem;
+}
+
+.user-icon {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Contenido central */
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Caja de roles */
+.roles-box {
+  background: #b2d6f3;
+  border-radius: 12px;
+  padding: 30px 40px;
+  min-width: 500px;
+  box-shadow: 0 2px 8px #0002;
+  width: 100%;
+  max-width: 800px;       /* limita el ancho máximo */
+}
+
+/* Tarjetas de roles */
+.role-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px #0001;
+  gap: 20px;
+}
+
+.role-avatar {
+  background: #b2d6f3;
+  color: #2a6bb2;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.role-info {
+  flex: 1;
+}
+
+.role-nombre {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.role-puesto {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+/* Botón de modificar / asignar roles */
+.modificar-btn {
+  background: #3a4b56;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px #0002;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.modificar-btn:hover {
+  background: #22303a;
+  transform: scale(1.05);
+}
+
+.modificar-btn:active {
+  transform: scale(0.95);
+}

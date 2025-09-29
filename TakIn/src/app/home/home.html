@@ -1,0 +1,45 @@
+<header class="navbar">
+  <div class="navbar-left">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <h3>TakIn</h3>
+    <a href="#" class="nav-item">Tarjeta de Debito</a>
+    <a href="#" class="nav-item">Tarjeta de credito</a>
+    <a href="#" class="nav-item">Inversiones</a>
+    <div class="dropdown">
+      <a href="#" class="nav-item dropbtn">Takln <span class="arrow-down"></span></a>
+      <div class="dropdown-content">
+        <a href="#">Opción 1</a>
+        <a href="#">Opción 2</a>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="#" class="nav-item dropbtn">Ayuda <span class="arrow-down"></span></a>
+      <div class="dropdown-content">
+        <a href="#">Soporte</a>
+        <a href="#">Preguntas Frecuentes</a>
+      </div>
+    </div>
+  </div>
+  <div class="navbar-right">
+    <div class="dropdown">
+      <button class="btn-empleado dropbtn">SOY EMPLEADO <span class="arrow-down"></span></button>
+      <div class="dropdown-content">
+        <a routerLink="/login">Ejecutivo</a>
+        <a routerLink="/login">Gerente</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="hero-section">
+  <div class="hero-content">
+    <h1>La unica cuenta donde tus <br> <span class="highlight-inversiones">inversiones</span> <br> y tus <span class="highlight-tarjetas">tarjetas</span> se llevan bien</h1>
+    <button class="btn-cliente" routerLink="/login">SOY CLIENTE</button>
+  </div>
+  <div class="hero-image-container">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <img src="assets/tarjeta.png" alt="Tarjeta Takin" class="card-image">
+    <div class="circle circle-3"></div>
+  </div>
+</main>

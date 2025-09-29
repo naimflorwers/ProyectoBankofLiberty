@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INGRESAR DINERO</title>
+    <link rel="stylesheet" href="ingresar-dinero.css">
+</head>
+<body><div class="container">
+  <h2>Bank of Liberty</h2>
+
+  <h3>Cargar saldo</h3>
+
+  <form>
+    <div class="form-group">
+      <label>Número de Cuenta</label>
+      <input type="text" placeholder="Ingresa número de cuenta">
+    </div>
+
+    <div class="form-group">
+      <label>Nombre del Titular</label>
+      <input type="text" placeholder="Ingresa nombre del titular">
+    </div>
+
+    <div class="form-group">
+      <label>Cuenta Clabe</label>
+      <input type="text" placeholder="Ingresa cuenta clabe">
+    </div>
+
+    <div class="form-group">
+      <label>Método de Depósito</label>
+      <select>
+        <option value="" disabled selected>Seleccione un método</option>
+        <option value="SORIANA">SORIANA</option>
+        <option value="oxxo">Depósito en OXXO</option>
+        <option value="7ELEVEN">7ELEVEN</option>
+      </select>
+    </div>
+
+    <button type="button" class="btn" [routerLink]="['/operacion-completada']">CARGAR DINERO</button>
+  </form>
+</div>
+</body>
+</html>

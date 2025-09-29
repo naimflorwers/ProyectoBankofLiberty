@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RETIRAR DINERO</title>
+    <link rel="stylesheet" href="retirar-dinero.css">
+</head>
+<body><div class="container">
+  <h2>Bank of Liberty</h2>
+
+  <h3>Retiro de efectivo</h3>
+
+  <form class="retiro-form">
+
+    <div class="left-side">
+      <div class="form-group">
+        <label>Cuenta de origen</label>
+        <input type="text" placeholder="Ingresa la cuenta de origen">
+      </div>
+
+      <div class="form-group">
+        <label>Monto a retirar</label>
+        <input type="number" placeholder="Ingresa el monto">
+      </div>
+
+      <button type="button" class="btn" [routerLink]="['/operacion-completa']">CONFIRMAR</button>
+    </div>
+
+   
+    <div class="right-side">
+      <div class="form-group">
+        <label>Método de retiro:</label>
+        <select>
+          <option value="" disabled selected>Seleccione</option>
+          <option value="qr">Generar código QR</option>
+          <option value="sucursal">Sucursal</option>
+        </select>
+      </div>
+
+      <div class="qr-box">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=Retiro" alt="QR de retiro">
+        <small>válido por cierto tiempo.</small>
+      </div>
+
+      <div class="form-group">
+        <label>No. de Referencia</label>
+        <input type="text" value=" 7279 3717 6832" readonly>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPERACION COMPLETADA</title>
+    <link rel="stylesheet" href="operacion-completada.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+        <h1 class="bank-title">Bank of Liberty</h1>
+        </div>
+
+        <div class="confirmation-box">
+            <div class="check-icon">✔️</div>
+            <h2 class="confirmation-text">Depósito acreditado en tu cuenta</h2>
+
+            <div class="details">
+                <div><strong>Monto</strong> <a href="#">$5,000.00 MXN</a></div>
+                <div><strong>Cuenta de Destino</strong> <a href="#">1234</a></div>
+                <div><strong>Fecha y hora</strong> <a href="#">04/09/2025 09:45 AM</a></div>
+                <div><strong>Folio</strong> <a href="#">000123456</a></div>
+            </div>
+
+            <button type="button" class="btn-aceptar" [routerLink]="['/menu-cliente']">ACEPTAR</button>
+        </div>
+    </div>
+</body>
+</html>

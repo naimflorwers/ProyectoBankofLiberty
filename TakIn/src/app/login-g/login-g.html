@@ -1,0 +1,24 @@
+<div class="login-container">
+  <a routerLink="/home" class="logo-link">  <img src="assets/logo.png" alt="Logo TakIn" class="logo">
+</a>
+
+  <div class="login-card">
+    <h2>Iniciar Sesión</h2>
+    <p class="security-text">Estás en un entorno con seguridad NSSH</p>
+
+    <form>
+      <div class="input-group">
+        <input type="text" id="username" name="username" placeholder="ID de usuario">
+      </div>
+
+      <div class="input-group password-wrapper">
+        <input type="password" id="password" name="password" placeholder="Contraseña">
+        <button type="button" class="submit-btn" [routerLink]="'/menu-gerente'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

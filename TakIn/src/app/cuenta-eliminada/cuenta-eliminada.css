@@ -1,0 +1,102 @@
+/* HTML y body se ajustan según el contenido */
+html {
+  height: auto;
+  min-height: 100%;
+  background-color: #33658A;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #33658A;
+  min-height: 100%;
+}
+
+/* Contenedor principal */
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px; /* espacio debajo del contenido */
+  box-sizing: border-box;
+}
+
+/* Navbar / Header */
+.header {
+  background-color: #86BBD8;
+  width: 100%;
+  padding: 8px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.header .logo {
+  height: 70px;
+  width: 70px;
+}
+
+.header .bank-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+/* Caja de confirmación */
+.confirmation-box {
+  background-color: #ffffff;
+  padding: 30px;
+  margin: 20px;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.check-icon {
+  font-size: 60px;
+  color: green;
+  margin-bottom: 10px;
+}
+
+.confirmation-text {
+  margin-bottom: 30px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.details {
+  text-align: left;
+  max-width: 300px;
+  margin: 0 auto 30px auto;
+  font-size: 16px;
+}
+
+.details div {
+  margin: 10px 0;
+}
+
+.details a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+/* Botón ACEPTAR */
+.btn-aceptar {
+  background-color: #20316b;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.btn-aceptar:hover {
+  background-color: #1d2a54;
+  transform: scale(1.05);
+}
+

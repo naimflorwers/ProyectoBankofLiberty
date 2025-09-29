@@ -1,0 +1,30 @@
+<div class="main-container">
+  <header class="header">
+    <img src="assets/logo.png" alt="Logo" class="logo" />
+    <span class="title">TakIn</span>
+    <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
+  </header>
+
+  <div class="content">
+    <div class="cp-section">
+      <div class="cp-item">
+        <img src="assets/abrir-cuenta.svg" alt="Abrir cuenta" class="cp-icon" />
+        <button class="button" [routerLink]="['/crear-cuenta-gerente']">Abrir cuenta</button>
+      </div>
+
+      <div class="cp-item">
+        <img src="assets/cerrar-cuenta.svg" alt="Cerrar cuenta" class="cp-icon" />
+        <button class="button" [routerLink]="['/cerrar-cuenta-gerente']">Cerrar cuenta</button>
+      </div>
+
+      <div class="cp-item">
+        <img src="assets/prestamo.svg" alt="Préstamo" class="cp-icon" />
+        <button class="button" [routerLink]="['/solicitudes-gerente']">Préstamo</button>
+      </div>
+      <div class="cp-item">
+        <img src="/assets/roles.svg" alt="Asignación de roles" class="cp-icon" />
+        <button type="button" class="button" [routerLink]="['/asignar-roles']">Asignación de roles</button>
+      </div>
+    </div>
+  </div>
+</div>

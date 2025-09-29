@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREDITO</title>
+    <link rel="stylesheet" href="credito-gerente.css">
+</head>
+<body>
+   <div class="container">
+  <h2>Takln</h2>
+
+  <form>
+
+    <div class="field">
+      <label>(Nombre)</label>
+      <input formControlName="nombre" type="text">
+    </div>
+
+    <h3>Información crediticia</h3>
+    <div class="grid">
+      <div class="field">
+        <label>Créditos vigentes</label>
+        <input formControlName="creditosVigentes">
+      </div>
+
+      <div class="field">
+        <label>Tipo de crédito</label>
+        <input formControlName="tipoCredito">
+      </div>
+
+      <div class="field">
+        <label>Saldo actual</label>
+        <input formControlName="saldoActual">
+      </div>
+
+      <div class="field">
+        <label>Créditos cerrados</label>
+        <input formControlName="creditosCerrados">
+      </div>
+
+      <div class="field">
+        <label>Institución que otorgó el crédito</label>
+        <input formControlName="institucion">
+      </div>
+
+      <div class="field">
+        <label>Pagos realizados</label>
+        <input formControlName="pagosRealizados">
+      </div>
+
+      <div class="field">
+        <label>Fecha de apertura del crédito</label>
+        <input formControlName="fechaApertura" type="date">
+      </div>
+
+      <div class="field">
+        <label>Límite de crédito autorizado</label>
+        <input formControlName="limiteCredito">
+      </div>
+
+      <div class="field">
+        <label>Pagos atrasados</label>
+        <input formControlName="pagosAtrasados">
+      </div>
+
+      <div class="field">
+        <label>Días de atraso</label>
+        <input formControlName="diasAtraso">
+      </div>
+
+      <div class="field">
+        <label>Estatus del crédito</label>
+        <input formControlName="estatusCredito">
+      </div>
+    </div>
+
+    <h3>Historial de pago</h3>
+    <div class="grid">
+      <div class="field">
+        <label>Puntualidad en los pagos</label>
+        <input formControlName="puntualidadPagos">
+      </div>
+
+      <div class="field">
+        <label>Atrasos en los pagos</label>
+        <input formControlName="atrasosPagos">
+      </div>
+
+      <div class="field">
+        <label>Montos vencidos</label>
+        <input formControlName="montosVencidos">
+      </div>
+
+      <div class="field">
+        <label>Casos de reestructura</label>
+        <input formControlName="casosReestructura">
+      </div>
+
+      <div class="field">
+        <label>Tiempo de morosidad</label>
+        <input formControlName="tiempoMora">
+      </div>
+
+      <div class="field">
+        <label>Cartera vencida</label>
+        <input formControlName="carteraVencida">
+      </div>
+    </div>
+
+    <h3>Consultas y reportes</h3>
+    <div class="grid">
+      <div class="field">
+        <label>Institución que ha consultado su historial crediticio</label>
+        <input formControlName="institucionConsulta">
+      </div>
+
+      <div class="field">
+        <label>Fecha de consulta</label>
+        <input formControlName="fechaConsulta" type="date">
+      </div>
+    </div>
+
+    <h3>Score crediticio</h3>
+    <div class="grid">
+      <div class="field">
+        <label>Nivel de riesgo del cliente</label>
+        <input formControlName="nivelRiesgo">
+      </div>
+    </div>
+
+    <button type="button" class="btn" [routerLink]="['/prestamo-gerente']">Volver</button>
+  </form>
+</div>
+
+</body>
+</html>
