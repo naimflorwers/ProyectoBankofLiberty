@@ -2,29 +2,39 @@
   <header class="header">
     <img src="assets/logo.png" alt="Logo" class="logo" />
     <span class="title">TakIn</span>
-    <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
+    <span class="user-icon" [routerLink]="['/home']">
+      <img src="assets/usuario.svg" alt="Usuario" class="user-img" />
+    </span>
   </header>
 
   <div class="content">
-    <div class="cp-section">
-      <div class="cp-item">
+    <div class="menu-icons-row menu-title-top">
+      <img src="assets/logo.png" alt="Logo Banco" class="menu-icon" />
+      <img src="assets/tarjeta.png" alt="Tarjeta" class="menu-icon" />
+      <img src="assets/fondo.png" alt="Seguridad" class="menu-icon" />
+      <span class="menu-icons-text">Gestión y liderazgo financiero</span>
+    </div>
+    <div class="menu-options-grid split-grid">
+      <div class="option-card" style="grid-area: opcion1;">
         <img src="assets/abrir-cuenta.svg" alt="Abrir cuenta" class="cp-icon" />
         <button class="button" [routerLink]="['/crear-cuenta-gerente']">Abrir cuenta</button>
       </div>
-
-      <div class="cp-item">
+      <div class="option-card" style="grid-area: opcion2;">
         <img src="assets/cerrar-cuenta.svg" alt="Cerrar cuenta" class="cp-icon" />
         <button class="button" [routerLink]="['/cerrar-cuenta-gerente']">Cerrar cuenta</button>
       </div>
-
-      <div class="cp-item">
+      <div class="option-card" style="grid-area: opcion3;">
+        <img src="assets/gerente-roles.svg" alt="Asignación de roles" class="cp-icon" />
+        <button type="button" class="button" [routerLink]="['/asignar-roles']">Asignación de roles</button>
+      </div>
+      <div class="option-card" style="grid-area: opcion4;">
         <img src="assets/prestamo.svg" alt="Préstamo" class="cp-icon" />
         <button class="button" [routerLink]="['/solicitudes-gerente']">Préstamo</button>
       </div>
-      <div class="cp-item">
-        <img src="/assets/roles.svg" alt="Asignación de roles" class="cp-icon" />
-        <button type="button" class="button" [routerLink]="['/asignar-roles']">Asignación de roles</button>
-      </div>
+    </div>
+    <div class="menu-text-bottom">
+      <h2>Banco TakIn</h2>
+      <p>Gestión y liderazgo financiero.</p>
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { UsuariosService } from '../../services/usuarios.service'; // Usa el servicio adaptado
+import { UsuariosService } from '../../services/usuarios.service'; 
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
@@ -42,7 +42,7 @@ export class Login {
           } catch (e) {
             console.error('Error guardando en localStorage:', e);
           }
-          // Redirigir según el rol
+        
           const rol = String(res.rol).trim().toLowerCase();
           if (rol === 'cliente') {
             this.router.navigate(['/menu-cliente']);

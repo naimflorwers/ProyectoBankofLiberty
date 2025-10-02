@@ -2,25 +2,37 @@
   <header class="header">
     <img src="assets/logo.png" alt="Logo" class="logo" />
     <span class="title">TakIn</span>
-    <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
+    <span class="user-icon" [routerLink]="['/home']">
+      <img src="assets/usuario.svg" alt="Usuario" class="user-img" />
+    </span>
   </header>
 
   <div class="content">
-    <div class="cp-section">
-      <div class="cp-item">
+    <div class="menu-icons-row menu-title-top">
+      <img src="assets/logo.png" alt="Logo Banco" class="menu-icon" />
+      <h2>Banco TakIn</h2>
+      <img src="assets/tarjeta.png" alt="Tarjeta" class="menu-icon" />
+      <img src="assets/fondo.png" alt="Seguridad" class="menu-icon" />
+      <span class="menu-icons-text">Soluciones financieras para ti</span>
+    </div>
+    <div class="menu-options-grid">
+      <div class="option-card">
         <img src="assets/abrir-cuenta.svg" alt="Abrir cuenta" class="cp-icon" />
         <button class="button" [routerLink]="['/crear-cuenta']">Abrir cuenta</button>
       </div>
-
-      <div class="cp-item">
+      <div class="option-card">
         <img src="assets/cerrar-cuenta.svg" alt="Cerrar cuenta" class="cp-icon" />
         <button class="button" [routerLink]="['/cerrar-cuenta']">Cerrar cuenta</button>
       </div>
-
-      <div class="cp-item">
+      <div class="option-card">
         <img src="assets/prestamo.svg" alt="Préstamo" class="cp-icon" />
         <button class="button" [routerLink]="['/solicitudes']">Préstamo</button>
       </div>
+    </div>
+
+    <div class="menu-text-bottom">
+      <h2>Banco TakIn</h2>
+      <p>Soluciones financieras para ti.</p>
     </div>
   </div>
 </div>

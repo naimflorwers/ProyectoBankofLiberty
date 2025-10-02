@@ -1,6 +1,6 @@
 const db = require('../db');
 
-// Obtener todos los usuarios
+
 const getUsuarios = (req, res) => {
   db.query('SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol FROM Usuarios', (err, results) => {
     if (err) return res.status(500).send(err);
@@ -8,7 +8,7 @@ const getUsuarios = (req, res) => {
   });
 };
 
-// Obtener todos los clientes
+
 const getClientes = (req, res) => {
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
@@ -23,7 +23,7 @@ const getClientes = (req, res) => {
   });
 };
 
-// Obtener todos los ejecutivos
+
 const getEjecutivos = (req, res) => {
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
@@ -37,7 +37,7 @@ const getEjecutivos = (req, res) => {
   });
 };
 
-// Obtener todos los gerentes
+
 const getGerentes = (req, res) => {
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
@@ -51,7 +51,7 @@ const getGerentes = (req, res) => {
   });
 };
 
-// Obtener un usuario por id
+
 const getUsuario = (req, res) => {
   const { id } = req.params;
   const query = `
@@ -69,7 +69,7 @@ const getUsuario = (req, res) => {
   });
 };
 
-// Login
+
 const login = (req, res) => {
   const correo = req.body.correo;
   const contrasena = req.body.contrasena;

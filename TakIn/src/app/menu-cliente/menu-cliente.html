@@ -5,22 +5,44 @@
     <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
   </header>
 
-  <div class="content">
-    <div class="cp-section">
-      <div class="cp-item">
+  <div class="content full-content">
+    <div class="cards-section">
+      <h2 class="cards-title">Tus Tarjetas</h2>
+      <div class="cards-list">
+        <div class="card-item credito">
+          <img src="assets/tarjeta.png" alt="Tarjeta Crédito" class="card-img" />
+          <div class="card-info">
+            <span class="card-type">Crédito</span>
+            <span class="card-balance">Saldo: $12,500.00</span>
+          </div>
+        </div>
+        <div class="card-item debito">
+          <img src="assets/tarjeta.png" alt="Tarjeta Débito" class="card-img" />
+          <div class="card-info">
+            <span class="card-type">Débito</span>
+            <span class="card-balance">Saldo: $3,200.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-options-grid">
+      <div class="option-card">
         <img src="assets/abrir-cuenta.svg" alt="Transferencia" class="cp-icon" />
         <button class="button" [routerLink]="['/transferencia']">Transferencia</button>
       </div>
-
-      <div class="cp-item">
+      <div class="option-card">
         <img src="assets/cerrar-cuenta.svg" alt="Ingresar Dinero" class="cp-icon" />
         <button class="button" [routerLink]="['/ingresar-dinero']">Ingresar Dinero</button>
       </div>
-
-      <div class="cp-item">
+      <div class="option-card">
         <img src="assets/prestamo.svg" alt="Retirar Dinero" class="cp-icon" />
         <button class="button" [routerLink]="['/retirar-dinero']">Retirar Dinero</button>
       </div>
+    </div>
+    <div class="menu-text menu-text-bottom">
+      <h2>¡Accede a tus opciones!</h2>
+      <p>Todo lo que necesitas, en un solo lugar.</p>
     </div>
   </div>
 </div>
