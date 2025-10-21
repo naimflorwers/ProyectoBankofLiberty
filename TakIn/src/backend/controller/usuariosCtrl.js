@@ -1,4 +1,6 @@
 const db = require('../db');
+const bcrypt = require('bcrypt');
+const SALT_ROUNDS = 10;
 
 
 const getUsuarios = (req, res) => {
@@ -78,15 +80,79 @@ const login = (req, res) => {
     return res.status(400).json({ msg: 'Faltan campos correo o contraseña' });
   }
 
-  const query = 'SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol FROM Usuarios WHERE Correo = ? AND Contrasena = ?';
-  db.query(query, [correo, contrasena], (err, results) => {
+  const query = 'SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol, Contrasena FROM Usuarios WHERE Correo = ?';
+  db.query(query, [correo], (err, results) => {
     if (err) return res.status(500).send(err);
     if (!results || results.length === 0) {
       return res.status(401).json({ success: false, msg: 'Usuario o contraseña incorrectos' });
     }
+
     const user = results[0];
-    res.json({ success: true, rol: user.Rol, user });
+    const stored = user.Contrasena || '';
+
+    if (typeof stored === 'string' && stored.startsWith('$2')) {
+      bcrypt.compare(contrasena, stored, (errCmp, same) => {
+        if (errCmp) return res.status(500).send(errCmp);
+        if (!same) return res.status(401).json({ success: false, msg: 'Usuario o contraseña incorrectos' });
+        delete user.Contrasena;
+        return res.json({ success: true, rol: user.Rol, user });
+      });
+    } else {
+      if (contrasena === stored) {
+        bcrypt.hash(contrasena, SALT_ROUNDS, (errHash, newHash) => {
+          if (!errHash) {
+            const upd = 'UPDATE Usuarios SET Contrasena = ? WHERE IDUsuario = ?';
+            db.query(upd, [newHash, user.IDUsuario], (uErr) => {
+              if (uErr) console.error('Error al actualizar hash de usuario:', uErr);
+            });
+          } else {
+            console.error('Error al hashear para migración:', errHash);
+          }
+        });
+
+        delete user.Contrasena;
+        return res.json({ success: true, rol: user.Rol, user });
+      }
+      return res.status(401).json({ success: false, msg: 'Usuario o contraseña incorrectos' });
+    }
   });
 };
 
-module.exports = { getUsuarios, getClientes, getEjecutivos, getGerentes, getUsuario, login };
+const registro = (req, res) => {
+  const { nombre, apellidoPaterno, apellidoMaterno, correo, contrasena, rol, curp } = req.body;
+
+  if (!nombre || !apellidoPaterno || !apellidoMaterno || !correo || !contrasena) {
+    return res.status(400).json({ msg: 'Faltan campos obligatorios' });
+  }
+
+  const checkQuery = 'SELECT IDUsuario FROM Usuarios WHERE Correo = ?';
+  db.query(checkQuery, [correo], (err, results) => {
+    if (err) return res.status(500).send(err);
+    if (results && results.length > 0) {
+      return res.status(409).json({ success: false, msg: 'El correo ya está registrado' });
+    }
+
+    bcrypt.hash(contrasena, SALT_ROUNDS, (err, hash) => {
+      if (err) return res.status(500).send(err);
+
+      const insertQuery = 'INSERT INTO Usuarios (Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Contrasena, Rol) VALUES (?, ?, ?, ?, ?, ?)';
+      db.query(insertQuery, [nombre, apellidoPaterno, apellidoMaterno, correo, hash, rol || 'cliente'], (err, result) => {
+        if (err) return res.status(500).send(err);
+        const usuarioId = result.insertId;
+        if (curp) {
+          const insertCliente = 'INSERT INTO Cliente (IDUsuario, CURP) VALUES (?, ?)';
+          db.query(insertCliente, [usuarioId, curp], (err2, res2) => {
+            if (err2) {
+              return res.status(201).json({ success: true, id: usuarioId, warning: 'Usuario creado, pero no se pudo crear registro de Cliente', clienteError: err2 });
+            }
+            return res.status(201).json({ success: true, id: usuarioId, clienteId: res2.insertId, msg: 'Usuario y Cliente creados correctamente' });
+          });
+        } else {
+          return res.status(201).json({ success: true, id: usuarioId, msg: 'Usuario creado correctamente' });
+        }
+      });
+    });
+  });
+};
+
+module.exports = { getUsuarios, getClientes, getEjecutivos, getGerentes, getUsuario, login, registro };

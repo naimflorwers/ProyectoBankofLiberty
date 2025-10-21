@@ -6,19 +6,41 @@
   </header>
   <div class="content">
     <div class="transfer-box">
-      <h2>Transferencia 1</h2>
-      <div class="tarjetas-title">Tarjetas</div>
-      <div class="account-card">
-        <span class="account-name">Tarjeta Basica</span>
-        <span class="account-balance">$567.20</span>
-        <span class="account-desc">- 23195934<br>Saldo disponible</span>
-      </div>
-      <div class="account-card">
-        <span class="account-name">Tarjeta Black Premium</span>
-        <span class="account-balance">$7,777.77</span>
-        <span class="account-desc">- 63475028<br>Saldo disponible</span>
-      </div>
-      <button type="button" class="continuar-btn" [routerLink]="['/transferencia-destino']">CONTINUAR</button>
+      <h2>Selecciona tu cuenta</h2>
+      
+      <!-- Mensaje de carga -->
+      @if (cargando) {
+        <p>Cargando cuentas...</p>
+      }
+      
+      <!-- Mensaje de error -->
+      @if (error) {
+        <p style="color: red;">{{ error }}</p>
+      }
+      
+      <div class="tarjetas-title">Mis Cuentas</div>
+      
+      <!-- Lista de cuentas -->
+      @if (cuentas.length === 0 && !cargando) {
+        <p>No tienes cuentas disponibles</p>
+      }
+      
+      @for (cuenta of cuentas; track cuenta.Numcuenta) {
+        <div class="account-card" 
+             [class.selected]="cuentaSeleccionada?.Numcuenta === cuenta.Numcuenta"
+             (click)="seleccionarCuenta(cuenta)">
+          <span class="account-name">{{ cuenta.Banco }}</span>
+          <span class="account-balance">${{ cuenta.Dinero | number:'1.2-2' }}</span>
+          <span class="account-desc">{{ cuenta.Numcuenta }}<br>Saldo disponible</span>
+        </div>
+      }
+      
+      <button type="button" 
+              class="continuar-btn" 
+              [disabled]="!cuentaSeleccionada"
+              (click)="continuar()">
+        CONTINUAR
+      </button>
     </div>
   </div>
 </div>

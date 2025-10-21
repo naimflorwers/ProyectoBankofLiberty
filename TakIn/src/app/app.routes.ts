@@ -3,7 +3,6 @@ import { Routes } from '@angular/router';
 import { ClienteGuard, EjecutivoGuard, GerenteGuard } from './guards/role.guard';
 import { Home } from './home/home';
 import { Login } from './login/login'; 
-import { LoginE } from './login-e/login-e';
 import { AbrirCuenta } from './abrir-cuenta/abrir-cuenta';
 import { Solicitudes } from './solicitudes/solicitudes';
 import { Prestamo } from './prestamo/prestamo';
@@ -14,7 +13,6 @@ import { CuentaEliminada } from './cuenta-eliminada/cuenta-eliminada';
 import { CuentaCreada } from './cuenta-creada/cuenta-creada';
 import { PrestamoAceptado } from './prestamo-aceptado/prestamo-aceptado';
 import { Credito } from './credito/credito';
-import { LoginG } from './login-g/login-g';
 import { CrearCuentaGerente } from './crear-cuenta-gerente/crear-cuenta-gerente';
 import { CerrarCuentaGerente } from './cerrar-cuenta-gerente/cerrar-cuenta-gerente';
 import { SolicitudesGerente } from './solicitudes-gerente/solicitudes-gerente';
@@ -49,8 +47,6 @@ export const routes: Routes = [
   {
     path: 'abrir-cuenta',
     component: AbrirCuenta,
-    canActivate: [EjecutivoGuard,GerenteGuard]
-    
   },
   {
     path: 'solicitudes',

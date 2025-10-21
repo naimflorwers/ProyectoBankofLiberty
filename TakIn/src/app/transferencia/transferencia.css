@@ -52,6 +52,18 @@
   flex-direction: column;
   font-size: 1.1rem;
   box-shadow: 0 2px 4px #0001;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+.account-card:hover {
+  border-color: #2a6bb2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px #0003;
+}
+.account-card.selected {
+  border-color: #2a6bb2;
+  background: #e8f4fd;
 }
 .account-name {
   color: #2a6bb2;
@@ -78,4 +90,9 @@
   margin-top: 10px;
   cursor: pointer;
   box-shadow: 0 2px 4px #0002;
+  width: 100%;
+}
+.continuar-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
 }

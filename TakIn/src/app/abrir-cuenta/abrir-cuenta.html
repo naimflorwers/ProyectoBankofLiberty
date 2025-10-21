@@ -5,25 +5,38 @@
   <div class="nuevo-usuario">
     <h2>Nuevo Usuario</h2>
 
-    <form>
-  <div class="input-group">
-    <input type="text" id="nombreCompleto" name="nombre" placeholder="Nombre Completo" required>
-  </div>
+    <form (ngSubmit)="register()">
+      <div class="input-row">
+        <div class="input-group">
+          <input [(ngModel)]="nombre" name="nombre" type="text" placeholder="Nombre" required />
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="apellidoPaterno" name="apellidoPaterno" type="text" placeholder="Apellido paterno" required />
+        </div>
+        <div class="input-group">
+          <input [(ngModel)]="apellidoMaterno" name="apellidoMaterno" type="text" placeholder="Apellido materno" required />
+        </div>
+      </div>
 
-  <div class="input-group">
-    <input type="email" id="email" name="email" placeholder="correo electrónico" required>
-  </div>
-  
-  <div class="input-group">
-    <input type="text" id="curp" name="curp" placeholder="CURP" required>
-  </div>
+      <div class="input-group">
+        <input [(ngModel)]="correo" name="correo" type="email" placeholder="Correo electrónico" required />
+      </div>
 
-  <div class="input-group">
-    <input type="password" id="password" name="password" placeholder="Contraseña" required>
-    </div>
+      <div class="input-group">
+        <input [(ngModel)]="curp" name="curp" type="text" placeholder="CURP" />
+      </div>
 
-  <button type="submit" class="crear-cuenta-btn">Crear Cuenta</button>
-</form>
+      <div class="input-group">
+        <input [(ngModel)]="contrasena" name="contrasena" type="password" placeholder="Contraseña" required />
+      </div>
+
+      <div class="form-messages">
+        <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+        <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
+      </div>
+
+      <button type="submit" class="crear-cuenta-btn" [disabled]="loading">{{ loading ? 'Creando...' : 'Crear Cuenta' }}</button>
+    </form>
 
     <p class="login-link">
       ¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a>

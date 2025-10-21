@@ -59,6 +59,14 @@ body {
     margin: 10px 0;
 }
 
+.details div.total-cobrado {
+    border-top: 2px solid #2a4e6c;
+    padding-top: 10px;
+    margin-top: 15px;
+    color: #2a4e6c;
+    font-size: 1.1em;
+}
+
 .details a {
     color: #007BFF;
     text-decoration: none;
