@@ -6,6 +6,8 @@ const db = require('../db');
 const getCuentasCliente = (req, res) => {
   const { idUsuario } = req.params;
   
+  console.log('📌 GET /api/cuentas/' + idUsuario + ' - Buscando cuentas...');
+  
   const query = `
     SELECT c.Numcuenta, c.Banco, c.Dinero, c.Clabe, c.NumTelefono
     FROM Cuentas c
@@ -15,9 +17,11 @@ const getCuentasCliente = (req, res) => {
   
   db.query(query, [idUsuario], (err, results) => {
     if (err) {
-      console.error('Error al obtener cuentas:', err);
+      console.error('❌ Error al obtener cuentas:', err);
       return res.status(500).json({ error: 'Error al obtener cuentas' });
     }
+    console.log('✅ Cuentas encontradas:', results.length);
+    console.log('Datos:', results);
     res.json(results);
   });
 };
