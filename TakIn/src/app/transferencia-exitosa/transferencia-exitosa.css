@@ -72,6 +72,22 @@ body {
     text-decoration: none;
 }
 
+.btn-descargar {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-descargar:hover {
+    background-color: #218838;
+}
+
 .btn-aceptar {
     background-color: #2a4e6c;
     color: white;

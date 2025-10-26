@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PdfReciboService } from '../../services/pdf-recibo.service';
 
 interface DatosTransferencia {
   monto: number;
   comision: number;
   montoTotal: number;
   cuentaDestino: string;
+  cuentaRemitente: string;
+  motivo: string;
   fecha: Date;
   folio: number;
 }
@@ -20,7 +23,10 @@ interface DatosTransferencia {
 export class TransferenciaExitosa implements OnInit {
   datosTransferencia: DatosTransferencia | null = null;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private pdfService: PdfReciboService
+  ) {}
 
   ngOnInit(): void {
     // Recuperar los datos de la transferencia del sessionStorage
@@ -31,6 +37,24 @@ export class TransferenciaExitosa implements OnInit {
       // Si no hay datos, redirigir al inicio
       this.router.navigate(['/menu-cliente']);
     }
+  }
+
+  descargarRecibo(): void {
+    if (!this.datosTransferencia) {
+      alert('No hay datos de transferencia disponibles');
+      return;
+    }
+
+    this.pdfService.generarRecibo({
+      idTransferencia: this.datosTransferencia.folio,
+      fecha: new Date(this.datosTransferencia.fecha),
+      cuentaRemitente: this.datosTransferencia.cuentaRemitente,
+      cuentaDestino: this.datosTransferencia.cuentaDestino,
+      monto: this.datosTransferencia.monto,
+      comision: this.datosTransferencia.comision,
+      montoTotal: this.datosTransferencia.montoTotal,
+      motivo: this.datosTransferencia.motivo
+    });
   }
 
   volver(): void {

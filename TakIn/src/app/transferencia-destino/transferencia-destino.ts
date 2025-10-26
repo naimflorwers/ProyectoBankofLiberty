@@ -112,6 +112,8 @@ export class TransferenciaDestino implements OnInit {
             comision: response.data?.comision || this.comision,
             montoTotal: response.data?.montoTotal || this.montoTotal,
             cuentaDestino: this.cuentaDestino,
+            cuentaRemitente: this.cuentaRemitente?.Numcuenta || datos.cuentaRemitente,
+            motivo: this.motivo || 'Transferencia',
             fecha: new Date(),
             folio: response.idTransferencia
           }));
