@@ -34,6 +34,7 @@ import { OperacionCompletada } from './operacion-completada/operacion-completada
 import { TransferenciaExitosa } from './transferencia-exitosa/transferencia-exitosa';
 import { RecuperarContrasena } from './recuperar-contrasena/recuperar-contrasena';
 import { EstadoCuenta } from './estado-cuenta/estado-cuenta';
+import { OfertaCredito } from './oferta-credito/oferta-credito';
 import path from 'path';
 
 
@@ -201,6 +202,11 @@ export const routes: Routes = [
   {
     path: 'estado-cuenta',
     component: EstadoCuenta,
+    canActivate: [ClienteGuard]
+  },
+  {
+    path: 'oferta-credito',
+    component: OfertaCredito,
     canActivate: [ClienteGuard]
   }
 ];

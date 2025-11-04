@@ -1,69 +1,20 @@
-<div class="main-container">
-  <header class="header">
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-    <span class="title">TakIn</span>
-    <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
-  </header>
-
-  <div class="content full-content">
-    <div class="cards-section">
-      <h2 class="cards-title">Tus Tarjetas</h2>
-      <div class="cards-list">
-        <div class="card-item credito">
-          <img src="assets/tarjeta.png" alt="Tarjeta Crédito" class="card-img" />
-          <div class="card-info">
-            <span class="card-type">Crédito</span>
-            <span class="card-balance">Saldo: $12,500.00</span>
-          </div>
-        </div>
-        <div class="card-item debito">
-          <img src="assets/tarjeta.png" alt="Tarjeta Débito" class="card-img" />
-          <div class="card-info">
-            <span class="card-type">Débito</span>
-            <span class="card-balance">Saldo: $3,200.00</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="menu-options-grid">
-      <div class="option-card">
-        <img src="assets/abrir-cuenta.svg" alt="Transferencia" class="cp-icon" />
-        <button class="button" [routerLink]="['/transferencia']">Transferencia</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/cerrar-cuenta.svg" alt="Ingresar Dinero" class="cp-icon" />
-        <button class="button" [routerLink]="['/ingresar-dinero']">Ingresar Dinero</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/prestamo.svg" alt="Retirar Dinero" class="cp-icon" />
-        <button class="button" [routerLink]="['/retirar-dinero']">Retirar Dinero</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/prestamo.svg" alt="Estado de Cuenta" class="cp-icon" />
-        <button class="button" [routerLink]="['/estado-cuenta']">Estado de Cuenta</button>
-      </div>
-    </div>
-    <div class="menu-text menu-text-bottom">
-      <h2>¡Accede a tus opciones!</h2>
-      <p>Todo lo que necesitas, en un solo lugar.</p>
-    </div>
+<div class="oferta-container">
+  <!-- Loading Spinner -->
+  <div *ngIf="cargando" class="spinner-container">
+    <div class="spinner"></div>
+    <p>Cargando...</p>
   </div>
 
-  <!-- Modal de Oferta de Crédito -->
-  <div *ngIf="mostrarModalCredito" class="modal-overlay-credito" (click)="cerrarModal()">
-    
-    <!-- Loading Spinner -->
-    <div *ngIf="cargando" class="spinner-container" (click)="$event.stopPropagation()">
-      <div class="spinner"></div>
-      <p>Cargando...</p>
-    </div>
+  <!-- Mensaje de Error -->
+  <div *ngIf="errorMsg && !cargando" class="error-message">
+    <p>{{ errorMsg }}</p>
+    <button (click)="cerrarModal()" class="btn-cerrar">Cerrar</button>
+  </div>
 
-    <!-- Oferta de Crédito - Modal Compacto -->
-    <div *ngIf="!cargando && !errorMsg && oferta && !mostrarFormulario" 
-         class="modal-content-compacto" 
-         (click)="$event.stopPropagation()">
-      <button class="close-btn-modal" (click)="cerrarModal()">&times;</button>
+  <!-- Oferta de Crédito - Modal Compacto -->
+  <div *ngIf="!cargando && !errorMsg && oferta && !mostrarFormulario" class="oferta-modal">
+    <div class="modal-content-compacto">
+      <button class="close-btn" (click)="cerrarModal()">&times;</button>
       
       <div *ngIf="oferta.elegible" class="oferta-body-compacto">
         <div class="icon-header">
@@ -105,15 +56,15 @@
         <span class="icon-warning">⚠️</span>
         <h2>No Elegible</h2>
         <p>{{ oferta.razon || 'No cumples con los requisitos mínimos.' }}</p>
-        <button (click)="cerrarModal()" class="btn-cerrar-modal">Entendido</button>
+        <button (click)="cerrarModal()" class="btn-cerrar">Entendido</button>
       </div>
     </div>
+  </div>
 
-    <!-- Formulario de Solicitud - Compacto -->
-    <div *ngIf="mostrarFormulario && oferta" 
-         class="formulario-content-compacto" 
-         (click)="$event.stopPropagation()">
-      <button class="close-btn-modal" (click)="cerrarModal()">&times;</button>
+  <!-- Formulario de Solicitud - Compacto -->
+  <div *ngIf="mostrarFormulario && oferta" class="formulario-solicitud">
+    <div class="formulario-content-compacto">
+      <button class="close-btn" (click)="cerrarModal()">&times;</button>
       <button class="btn-volver" (click)="volverAOferta()">← Volver</button>
       
       <div class="formulario-header-compacto">
