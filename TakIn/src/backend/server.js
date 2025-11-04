@@ -4,6 +4,7 @@ const cors = require('cors');
 const usuariosRoutes = require('./routes/usuarios');
 const transferenciasRoutes = require('./routes/transferencias');
 const recuperacionRoutes = require('./routes/recuperacion');
+const estadoCuentaRoutes = require('./routes/estadoCuenta');
 
 console.log('Iniciando server.js...');
 
@@ -14,6 +15,7 @@ app.use(express.json());
 app.use('/api', usuariosRoutes);
 app.use('/api', transferenciasRoutes);
 app.use('/api', recuperacionRoutes);
+app.use('/api', estadoCuentaRoutes);
 
 app.listen(3000, () => {
   console.log('✅ Servidor corriendo en http://localhost:3000');

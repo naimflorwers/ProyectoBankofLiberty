@@ -33,6 +33,7 @@ import { OperacionCompleta } from './operacion-completa/operacion-completa';
 import { OperacionCompletada } from './operacion-completada/operacion-completada';
 import { TransferenciaExitosa } from './transferencia-exitosa/transferencia-exitosa';
 import { RecuperarContrasena } from './recuperar-contrasena/recuperar-contrasena';
+import { EstadoCuenta } from './estado-cuenta/estado-cuenta';
 import path from 'path';
 
 
@@ -195,6 +196,11 @@ export const routes: Routes = [
   {
     path: 'transferencia-exitosa',
     component: TransferenciaExitosa,
+    canActivate: [ClienteGuard]
+  },
+  {
+    path: 'estado-cuenta',
+    component: EstadoCuenta,
     canActivate: [ClienteGuard]
   }
 ];
