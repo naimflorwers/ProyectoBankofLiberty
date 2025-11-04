@@ -32,6 +32,7 @@ import { ConfirmacionIdentidad } from './confirmacion-identidad/confirmacion-ide
 import { OperacionCompleta } from './operacion-completa/operacion-completa';
 import { OperacionCompletada } from './operacion-completada/operacion-completada';
 import { TransferenciaExitosa } from './transferencia-exitosa/transferencia-exitosa';
+import { RecuperarContrasena } from './recuperar-contrasena/recuperar-contrasena';
 import path from 'path';
 
 
@@ -43,6 +44,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: Login, 
+  },
+  {
+    path: 'recuperar-contrasena',
+    component: RecuperarContrasena,
   },
   {
     path: 'abrir-cuenta',

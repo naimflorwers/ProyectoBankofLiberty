@@ -1,0 +1,146 @@
+<div class="recuperar-container">
+  <a routerLink="/home">
+    <img src="assets/logo.png" alt="Logo Bank of Liberty" class="logo">
+  </a>
+
+  <div class="recuperar-card">
+    <!-- Indicador de pasos -->
+    <div class="pasos-indicador">
+      <div class="paso" [class.activo]="pasoActual >= 1" [class.completado]="pasoActual > 1">
+        <div class="paso-numero">1</div>
+        <div class="paso-texto">Correo</div>
+      </div>
+      <div class="paso-linea" [class.completado]="pasoActual > 1"></div>
+      <div class="paso" [class.activo]="pasoActual >= 2" [class.completado]="pasoActual > 2">
+        <div class="paso-numero">2</div>
+        <div class="paso-texto">Código</div>
+      </div>
+      <div class="paso-linea" [class.completado]="pasoActual > 2"></div>
+      <div class="paso" [class.activo]="pasoActual >= 3">
+        <div class="paso-numero">3</div>
+        <div class="paso-texto">Nueva Contraseña</div>
+      </div>
+    </div>
+
+    <h2>Recuperar Contraseña</h2>
+
+    <!-- PASO 1: Solicitar correo -->
+    @if (pasoActual === 1) {
+      <p class="description">Ingresa tu correo electrónico y te enviaremos un código de verificación.</p>
+      
+      <div>
+        <div class="input-group">
+          <label for="correo">Correo Electrónico</label>
+          <input 
+            type="email" 
+            id="correo" 
+            name="correo" 
+            placeholder="ejemplo@correo.com" 
+            [(ngModel)]="correo" 
+            required>
+        </div>
+
+        <button type="button" class="btn-principal" (click)="solicitarCodigo()">
+          Enviar Código
+        </button>
+      </div>
+    }
+
+    <!-- PASO 2: Verificar código -->
+    @if (pasoActual === 2) {
+      <p class="description">
+        Hemos enviado un código de 6 dígitos a <strong>{{ correo }}</strong>
+      </p>
+      
+      <div>
+        <div class="input-group">
+          <label for="codigo">Código de Verificación</label>
+          <input 
+            type="text" 
+            id="codigo" 
+            name="codigo" 
+            placeholder="123456" 
+            [(ngModel)]="codigoIngresado" 
+            maxlength="6"
+            pattern="[0-9]{6}"
+            class="codigo-input"
+            required>
+          <small>Ingresa el código de 6 dígitos</small>
+        </div>
+
+        <button type="button" class="btn-principal" (click)="verificarCodigo()">
+          Verificar Código
+        </button>
+
+        <button type="button" class="btn-secundario" (click)="reenviarCodigo()">
+          Reenviar Código
+        </button>
+      </div>
+    }
+
+    <!-- PASO 3: Nueva contraseña -->
+    @if (pasoActual === 3) {
+      <p class="description">Ingresa tu nueva contraseña</p>
+      
+      <div>
+        <div class="input-group">
+          <label for="nuevaContrasena">Nueva Contraseña</label>
+          <div class="password-wrapper">
+            <input 
+              [type]="passwordVisible ? 'text' : 'password'" 
+              id="nuevaContrasena" 
+              name="nuevaContrasena" 
+              placeholder="Mínimo 6 caracteres" 
+              [(ngModel)]="nuevaContrasena" 
+              required>
+            <button type="button" class="toggle-password" (click)="togglePasswordVisibility()" tabindex="-1">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="confirmarContrasena">Confirmar Contraseña</label>
+          <div class="password-wrapper">
+            <input 
+              [type]="confirmPasswordVisible ? 'text' : 'password'" 
+              id="confirmarContrasena" 
+              name="confirmarContrasena" 
+              placeholder="Repite tu contraseña" 
+              [(ngModel)]="confirmarContrasena" 
+              required>
+            <button type="button" class="toggle-password" (click)="toggleConfirmPasswordVisibility()" tabindex="-1">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button type="button" class="btn-principal" (click)="cambiarContrasena()">
+          Cambiar Contraseña
+        </button>
+      </div>
+    }
+
+    <!-- Mensajes -->
+    @if (errorMsg) {
+      <div class="message error-message">{{ errorMsg }}</div>
+    }
+
+    @if (successMsg) {
+      <div class="message success-message">{{ successMsg }}</div>
+    }
+
+    <!-- Botones de navegación -->
+    <div class="navigation-buttons">
+      @if (pasoActual > 1 && pasoActual <= 3) {
+        <button type="button" class="btn-link" (click)="volverPaso()">
+          ← Volver
+        </button>
+      }
+      
+      <button type="button" class="btn-link" (click)="volverLogin()">
+        Volver al Login
+      </button>
+    </div>
+  </div>
+</div>

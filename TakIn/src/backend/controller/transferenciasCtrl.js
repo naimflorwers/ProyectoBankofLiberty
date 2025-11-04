@@ -1,4 +1,5 @@
 const db = require('../db');
+const emailService = require('../services/emailService');
 
 /**
  * Obtener cuentas de un cliente por IDUsuario
@@ -109,6 +110,77 @@ const realizarTransferencia = (req, res) => {
 
       // Verificar si fue exitoso
       if (resultado && resultado.startsWith('EXITO')) {
+        // Enviar correos electrónicos de forma asíncrona (no bloqueante)
+        setImmediate(async () => {
+          try {
+            // Obtener datos del remitente y destinatario para los correos
+            const queryRemitente = `
+              SELECT u.Correo, CONCAT(u.Nombre, ' ', u.ApellidoPaterno) as NombreCompleto, c.Dinero as NuevoSaldo
+              FROM Usuarios u
+              INNER JOIN Cliente cl ON u.IDUsuario = cl.IDUsuario
+              INNER JOIN Cuentas c ON cl.IDCliente = c.IDCliente
+              WHERE c.Numcuenta = ?
+            `;
+            
+            const queryDestinatario = `
+              SELECT u.Correo, CONCAT(u.Nombre, ' ', u.ApellidoPaterno) as NombreCompleto, c.Dinero as NuevoSaldo
+              FROM Usuarios u
+              INNER JOIN Cliente cl ON u.IDUsuario = cl.IDUsuario
+              INNER JOIN Cuentas c ON cl.IDCliente = c.IDCliente
+              WHERE c.Numcuenta = ?
+            `;
+            
+            db.query(queryRemitente, [cuentaRemitente], (err, remitente) => {
+              if (!err && remitente && remitente.length > 0) {
+                const datosRemitente = {
+                  customerName: remitente[0].NombreCompleto,
+                  amount: parseFloat(monto),
+                  fee: comisionCobrada,
+                  destinationAccount: cuentaDestino,
+                  originAccount: cuentaRemitente,
+                  description: motivo || 'Transferencia',
+                  tranId: idTransferencia,
+                  date: new Date().toLocaleString('es-MX'),
+                  newBalance: remitente[0].NuevoSaldo
+                };
+                
+                emailService.sendTransferSentEmail(remitente[0].Correo, datosRemitente)
+                  .then(result => {
+                    if (result.success) {
+                      console.log('✅ Correo de transferencia enviada exitosamente');
+                    }
+                  })
+                  .catch(err => console.error('❌ Error enviando correo de transferencia enviada:', err));
+              }
+            });
+            
+            db.query(queryDestinatario, [cuentaDestino], (err, destinatario) => {
+              if (!err && destinatario && destinatario.length > 0) {
+                const datosDestinatario = {
+                  customerName: destinatario[0].NombreCompleto,
+                  amount: parseFloat(monto),
+                  originAccount: cuentaRemitente,
+                  destinationAccount: cuentaDestino,
+                  description: motivo || 'Transferencia',
+                  tranId: idTransferencia,
+                  date: new Date().toLocaleString('es-MX'),
+                  newBalance: destinatario[0].NuevoSaldo
+                };
+                
+                emailService.sendTransferReceivedEmail(destinatario[0].Correo, datosDestinatario)
+                  .then(result => {
+                    if (result.success) {
+                      console.log('✅ Correo de transferencia recibida exitosamente');
+                    }
+                  })
+                  .catch(err => console.error('❌ Error enviando correo de transferencia recibida:', err));
+              }
+            });
+          } catch (error) {
+            console.error('❌ Error general al enviar correos:', error);
+          }
+        });
+        
         return res.json({
           success: true,
           mensaje: resultado,

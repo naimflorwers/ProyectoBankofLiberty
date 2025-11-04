@@ -31,6 +31,10 @@
 
     <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
 
+    <p class="forgot-password-link">
+      <a href="#" (click)="recuperarContrasena($event)">¿Olvidaste tu contraseña?</a>
+    </p>
+
     <p class="register-link">
       Aún no tienes cuenta? <a href="/abrir-cuenta">Regístrate ahora</a>
     </p>
