@@ -149,6 +149,30 @@
   cursor: not-allowed;
 }
 
+.btn-email {
+  background-color: #27ae60;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex: 1;
+}
+
+.btn-email:hover:not(:disabled) {
+  background-color: #229954;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+}
+
+.btn-email:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Información de Cuenta */
 .cuenta-info {
   background: white;

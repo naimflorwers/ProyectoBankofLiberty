@@ -232,6 +232,50 @@ export class EstadoCuenta implements OnInit {
   }
 
   /**
+   * Enviar estado de cuenta por correo electrónico
+   */
+  enviarPorCorreo(): void {
+    if (!this.estadoCuenta) {
+      return;
+    }
+
+    const userId = this.usuario?.IdUsuario || this.usuario?.IDUsuario;
+    const correo = this.usuario?.Correo;
+
+    if (!correo) {
+      this.errorMsg = 'No se encontró el correo electrónico del usuario';
+      return;
+    }
+
+    this.cargando = true;
+    this.errorMsg = '';
+
+    const params = {
+      idUsuario: userId,
+      fechaInicio: this.fechaInicio,
+      fechaFin: this.fechaFin,
+      correo: correo
+    };
+
+    this.http.post<any>(`${this.apiUrl}/estado-cuenta/enviar-email`, params)
+      .subscribe({
+        next: (response) => {
+          this.cargando = false;
+          if (response.success) {
+            alert(`Estado de cuenta enviado exitosamente a: ${correo}`);
+          } else {
+            this.errorMsg = response.error || 'Error al enviar el correo';
+          }
+        },
+        error: (err) => {
+          this.cargando = false;
+          console.error('Error al enviar correo:', err);
+          this.errorMsg = err.error?.error || 'Error al enviar el estado de cuenta por correo';
+        }
+      });
+  }
+
+  /**
    * Formatear fecha para input type="date"
    */
   formatearFecha(fecha: Date): string {
