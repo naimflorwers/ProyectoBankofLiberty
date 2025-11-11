@@ -25,6 +25,11 @@ export class Login {
     this.passwordVisible = !this.passwordVisible;
   }
 
+  recuperarContrasena(event: Event) {
+    event.preventDefault();
+    this.router.navigate(['/recuperar-contrasena']);
+  }
+
   login() {
     if (!this.correo || !this.contrasena) {
       this.errorMsg = 'Debes llenar todos los campos';

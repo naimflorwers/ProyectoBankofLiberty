@@ -1,0 +1,301 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-image: url('../../assets/fondo.png');
+  background-size: cover;
+  font-family: Arial, sans-serif;
+}
+
+.recuperar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  padding: 20px;
+}
+
+.logo {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+  width: 150px;
+  height: 150px;
+}
+
+.recuperar-card {
+  background-color: #a9cce3;
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 500px;
+  text-align: left;
+}
+
+.recuperar-card h2 {
+  margin: 20px 0 10px 0;
+  color: #2c3e50;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.description {
+  text-align: center;
+  color: #34495e;
+  margin-bottom: 25px;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+/* Indicador de pasos */
+.pasos-indicador {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.paso {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.paso-numero {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ddd;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.paso.activo .paso-numero {
+  background-color: #2a6bb2;
+  color: white;
+}
+
+.paso.completado .paso-numero {
+  background-color: #28a745;
+  color: white;
+}
+
+.paso-texto {
+  font-size: 0.75em;
+  color: #555;
+  text-align: center;
+}
+
+.paso-linea {
+  flex: 1;
+  height: 2px;
+  background-color: #ddd;
+  margin: 0 10px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+.paso-linea.completado {
+  background-color: #28a745;
+}
+
+/* Formulario */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: #eaf2f8;
+  font-size: 1em;
+  color: #2c3e50;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+  outline: 2px solid #3498db;
+  background-color: white;
+}
+
+.input-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.input-group small {
+  display: block;
+  margin-top: 5px;
+  color: #7f8c8d;
+  font-size: 0.85em;
+}
+
+.codigo-input {
+  text-align: center;
+  font-size: 1.5em !important;
+  letter-spacing: 8px;
+  font-weight: bold;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 50px;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* Botones */
+.btn-principal {
+  width: 100%;
+  padding: 15px;
+  background-color: #2a6bb2;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.btn-principal:hover:not(:disabled) {
+  background-color: #1a4d7a;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(42, 107, 178, 0.3);
+}
+
+.btn-principal:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  width: 100%;
+  padding: 12px;
+  background-color: transparent;
+  color: #2a6bb2;
+  border: 2px solid #2a6bb2;
+  border-radius: 10px;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secundario:hover:not(:disabled) {
+  background-color: #2a6bb2;
+  color: white;
+}
+
+.btn-secundario:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Mensajes */
+.message {
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.error-message {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.success-message {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Botones de navegación */
+.navigation-buttons {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  color: #2a6bb2;
+  font-size: 0.9em;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 5px 10px;
+  transition: color 0.3s ease;
+}
+
+.btn-link:hover:not(:disabled) {
+  color: #1a4d7a;
+}
+
+.btn-link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .recuperar-card {
+    padding: 30px 25px;
+  }
+
+  .logo {
+    width: 100px;
+    height: 100px;
+    top: 15px;
+    left: 15px;
+  }
+
+  .pasos-indicador {
+    padding: 0 5px;
+  }
+
+  .paso-numero {
+    width: 35px;
+    height: 35px;
+  }
+
+  .paso-texto {
+    font-size: 0.7em;
+  }
+}

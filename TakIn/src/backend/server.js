@@ -1,7 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const usuariosRoutes = require('./routes/usuarios');
 const transferenciasRoutes = require('./routes/transferencias');
+const recuperacionRoutes = require('./routes/recuperacion');
+const estadoCuentaRoutes = require('./routes/estadoCuenta');
+const creditoRoutes = require('./routes/credito');
 
 console.log('Iniciando server.js...');
 
@@ -11,5 +15,14 @@ app.use(express.json());
 
 app.use('/api', usuariosRoutes);
 app.use('/api', transferenciasRoutes);
+app.use('/api', recuperacionRoutes);
+app.use('/api', estadoCuentaRoutes);
+app.use('/api', creditoRoutes);
 
-app.listen(3000, () => console.log('✅ Servidor corriendo en http://localhost:3000'));
+app.listen(3000, () => {
+  console.log('✅ Servidor corriendo en http://localhost:3000');
+  
+  // Verificar configuración de email al iniciar
+  const emailService = require('./services/emailService');
+  emailService.verifyConnection();
+});

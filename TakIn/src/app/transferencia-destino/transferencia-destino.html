@@ -53,16 +53,16 @@
 				@if (mostrarDetalleComision && monto > 0) {
 					<div class="comision-desglose">
 						<div class="comision-item">
-							<span class="comision-label">Monto a transferir:</span>
-							<span class="comision-valor">${{ monto | number:'1.2-2' }}</span>
-						</div>
-						<div class="comision-item">
 							<span class="comision-label">Comisión:</span>
 							<span class="comision-valor">${{ comision | number:'1.2-2' }}</span>
 						</div>
-						<div class="comision-item total">
-							<span class="comision-label"><strong>Total a cobrar:</strong></span>
-							<span class="comision-valor"><strong>${{ montoTotal | number:'1.2-2' }}</strong></span>
+						<div class="comision-item">
+							<span class="comision-label">Total a debitar:</span>
+							<span class="comision-valor">${{ montoTotal | number:'1.2-2' }}</span>
+						</div>
+						<div class="comision-item" [class.saldo-negativo]="cuentaRemitente && (cuentaRemitente.Dinero - montoTotal) < 0">
+							<span class="comision-label">Saldo restante:</span>
+							<span class="comision-valor">${{ cuentaRemitente ? (cuentaRemitente.Dinero - montoTotal) : 0 | number:'1.2-2' }}</span>
 						</div>
 					</div>
 				}

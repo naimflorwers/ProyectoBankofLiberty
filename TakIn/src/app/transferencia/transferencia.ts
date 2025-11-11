@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TransferenciasService, Cuenta } from '../../services/transferencias.service';
@@ -18,7 +18,8 @@ export class Transferencia implements OnInit {
 
   constructor(
     private transferenciasService: TransferenciasService,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -40,22 +41,33 @@ export class Transferencia implements OnInit {
     this.cargando = true;
     this.error = '';
     
-    console.log('Cargando cuentas para usuario:', this.idUsuario);
+    console.log('🔄 Cargando cuentas para usuario:', this.idUsuario);
     this.transferenciasService.getCuentasCliente(this.idUsuario).subscribe({
       next: (cuentas) => {
-        console.log('Cuentas recibidas:', cuentas);
+        console.log('✅ Cuentas recibidas del servidor:', cuentas);
+        console.log('📊 Cantidad de cuentas:', cuentas.length);
+        console.log('📊 Tipo de datos:', typeof cuentas, Array.isArray(cuentas));
+        
         this.cuentas = cuentas;
         this.cargando = false;
         
+        console.log('✅ Estado actualizado - cargando:', this.cargando);
+        console.log('✅ Estado actualizado - cuentas.length:', this.cuentas.length);
+        console.log('✅ this.cuentas:', this.cuentas);
+        
+        // Forzar detección de cambios
+        this.cdr.detectChanges();
+        
         if (cuentas.length === 0) {
-          console.warn('No se encontraron cuentas para este usuario');
+          console.warn('⚠️ No se encontraron cuentas para este usuario');
           this.error = 'No tienes cuentas disponibles';
         }
       },
       error: (err) => {
-        console.error('Error al cargar cuentas:', err);
+        console.error('❌ Error al cargar cuentas:', err);
         this.error = 'No se pudieron cargar las cuentas';
         this.cargando = false;
+        this.cdr.detectChanges();
       }
     });
   }

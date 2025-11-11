@@ -1,0 +1,477 @@
+.oferta-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+  overflow-y: auto;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Spinner */
+.spinner-container {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Modal Compacto - Oferta */
+.oferta-modal {
+  width: 100%;
+  max-width: 420px;
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content-compacto {
+  background: white;
+  border-radius: 20px;
+  padding: 30px 25px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.formulario-solicitud {
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.4s ease;
+}
+
+.formulario-content-compacto {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f0f0f0;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.close-btn:hover {
+  background: #e0e0e0;
+  color: #333;
+  transform: rotate(90deg);
+}
+
+.btn-volver {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  color: #667eea;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-volver:hover {
+  color: #764ba2;
+}
+
+/* Header Compacto */
+.oferta-body-compacto {
+  text-align: center;
+}
+
+.icon-header {
+  margin-bottom: 15px;
+}
+
+.icon-grande {
+  font-size: 3.5rem;
+}
+
+.titulo-oferta {
+  color: #333;
+  font-size: 1.8rem;
+  margin: 10px 0 5px;
+}
+
+.subtitulo-oferta {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+/* Monto Principal */
+.monto-principal {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px 0;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Detalles Compactos */
+.detalles-compactos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.detalle-compacto {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.label-detalle {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.valor-detalle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* Beneficios Compactos */
+.beneficios-compactos {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0 20px;
+  flex-wrap: wrap;
+}
+
+.beneficio-item {
+  color: #28a745;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Botones Compactos */
+.btn-solicitar-compacto {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 5px;
+}
+
+.btn-solicitar-compacto:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-cancelar-compacto {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  color: #666;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.btn-cancelar-compacto:hover {
+  background: #f8f9fa;
+  color: #667eea;
+}
+
+.btn-enviar-compacto {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.btn-enviar-compacto:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-enviar-compacto:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* No Elegible Compacto */
+.no-elegible-compacto {
+  text-align: center;
+  padding: 20px;
+}
+
+.icon-warning {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.no-elegible-compacto h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.no-elegible-compacto p {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+/* Formulario Compacto */
+.formulario-header-compacto {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-top: 10px;
+}
+
+.formulario-header-compacto h2 {
+  color: #333;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.formulario-body-compacto {
+  padding: 5px 0;
+}
+
+.form-group-compacto {
+  margin-bottom: 15px;
+}
+
+.form-group-compacto label {
+  display: block;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.form-control-compacto {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-control-compacto:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.form-group-compacto small {
+  display: block;
+  color: #666;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+.form-row-compacto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Resultados Compactos */
+.resultados-compactos {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.resultado-compacto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.resultado-compacto:last-of-type {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.resultado-compacto span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.resultado-compacto strong {
+  font-size: 1.1rem;
+  color: #667eea;
+}
+
+/* Estado Compacto */
+.estado-compacto {
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+.estado-compacto.aprobado {
+  background: #d4edda;
+  color: #155724;
+  border: 2px solid #28a745;
+}
+
+.estado-compacto.rechazado {
+  background: #f8d7da;
+  color: #721c24;
+  border: 2px solid #dc3545;
+}
+
+/* Error Message */
+.error-message {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  max-width: 350px;
+}
+
+.error-message p {
+  color: #dc3545;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.btn-cerrar {
+  padding: 12px 30px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-cerrar:hover {
+  background: #764ba2;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content-compacto, .formulario-content-compacto {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .titulo-oferta {
+    font-size: 1.5rem;
+  }
+
+  .monto-principal {
+    font-size: 2rem;
+    padding: 15px;
+  }
+
+  .detalles-compactos {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row-compacto {
+    grid-template-columns: 1fr;
+  }
+
+  .icon-grande {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .oferta-container {
+    padding: 10px;
+  }
+
+  .modal-content-compacto, .formulario-content-compacto {
+    padding: 20px 15px;
+  }
+
+  .monto-principal {
+    font-size: 1.8rem;
+  }
+}

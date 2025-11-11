@@ -100,8 +100,36 @@
   padding-right: 60px;
 }
 
+.error-message {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+.forgot-password-link {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.forgot-password-link a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password-link a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
 .register-link {
-  margin-top: 30px;
+  margin-top: 10px;
   font-size: 0.9em;
   color: #34495e;
   text-align: center;
