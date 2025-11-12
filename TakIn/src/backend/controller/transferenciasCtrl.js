@@ -6,16 +6,17 @@ const emailService = require('../services/emailService');
  */
 const getCuentasCliente = (req, res) => {
   const { idUsuario } = req.params;
-  
+
   console.log('📌 GET /api/cuentas/' + idUsuario + ' - Buscando cuentas...');
-  
+
+  // CORREGIDO: 'cuentas' y 'cliente' en minúsculas
   const query = `
     SELECT c.Numcuenta, c.Banco, c.Dinero, c.Clabe, c.NumTelefono
-    FROM Cuentas c
-    INNER JOIN Cliente cl ON c.IDCliente = cl.IDCliente
+    FROM cuentas c
+    INNER JOIN cliente cl ON c.IDCliente = cl.IDCliente
     WHERE cl.IDUsuario = ?
   `;
-  
+
   db.query(query, [idUsuario], (err, results) => {
     if (err) {
       console.error('❌ Error al obtener cuentas:', err);
@@ -29,15 +30,13 @@ const getCuentasCliente = (req, res) => {
 
 /**
  * Calcular comisión según el monto (ACUMULATIVO)
- * BASE: $5 por cada $100 (siempre)
- * EXTRA: +$10 si monto >= $1,500
- * EXTRA: +$20 si monto >= $3,000 (reemplaza el +$10)
+ * (No hay SQL aquí, no se necesita cambiar)
  */
 const calcularComision = (monto) => {
   // Comisión base: $5 por cada $100
   let comision = Math.round((monto / 100) * 5 * 100) / 100; // Redondear a 2 decimales
   let descripcion = 'Comisión $5 por cada $100';
-  
+
   // Agregar comisión extra según el monto
   if (monto >= 3000.00) {
     // Agregar $20 extra para montos >= $3,000
@@ -48,7 +47,7 @@ const calcularComision = (monto) => {
     comision = comision + 10.00;
     descripcion = 'Comisión $5 por cada $100 + $10 extra (≥$1,500)';
   }
-  
+
   return {
     comision: comision,
     descripcion: descripcion
@@ -63,16 +62,16 @@ const realizarTransferencia = (req, res) => {
 
   // Validaciones básicas
   if (!cuentaRemitente || !cuentaDestino || !monto) {
-    return res.status(400).json({ 
-      success: false, 
-      error: 'Faltan datos requeridos: cuentaRemitente, cuentaDestino, monto' 
+    return res.status(400).json({
+      success: false,
+      error: 'Faltan datos requeridos: cuentaRemitente, cuentaDestino, monto'
     });
   }
 
   if (monto <= 0) {
-    return res.status(400).json({ 
-      success: false, 
-      error: 'El monto debe ser mayor a 0' 
+    return res.status(400).json({
+      success: false,
+      error: 'El monto debe ser mayor a 0'
     });
   }
 
@@ -80,26 +79,26 @@ const realizarTransferencia = (req, res) => {
   const { comision, descripcion } = calcularComision(parseFloat(monto));
   const montoTotal = parseFloat(monto) + comision;
 
-  // Llamar al Stored Procedure con los nuevos parámetros de comisión
+  // Llamar al Stored Procedure (El SP ya usa minúsculas internamente)
   const query = 'CALL sp_realizar_transferencia(?, ?, ?, ?, @resultado, @id_transferencia, @comision, @monto_total)';
-  
+
   db.query(query, [cuentaRemitente, cuentaDestino, monto, motivo || 'Transferencia'], (err, results) => {
     if (err) {
       console.error('Error al ejecutar SP de transferencia:', err);
-      return res.status(500).json({ 
-        success: false, 
+      return res.status(500).json({
+        success: false,
         error: 'Error al procesar la transferencia',
-        detalle: err.message 
+        detalle: err.message
       });
     }
 
-    // Obtener los valores de salida del SP (ahora incluye comisión y monto total)
+    // Obtener los valores de salida del SP
     db.query('SELECT @resultado AS resultado, @id_transferencia AS idTransferencia, @comision AS comision, @monto_total AS montoTotal', (err2, output) => {
       if (err2) {
         console.error('Error al obtener resultado del SP:', err2);
-        return res.status(500).json({ 
-          success: false, 
-          error: 'Error al obtener resultado de la transferencia' 
+        return res.status(500).json({
+          success: false,
+          error: 'Error al obtener resultado de la transferencia'
         });
       }
 
@@ -110,26 +109,29 @@ const realizarTransferencia = (req, res) => {
 
       // Verificar si fue exitoso
       if (resultado && resultado.startsWith('EXITO')) {
-        // Enviar correos electrónicos de forma asíncrona (no bloqueante)
+        // Enviar correos electrónicos de forma asíncrona
         setImmediate(async () => {
           try {
-            // Obtener datos del remitente y destinatario para los correos
+            // Obtener datos del remitente
+            // CORREGIDO: 'usuarios', 'cliente', 'cuentas' en minúsculas
             const queryRemitente = `
               SELECT u.Correo, CONCAT(u.Nombre, ' ', u.ApellidoPaterno) as NombreCompleto, c.Dinero as NuevoSaldo
-              FROM Usuarios u
-              INNER JOIN Cliente cl ON u.IDUsuario = cl.IDUsuario
-              INNER JOIN Cuentas c ON cl.IDCliente = c.IDCliente
+              FROM usuarios u
+              INNER JOIN cliente cl ON u.IDUsuario = cl.IDUsuario
+              INNER JOIN cuentas c ON cl.IDCliente = c.IDCliente
               WHERE c.Numcuenta = ?
             `;
-            
+
+            // Obtener datos del destinatario
+            // CORREGIDO: 'usuarios', 'cliente', 'cuentas' en minúsculas
             const queryDestinatario = `
               SELECT u.Correo, CONCAT(u.Nombre, ' ', u.ApellidoPaterno) as NombreCompleto, c.Dinero as NuevoSaldo
-              FROM Usuarios u
-              INNER JOIN Cliente cl ON u.IDUsuario = cl.IDUsuario
-              INNER JOIN Cuentas c ON cl.IDCliente = c.IDCliente
+              FROM usuarios u
+              INNER JOIN cliente cl ON u.IDUsuario = cl.IDUsuario
+              INNER JOIN cuentas c ON cl.IDCliente = c.IDCliente
               WHERE c.Numcuenta = ?
             `;
-            
+
             db.query(queryRemitente, [cuentaRemitente], (err, remitente) => {
               if (!err && remitente && remitente.length > 0) {
                 const datosRemitente = {
@@ -143,7 +145,7 @@ const realizarTransferencia = (req, res) => {
                   date: new Date().toLocaleString('es-MX'),
                   newBalance: remitente[0].NuevoSaldo
                 };
-                
+
                 emailService.sendTransferSentEmail(remitente[0].Correo, datosRemitente)
                   .then(result => {
                     if (result.success) {
@@ -153,7 +155,7 @@ const realizarTransferencia = (req, res) => {
                   .catch(err => console.error('❌ Error enviando correo de transferencia enviada:', err));
               }
             });
-            
+
             db.query(queryDestinatario, [cuentaDestino], (err, destinatario) => {
               if (!err && destinatario && destinatario.length > 0) {
                 const datosDestinatario = {
@@ -166,7 +168,7 @@ const realizarTransferencia = (req, res) => {
                   date: new Date().toLocaleString('es-MX'),
                   newBalance: destinatario[0].NuevoSaldo
                 };
-                
+
                 emailService.sendTransferReceivedEmail(destinatario[0].Correo, datosDestinatario)
                   .then(result => {
                     if (result.success) {
@@ -180,7 +182,7 @@ const realizarTransferencia = (req, res) => {
             console.error('❌ Error general al enviar correos:', error);
           }
         });
-        
+
         return res.json({
           success: true,
           mensaje: resultado,
@@ -196,7 +198,7 @@ const realizarTransferencia = (req, res) => {
           }
         });
       } else {
-        // Error de negocio (saldo insuficiente, cuenta no existe, etc.)
+        // Error de negocio
         return res.status(400).json({
           success: false,
           error: resultado || 'Error desconocido en la transferencia',
@@ -213,7 +215,8 @@ const realizarTransferencia = (req, res) => {
  */
 const getHistorialTransferencias = (req, res) => {
   const { idUsuario } = req.params;
-  
+
+  // CORREGIDO: 'transferencia', 'cuentas', 'cliente' en minúsculas
   const query = `
     SELECT 
       t.IDTransferencia,
@@ -227,13 +230,13 @@ const getHistorialTransferencias = (req, res) => {
         WHEN t.CuentaRemitente = c.Numcuenta THEN 'Enviada'
         WHEN t.CuentaDestino = c.Numcuenta THEN 'Recibida'
       END AS TipoTransferencia
-    FROM Transferencia t
-    INNER JOIN Cuentas c ON (t.CuentaRemitente = c.Numcuenta OR t.CuentaDestino = c.Numcuenta)
-    INNER JOIN Cliente cl ON c.IDCliente = cl.IDCliente
+    FROM transferencia t
+    INNER JOIN cuentas c ON (t.CuentaRemitente = c.Numcuenta OR t.CuentaDestino = c.Numcuenta)
+    INNER JOIN cliente cl ON c.IDCliente = cl.IDCliente
     WHERE cl.IDUsuario = ?
     ORDER BY t.FechaTransferencia DESC
   `;
-  
+
   db.query(query, [idUsuario], (err, results) => {
     if (err) {
       console.error('Error al obtener historial:', err);
@@ -248,7 +251,8 @@ const getHistorialTransferencias = (req, res) => {
  */
 const getDetalleTransferencia = (req, res) => {
   const { idTransferencia } = req.params;
-  
+
+  // CORREGIDO: 'transferencia' en minúscula
   const query = `
     SELECT 
       t.IDTransferencia,
@@ -258,20 +262,20 @@ const getDetalleTransferencia = (req, res) => {
       t.CuentaRemitente,
       t.Motivo,
       t.FechaTransferencia
-    FROM Transferencia t
+    FROM transferencia t
     WHERE t.IDTransferencia = ?
   `;
-  
+
   db.query(query, [idTransferencia], (err, results) => {
     if (err) {
       console.error('Error al obtener detalle:', err);
       return res.status(500).json({ error: 'Error al obtener detalle de transferencia' });
     }
-    
+
     if (results.length === 0) {
       return res.status(404).json({ error: 'Transferencia no encontrada' });
     }
-    
+
     res.json(results[0]);
   });
 };
@@ -281,16 +285,16 @@ const getDetalleTransferencia = (req, res) => {
  */
 const getInfoComision = (req, res) => {
   const { monto } = req.query;
-  
+
   if (!monto || parseFloat(monto) <= 0) {
-    return res.status(400).json({ 
-      error: 'Debe proporcionar un monto válido' 
+    return res.status(400).json({
+      error: 'Debe proporcionar un monto válido'
     });
   }
-  
+
   const { comision, descripcion } = calcularComision(parseFloat(monto));
   const montoTotal = parseFloat(monto) + comision;
-  
+
   res.json({
     monto: parseFloat(monto),
     comision: comision,

@@ -32,18 +32,12 @@
     "@angular/router": "^20.2.0",
     "@angular/ssr": "^20.2.2",
     "bcrypt": "^6.0.0",
-<<<<<<< HEAD
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "mysql2": "^3.15.2",
-=======
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jspdf": "^3.0.3",
     "mysql2": "^3.15.1",
     "nodemailer": "^7.0.10",
     "pdfkit": "^0.17.2",
->>>>>>> c90b512dd15e942660d918744b352d493baee00d
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },

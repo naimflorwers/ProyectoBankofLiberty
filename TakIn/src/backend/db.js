@@ -1,20 +1,21 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '123456789',
-  database: 'Liberty',
+    host: 'ec2-3-131-82-171.us-east-2.compute.amazonaws.com',  
+    user: 'TakInRemoto',                                
+    password: '#g~Opc1OB)Qa;4,c',                     
+    database: 'Liberty'                                 
 });
 
-db.connect(err => {
-  if (err) {
-    console.error('Error al conectar MySQL:', err.message);
-    console.error('Código de error:', err.code);
-    console.error('Detalles completos:', err);
-    return;
-  }
-  console.log('Conectado a MySQL');
+db.connect((err) => {
+    if (err) {
+        console.error('ERROR AL CONECTAR A AWS MYSQL:', err.message);
+        console.error('Código de error:', err.code);
+        console.error('Detalles completos:', err);
+        return;
+    }
+    
+    console.log('¡Conectado exitosamente a la base de datos de AWS EC2!'); 
 });
 
 module.exports = db;

@@ -17,12 +17,13 @@ const enviarEstadoCuentaPorEmail = async (req, res) => {
 
   try {
     // Obtener datos del usuario y cuenta
+    // CORREGIDO: 'usuarios', 'cliente', 'cuentas'
     const [usuario] = await db.promise().query(
       `SELECT u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, 
               c.Numcuenta, c.Dinero as Saldo, c.Banco
-       FROM Usuarios u
-       LEFT JOIN Cliente cl ON u.IDUsuario = cl.IDUsuario
-       LEFT JOIN Cuentas c ON cl.IDCliente = c.IDCliente
+       FROM usuarios u
+       LEFT JOIN cliente cl ON u.IDUsuario = cl.IDUsuario
+       LEFT JOIN cuentas c ON cl.IDCliente = c.IDCliente
        WHERE u.IDUsuario = ?`,
       [idUsuario]
     );
@@ -47,6 +48,7 @@ const enviarEstadoCuentaPorEmail = async (req, res) => {
     const saldoInicialValue = datosUsuario.Saldo || 0;
 
     // Obtener movimientos
+    // CORREGIDO: 'transferencia', 'ingresar', 'retirar'
     const [movimientos] = await db.promise().query(
       `SELECT * FROM (
         SELECT 
@@ -56,7 +58,7 @@ const enviarEstadoCuentaPorEmail = async (req, res) => {
           CONCAT('TRANS-', t.IDTransferencia) as referencia,
           -t.Monto as monto,
           t.FechaTransferencia as ordenFecha
-        FROM Transferencia t
+        FROM transferencia t
         WHERE t.NumCuenta = ?
         AND t.CuentaRemitente = ?
         AND t.FechaTransferencia BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
@@ -70,7 +72,7 @@ const enviarEstadoCuentaPorEmail = async (req, res) => {
           CONCAT('TRANS-', t.IDTransferencia) as referencia,
           t.Monto as monto,
           t.FechaTransferencia as ordenFecha
-        FROM Transferencia t
+        FROM transferencia t
         WHERE t.CuentaDestino = ?
         AND t.FechaTransferencia BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
         
@@ -83,7 +85,7 @@ const enviarEstadoCuentaPorEmail = async (req, res) => {
           IFNULL(i.ClaveReferencia, CONCAT('ING-', i.IDIngreso)) as referencia,
           i.Monto as monto,
           i.FechaIngreso as ordenFecha
-        FROM Ingresar i
+        FROM ingresar i
         WHERE i.NumCuenta = ?
         AND i.FechaIngreso BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
         
@@ -96,16 +98,16 @@ const enviarEstadoCuentaPorEmail = async (req, res) => {
           IFNULL(r.NumeroReferencia, CONCAT('RET-', r.IDRetiro)) as referencia,
           -r.Monto as monto,
           r.FechaRetiro as ordenFecha
-        FROM Retirar r
+        FROM retirar r
         WHERE r.NumCuenta = ?
         AND r.FechaRetiro BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
       ) as TodosMovimientos
       ORDER BY ordenFecha ASC`,
       [
-        numCuenta, numCuenta, fechaInicio, fechaInicio,
-        numCuenta, fechaInicio, fechaInicio,
-        numCuenta, fechaInicio, fechaInicio,
-        numCuenta, fechaInicio, fechaInicio
+        numCuenta, numCuenta, fechaInicio, fechaInicio, // Corrección en fechas de Transferencia Enviada
+        numCuenta, fechaInicio, fechaInicio, // Corrección en fechas de Transferencia Recibida
+        numCuenta, fechaInicio, fechaInicio, // Corrección en fechas de Ingresar
+        numCuenta, fechaInicio, fechaInicio  // Corrección en fechas de Retirar
       ]
     );
 

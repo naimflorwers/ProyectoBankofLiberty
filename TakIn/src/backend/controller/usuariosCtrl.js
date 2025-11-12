@@ -2,75 +2,70 @@ const db = require('../db');
 const bcrypt = require('bcrypt');
 const SALT_ROUNDS = 10;
 
-
 const getUsuarios = (req, res) => {
-  db.query('SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol FROM Usuarios', (err, results) => {
+  // CORREGIDO: 'usuarios' en minúscula
+  db.query('SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol FROM usuarios', (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
 };
-
 
 const getClientes = (req, res) => {
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
            c.IDCliente, c.CURP, c.RFC, c.FechaNacimiento, c.Nacionalidad, c.NumIdentificacion, c.Telefono, c.Domicilio,
            c.PuestoLaboral, c.NomEmpresa, c.DomEmpresa, c.FuenteIngresos, c.IngresoMensual, c.Beneficiarios, c.Genero
-    FROM Usuarios u
-    INNER JOIN Cliente c ON u.IDUsuario = c.IDUsuario
-  `;
+    FROM usuarios u
+    INNER JOIN cliente c ON u.IDUsuario = c.IDUsuario
+  `; // CORREGIDO: 'usuarios' y 'cliente'
   db.query(query, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
 };
-
 
 const getEjecutivos = (req, res) => {
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
            e.IDEjecutivo, e.CURP, e.RFC, e.FechaNacimiento, e.Nacionalidad, e.NumIdentificacion, e.Telefono, e.Domicilio, e.Genero
-    FROM Usuarios u
-    INNER JOIN Ejecutivo e ON u.IDUsuario = e.IDUsuario
-  `;
+    FROM usuarios u
+    INNER JOIN ejecutivo e ON u.IDUsuario = e.IDUsuario
+  `; // CORREGIDO: 'usuarios' y 'ejecutivo'
   db.query(query, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
 };
-
 
 const getGerentes = (req, res) => {
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
            g.IDGerente, g.CURP, g.RFC, g.FechaNacimiento, g.Nacionalidad, g.NumIdentificacion, g.Telefono, g.Domicilio, g.Genero
-    FROM Usuarios u
-    INNER JOIN Gerente g ON u.IDUsuario = g.IDUsuario
-  `;
+    FROM usuarios u
+    INNER JOIN gerente g ON u.IDUsuario = g.IDUsuario
+  `; // CORREGIDO: 'usuarios' y 'gerente'
   db.query(query, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
   });
 };
-
 
 const getUsuario = (req, res) => {
   const { id } = req.params;
   const query = `
     SELECT u.IDUsuario, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, u.Rol,
            c.IDCliente, c.CURP AS ClienteCURP, e.IDEjecutivo, e.CURP AS EjecutivoCURP, g.IDGerente, g.CURP AS GerenteCURP
-    FROM Usuarios u
-    LEFT JOIN Cliente c ON u.IDUsuario = c.IDUsuario
-    LEFT JOIN Ejecutivo e ON u.IDUsuario = e.IDUsuario
-    LEFT JOIN Gerente g ON u.IDUsuario = g.IDUsuario
+    FROM usuarios u
+    LEFT JOIN cliente c ON u.IDUsuario = c.IDUsuario
+    LEFT JOIN ejecutivo e ON u.IDUsuario = e.IDUsuario
+    LEFT JOIN gerente g ON u.IDUsuario = g.IDUsuario
     WHERE u.IDUsuario = ?
-  `;
+  `; // CORREGIDO: 'usuarios', 'cliente', 'ejecutivo', 'gerente'
   db.query(query, [id], (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results[0] || {});
   });
 };
-
 
 const login = (req, res) => {
   const correo = req.body.correo;
@@ -80,7 +75,8 @@ const login = (req, res) => {
     return res.status(400).json({ msg: 'Faltan campos correo o contraseña' });
   }
 
-  const query = 'SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol, Contrasena FROM Usuarios WHERE Correo = ?';
+  // CORREGIDO: 'usuarios' en minúscula
+  const query = 'SELECT IDUsuario, Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Rol, Contrasena FROM usuarios WHERE Correo = ?';
   db.query(query, [correo], (err, results) => {
     if (err) return res.status(500).send(err);
     if (!results || results.length === 0) {
@@ -101,7 +97,8 @@ const login = (req, res) => {
       if (contrasena === stored) {
         bcrypt.hash(contrasena, SALT_ROUNDS, (errHash, newHash) => {
           if (!errHash) {
-            const upd = 'UPDATE Usuarios SET Contrasena = ? WHERE IDUsuario = ?';
+            // CORREGIDO: 'usuarios' en minúscula
+            const upd = 'UPDATE usuarios SET Contrasena = ? WHERE IDUsuario = ?';
             db.query(upd, [newHash, user.IDUsuario], (uErr) => {
               if (uErr) console.error('Error al actualizar hash de usuario:', uErr);
             });
@@ -125,7 +122,8 @@ const registro = (req, res) => {
     return res.status(400).json({ msg: 'Faltan campos obligatorios' });
   }
 
-  const checkQuery = 'SELECT IDUsuario FROM Usuarios WHERE Correo = ?';
+  // CORREGIDO: 'usuarios' en minúscula
+  const checkQuery = 'SELECT IDUsuario FROM usuarios WHERE Correo = ?';
   db.query(checkQuery, [correo], (err, results) => {
     if (err) return res.status(500).send(err);
     if (results && results.length > 0) {
@@ -135,12 +133,14 @@ const registro = (req, res) => {
     bcrypt.hash(contrasena, SALT_ROUNDS, (err, hash) => {
       if (err) return res.status(500).send(err);
 
-      const insertQuery = 'INSERT INTO Usuarios (Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Contrasena, Rol) VALUES (?, ?, ?, ?, ?, ?)';
+      // CORREGIDO: 'usuarios' en minúscula
+      const insertQuery = 'INSERT INTO usuarios (Nombre, ApellidoPaterno, ApellidoMaterno, Correo, Contrasena, Rol) VALUES (?, ?, ?, ?, ?, ?)';
       db.query(insertQuery, [nombre, apellidoPaterno, apellidoMaterno, correo, hash, rol || 'cliente'], (err, result) => {
         if (err) return res.status(500).send(err);
         const usuarioId = result.insertId;
         if (curp) {
-          const insertCliente = 'INSERT INTO Cliente (IDUsuario, CURP) VALUES (?, ?)';
+          // CORREGIDO: 'cliente' en minúscula
+          const insertCliente = 'INSERT INTO cliente (IDUsuario, CURP) VALUES (?, ?)';
           db.query(insertCliente, [usuarioId, curp], (err2, res2) => {
             if (err2) {
               return res.status(201).json({ success: true, id: usuarioId, warning: 'Usuario creado, pero no se pudo crear registro de Cliente', clienteError: err2 });

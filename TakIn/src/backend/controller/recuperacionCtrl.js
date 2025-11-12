@@ -23,7 +23,8 @@ const solicitarRecuperacion = (req, res) => {
   }
 
   // Verificar si el correo existe en la base de datos
-  const query = 'SELECT IDUsuario, CONCAT(Nombre, " ", ApellidoPaterno) as NombreCompleto FROM Usuarios WHERE Correo = ?';
+  // CORREGIDO: 'usuarios' en minúscula
+  const query = 'SELECT IDUsuario, CONCAT(Nombre, " ", ApellidoPaterno) as NombreCompleto FROM usuarios WHERE Correo = ?';
   
   db.query(query, [correo], async (err, results) => {
     if (err) {
@@ -162,7 +163,8 @@ const cambiarContrasena = (req, res) => {
     }
 
     // Actualizar contraseña en la base de datos
-    const query = 'UPDATE Usuarios SET Contrasena = ? WHERE Correo = ?';
+    // CORREGIDO: 'usuarios' en minúscula
+    const query = 'UPDATE usuarios SET Contrasena = ? WHERE Correo = ?';
     
     db.query(query, [hashedPassword, correo], async (err, result) => {
       if (err) {
@@ -178,7 +180,8 @@ const cambiarContrasena = (req, res) => {
       codigosVerificacion.delete(correo);
 
       // Obtener nombre del usuario para el correo
-      db.query('SELECT CONCAT(Nombre, " ", ApellidoPaterno) as NombreCompleto FROM Usuarios WHERE Correo = ?', [correo], async (err, results) => {
+      // CORREGIDO: 'usuarios' en minúscula
+      db.query('SELECT CONCAT(Nombre, " ", ApellidoPaterno) as NombreCompleto FROM usuarios WHERE Correo = ?', [correo], async (err, results) => {
         if (!err && results.length > 0) {
           // Enviar correo de confirmación
           await emailService.sendPasswordChangedEmail(correo, {

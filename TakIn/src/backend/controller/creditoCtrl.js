@@ -10,10 +10,11 @@ const verificarElegibilidad = async (req, res) => {
 
   try {
     // 1. Obtener datos del cliente
+    // CORREGIDO: 'cliente' y 'usuarios'
     const [cliente] = await db.promise().query(
       `SELECT cl.*, u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo
-       FROM Cliente cl
-       JOIN Usuarios u ON cl.IDUsuario = u.IDUsuario
+       FROM cliente cl
+       JOIN usuarios u ON cl.IDUsuario = u.IDUsuario
        WHERE cl.IDUsuario = ?`,
       [idUsuario]
     );
@@ -34,8 +35,9 @@ const verificarElegibilidad = async (req, res) => {
     const datosCliente = cliente[0];
 
     // 2. Obtener cuenta del cliente
+    // CORREGIDO: 'cuentas'
     const [cuenta] = await db.promise().query(
-      `SELECT * FROM Cuentas WHERE IDCliente = ?`,
+      `SELECT * FROM cuentas WHERE IDCliente = ?`,
       [datosCliente.IDCliente]
     );
 
@@ -55,8 +57,9 @@ const verificarElegibilidad = async (req, res) => {
     const datosCuenta = cuenta[0];
 
     // 3. Verificar si tiene préstamos activos
+    // CORREGIDO: 'prestamos'
     const [prestamosActivos] = await db.promise().query(
-      `SELECT COUNT(*) as total FROM Prestamos 
+      `SELECT COUNT(*) as total FROM prestamos 
        WHERE IDCliente = ? AND Autorizado = TRUE`,
       [datosCliente.IDCliente]
     );
@@ -64,7 +67,6 @@ const verificarElegibilidad = async (req, res) => {
     const tienePrestamos = prestamosActivos[0].total > 0;
 
     // 4. Calcular monto máximo basado en ingreso mensual
-    // Fórmula: Monto máximo = IngresoMensual * 5 (multiplicador bancario estándar)
     const ingresoMensual = parseFloat(datosCliente.IngresoMensual) || 0;
     
     if (ingresoMensual < 5000) {
@@ -89,9 +91,9 @@ const verificarElegibilidad = async (req, res) => {
     }
 
     // 5. Determinar tasa de interés mensual
-    // Basada en el score de crédito (si existe) o un valor por defecto
+    // CORREGIDO: 'score_de_credito'
     const [score] = await db.promise().query(
-      `SELECT Score FROM Score_de_Credito 
+      `SELECT Score FROM score_de_credito 
        WHERE IDCliente = ? 
        ORDER BY FechaConsulta DESC 
        LIMIT 1`,
@@ -173,8 +175,9 @@ const solicitarCredito = async (req, res) => {
 
   try {
     // 1. Obtener datos del cliente
+    // CORREGIDO: 'cliente'
     const [cliente] = await db.promise().query(
-      `SELECT * FROM Cliente WHERE IDUsuario = ?`,
+      `SELECT * FROM cliente WHERE IDUsuario = ?`,
       [idUsuario]
     );
 
@@ -188,8 +191,9 @@ const solicitarCredito = async (req, res) => {
     const datosCliente = cliente[0];
 
     // 2. Obtener cuenta del cliente
+    // CORREGIDO: 'cuentas'
     const [cuenta] = await db.promise().query(
-      `SELECT * FROM Cuentas WHERE IDCliente = ?`,
+      `SELECT * FROM cuentas WHERE IDCliente = ?`,
       [datosCliente.IDCliente]
     );
 
@@ -210,11 +214,12 @@ Capacidad de Pago: $${capacidadPago}
 Pago Mensual: $${pagoMensual}
 Total a Pagar: $${totalAPagar}`;
 
+    // CORREGIDO: 'prestamos'
     const [result] = await db.promise().query(
-      `INSERT INTO Prestamos (
-        IDCliente, NumCuenta, Descripcion, Monto, 
-        PlazoMeses, TasaInteres, Autorizado
-      ) VALUES (?, ?, ?, ?, ?, ?, FALSE)`,
+      `INSERT INTO prestamos (
+         IDCliente, NumCuenta, Descripcion, Monto, 
+         PlazoMeses, TasaInteres, Autorizado
+       ) VALUES (?, ?, ?, ?, ?, ?, FALSE)`,
       [
         datosCliente.IDCliente,
         numCuenta,

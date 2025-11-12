@@ -17,12 +17,13 @@ const obtenerEstadoCuenta = async (req, res) => {
 
   try {
     // 1. Obtener información del usuario y su cuenta
+    // CORREGIDO: 'usuarios', 'cliente', 'cuentas'
     const [usuario] = await db.promise().query(
       `SELECT u.Nombre, u.ApellidoPaterno, u.ApellidoMaterno, u.Correo, 
               c.Numcuenta, c.Dinero as Saldo, c.Banco
-       FROM Usuarios u
-       LEFT JOIN Cliente cl ON u.IDUsuario = cl.IDUsuario
-       LEFT JOIN Cuentas c ON cl.IDCliente = c.IDCliente
+       FROM usuarios u
+       LEFT JOIN cliente cl ON u.IDUsuario = cl.IDUsuario
+       LEFT JOIN cuentas c ON cl.IDCliente = c.IDCliente
        WHERE u.IDUsuario = ?`,
       [idUsuario]
     );
@@ -39,12 +40,12 @@ const obtenerEstadoCuenta = async (req, res) => {
     const datosUsuario = usuario[0];
 
     // 2. Obtener saldo inicial (usar el saldo actual de la cuenta)
-    // Como no hay histórico, usamos el saldo actual
     const saldoInicialValue = datosUsuario.Saldo || 0;
 
     // 3. Obtener ID del cliente para las consultas
+    // CORREGIDO: 'cliente'
     const [cliente] = await db.promise().query(
-      `SELECT IDCliente FROM Cliente WHERE IDUsuario = ?`,
+      `SELECT IDCliente FROM cliente WHERE IDUsuario = ?`,
       [idUsuario]
     );
 
@@ -70,6 +71,7 @@ const obtenerEstadoCuenta = async (req, res) => {
     console.log('💳 Consultando movimientos para cuenta:', numCuenta);
 
     // 4. Obtener todos los movimientos en el periodo
+    // CORREGIDO: 'transferencia', 'ingresar', 'retirar', 'prestamos'
     const [movimientos] = await db.promise().query(
       `SELECT * FROM (
         -- Transferencias enviadas
@@ -80,7 +82,7 @@ const obtenerEstadoCuenta = async (req, res) => {
           CONCAT('TRANS-', t.IDTransferencia) as referencia,
           -t.Monto as monto,
           t.FechaTransferencia as ordenFecha
-        FROM Transferencia t
+        FROM transferencia t
         WHERE t.NumCuenta = ?
         AND t.CuentaRemitente = ?
         AND t.FechaTransferencia BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
@@ -95,7 +97,7 @@ const obtenerEstadoCuenta = async (req, res) => {
           CONCAT('TRANS-', t.IDTransferencia) as referencia,
           t.Monto as monto,
           t.FechaTransferencia as ordenFecha
-        FROM Transferencia t
+        FROM transferencia t
         WHERE t.CuentaDestino = ?
         AND t.FechaTransferencia BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
         
@@ -109,7 +111,7 @@ const obtenerEstadoCuenta = async (req, res) => {
           IFNULL(i.ClaveReferencia, CONCAT('ING-', i.IDIngreso)) as referencia,
           i.Monto as monto,
           i.FechaIngreso as ordenFecha
-        FROM Ingresar i
+        FROM ingresar i
         WHERE i.NumCuenta = ?
         AND i.FechaIngreso BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
         
@@ -123,7 +125,7 @@ const obtenerEstadoCuenta = async (req, res) => {
           IFNULL(r.NumeroReferencia, CONCAT('RET-', r.IDRetiro)) as referencia,
           -r.Monto as monto,
           r.FechaRetiro as ordenFecha
-        FROM Retirar r
+        FROM retirar r
         WHERE r.NumCuenta = ?
         AND r.FechaRetiro BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
         
@@ -137,7 +139,7 @@ const obtenerEstadoCuenta = async (req, res) => {
           CONCAT('PRES-', p.IDPrestamo) as referencia,
           p.Monto as monto,
           p.FechaSolicitud as ordenFecha
-        FROM Prestamos p
+        FROM prestamos p
         WHERE p.NumCuenta = ?
         AND p.Autorizado = TRUE
         AND p.FechaSolicitud BETWEEN ? AND DATE_ADD(?, INTERVAL 1 DAY)
