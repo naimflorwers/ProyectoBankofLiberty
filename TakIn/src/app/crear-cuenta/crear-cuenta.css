@@ -1,106 +1,140 @@
-/* HTML y body deben crecer según el contenido */
-html {
-  height: auto;
-  min-height: 100%;
-  background-color: #33658A;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #33658A;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #33658A;
-  min-height: 100%;
-}
-
-/* Contenedor principal */
-.container {
+/* --- CONTENEDOR PRINCIPAL --- */
+.main-container {
   width: 100%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px; /* espacio debajo del formulario */
-  box-sizing: border-box;
+  padding-bottom: 40px;
+  font-family: Arial, sans-serif;
 }
 
-/* Navbar / Header (NO TOCAR) */
-.header {
+/* --- HEADER --- */
+.header-custom {
   background-color: #86BBD8;
   color: rgb(0, 0, 0);
   width: 100%;
-  padding: 8px 20px;
+  padding: 10px 20px;
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.header .logo {
-  height: 70px;
-  width: 70px;
+.header-custom .logo {
+  height: 50px;
+  width: 50px;
+  margin-right: 15px;
+  object-fit: contain;
 }
 
-.header .title {
+.header-custom .title {
   font-size: 18px;
   font-weight: bold;
 }
 
-/* FORMULARIO */
+/* --- FORMULARIO --- */
 .form-card {
   background-color: #5fa9c7;
-  margin: 20px;
-  padding: 20px;
-  width: 80%;
-  max-width: 800px;
+  margin-top: 20px;
+  padding: 30px;
+  width: 90%;
+  max-width: 800px; /* Límite en PC */
   border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 h4 {
-  margin: 10px 0;
-  font-size: 14px;
+  margin: 20px 0 10px 0;
+  font-size: 16px;
+  color: #000;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 5px;
+  font-weight: bold;
 }
 
-.row, .row-full {
+/* SISTEMA DE REJILLA (FLEXBOX) */
+.row {
   display: flex;
-  gap: 15px;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.row-full {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 15px;
 }
 
 .col {
-  flex: 1;
+  flex: 1; /* En PC ocupan el 50% cada uno */
   display: flex;
-  flex-direction: column;
-}
-
-.row-full {
   flex-direction: column;
 }
 
 label {
-  font-size: 12px;
+  font-size: 13px;
   margin-bottom: 5px;
+  font-weight: bold;
+  color: #20316b;
 }
 
 input {
-  padding: 6px;
+  padding: 10px 15px;
   border-radius: 15px;
   border: none;
   outline: none;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box; /* Vital para evitar desbordes */
 }
 
+input:focus {
+  outline: 2px solid #20316b;
+}
+
+/* --- BOTÓN --- */
 .button-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 button {
-  padding: 8px 25px;
+  padding: 12px 40px;
   background-color: #20316b;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background-color: #20316b;
+  background-color: #152046;
+}
+
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 768px) {
+  .form-card {
+    padding: 20px 15px;
+    width: 95%; /* Usar más ancho en celular */
+  }
+
+  /* AQUÍ ESTÁ LA CLAVE: Cambiamos fila a columna */
+  .row {
+    flex-direction: column; /* Pone uno debajo del otro */
+    gap: 15px;
+  }
+  
+  .header-custom .logo {
+    height: 40px;
+    width: 40px;
+  }
 }

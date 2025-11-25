@@ -1,7 +1,10 @@
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #3b5970; /* Fondo azul grisáceo */
+}
+
 :host {
   display: block;
-  background-color: #3b5970;
-  min-height: 100vh;
   font-family: Arial, sans-serif;
 }
 
@@ -9,97 +12,144 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  min-height: 100vh;
 }
 
-h3 {
-  font-size: 2.5em;
-  line-height: 1.2;
-  color: #FEE568;
-}
-
-/* Navbar ajustado */
+/* --- HEADER --- */
 .header {
-  width: 100%;                 /* Ocupa todo el ancho */
+  width: 100%;
   background-color: #85b4d1;
-  padding: 8px 20px;           /* Menos alto verticalmente */
+  padding: 10px 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center; /* Centrado en móvil */
+  gap: 15px;
+}
+
+.header-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
 }
 
 .logo {
-  height: 70px;
-  width: 70px;
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
 }
 
+h3 {
+  font-size: 1.8em;
+  line-height: 1.2;
+  color: #FEE568; /* Amarillo */
+  margin: 0;
+  font-weight: bold;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
 .main-content {
-  width: 100%;
-  max-width: 900px;
-  margin-top: 50px;
+  width: 90%; /* Responsivo por defecto */
+  max-width: 900px; /* Límite en PC */
+  margin-top: 30px;
+  background-color: white; /* Fondo para la lista */
+  border-radius: 8px;
+  overflow: hidden; /* Para redondear esquinas */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .title-bar {
   background-color: #375d79;
   color: white;
-  padding: 12px 20px;
+  padding: 15px 20px;
   text-align: center;
   font-weight: bold;
   letter-spacing: 1px;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  font-size: 1.1em;
+}
+
+/* --- LISTA DE SOLICITUDES --- */
+.solicitudes-list {
+  background-color: #ccc; /* Fondo gris de la lista */
 }
 
 .solicitud-item {
   display: flex;
   align-items: center;
   padding: 15px 20px;
-  background-color: #ccc;
+  background-color: #ccc; /* Item impar */
   border-bottom: 1px solid #aaa;
   color: #333;
-}
-
-.solicitud-item.empty {
-  color: transparent;
+  transition: background-color 0.2s;
 }
 
 .solicitud-item:nth-child(even) {
-  background-color: #ddd;
+  background-color: #ddd; /* Item par (cebra) */
 }
 
+/* Efecto hover para items clickeables */
+.hover-effect:hover {
+  background-color: #b0c4de; /* Azul muy claro al pasar mouse */
+  cursor: pointer;
+}
+
+.solicitud-item.empty {
+  color: transparent; /* Ocultar iconos en items vacíos */
+  height: 50px; /* Altura mínima */
+}
+
+.solicitud-item.empty .status-icon {
+  opacity: 0.2; /* Hacer iconos muy tenues */
+}
+
+/* Iconos de estado */
 .status-icon {
-  font-size: 1.2em;
-  margin-right: 20px;
+  font-size: 1.4em;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .icon-pending {
   color: #555;
 }
 
-.icon-rejected {
-  color: #c0392b;
-  font-weight: bold;
-}
-
 .icon-approved {
-  color: #27ae60;
+  color: #27ae60; /* Verde */
   font-weight: bold;
 }
 
 .solicitud-nombre {
   flex-grow: 1;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Cortar texto con ... si es muy largo */
+  margin-right: 10px;
 }
 
 .solicitud-fecha {
   font-weight: bold;
+  font-size: 0.9em;
+  color: #555;
 }
 
-/* Footer y botón */
+/* Link envolvente */
+.solicitud-link {
+  text-decoration: none; 
+  color: inherit;      
+  display: block;    
+}
+
+/* --- FOOTER --- */
 .footer {
   width: 100%;
   display: flex;
   justify-content: center;
   padding: 20px 0;
+  background-color: #3b5970; /* Mismo color del fondo general para integrarse */
   box-sizing: border-box;
 }
 
@@ -113,9 +163,11 @@ h3 {
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   transition: all 0.2s ease-in-out;
-  max-width: 100%;
+  max-width: 90%; /* En móvil no exceder ancho */
   white-space: nowrap;
   text-align: center;
+  cursor: pointer;
+  font-size: 1em;
 }
 
 .regresar-btn:hover {
@@ -123,8 +175,36 @@ h3 {
   transform: translateY(-2px);
 }
 
-.solicitud-link {
-  text-decoration: none; 
-  color: inherit;      
-  display: block;    
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 600px) {
+  .header {
+    justify-content: space-between; /* Separar logo y título */
+    padding: 10px 15px;
+  }
+
+  .logo {
+    height: 40px;
+    width: 40px;
+  }
+
+  h3 {
+    font-size: 1.5em;
+  }
+
+  .main-content {
+    width: 95%; /* Más ancho en celular */
+    margin-top: 20px;
+  }
+
+  .solicitud-item {
+    padding: 12px 15px; /* Menos padding */
+  }
+
+  .solicitud-nombre {
+    font-size: 0.95em;
+  }
+
+  .solicitud-fecha {
+    font-size: 0.85em;
+  }
 }

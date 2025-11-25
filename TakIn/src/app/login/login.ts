@@ -3,12 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuariosService } from '../../services/usuarios.service'; 
+import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login-cliente',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule, RouterModule],
+  imports: [FormsModule, CommonModule, HttpClientModule, RouterModule, IonicModule],
   providers: [UsuariosService],
   templateUrl: './login.html',
   styleUrls: ['./login.css']

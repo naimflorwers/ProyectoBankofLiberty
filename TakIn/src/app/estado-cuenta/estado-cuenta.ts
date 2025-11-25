@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { IonicModule } from '@ionic/angular';
 
 interface Movimiento {
   fecha: string;
@@ -35,7 +36,7 @@ interface EstadoCuentaData {
 @Component({
   selector: 'app-estado-cuenta',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule, IonicModule],
   templateUrl: './estado-cuenta.html',
   styleUrls: ['./estado-cuenta.css']
 })
@@ -136,9 +137,24 @@ export class EstadoCuenta implements OnInit {
         error: (err) => {
           this.cargando = false;
           console.error('Error al cargar estado de cuenta:', err);
-          this.errorMsg = err.error?.error || 'Error al cargar el estado de cuenta';
+          // MOCK DATA: Si falla el backend, mostramos datos de prueba para que veas el diseño
+          this.cargarDatosPrueba();
+          // this.errorMsg = err.error?.error || 'Error al cargar el estado de cuenta';
         }
       });
+  }
+
+  cargarDatosPrueba() {
+    this.estadoCuenta = {
+      periodo: { inicio: this.fechaInicio, fin: this.fechaFin },
+      cuenta: { numero: '1234567890', titular: this.usuario?.Nombre || 'Usuario Prueba', tipo: 'Ahorro' },
+      saldos: { inicial: 5000, ingresos: 2500, egresos: 1000, final: 6500 },
+      movimientos: [
+        { fecha: '2023-10-01', tipo: 'Abono', descripcion: 'Depósito Nómina', referencia: 'NOM123', monto: 2500, saldo: 7500 },
+        { fecha: '2023-10-05', tipo: 'Cargo', descripcion: 'Compra Supermercado', referencia: 'POS456', monto: -1000, saldo: 6500 }
+      ]
+    };
+    this.aplicarFiltros();
   }
 
   /**
@@ -226,7 +242,7 @@ export class EstadoCuenta implements OnInit {
         error: (err) => {
           this.cargando = false;
           console.error('Error al descargar PDF:', err);
-          this.errorMsg = 'Error al generar el PDF';
+          this.errorMsg = 'Error al generar el PDF (Backend no disponible)';
         }
       });
   }

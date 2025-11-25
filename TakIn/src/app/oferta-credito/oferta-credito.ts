@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular'; // <--- Importante para ion-content
 
 export interface OfertaCreditoData {
   montoMaximo: number;
@@ -15,7 +16,7 @@ export interface OfertaCreditoData {
 @Component({
   selector: 'app-oferta-credito',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, IonicModule],
   templateUrl: './oferta-credito.html',
   styleUrls: ['./oferta-credito.css']
 })
@@ -101,13 +102,7 @@ export class OfertaCredito implements OnInit {
   }
 
   /**
-   * Calcular pago mensual usando la fórmula
-   * Pc = Pr + Pr * i * n
-   * Donde:
-   * - Pc = Pago total con intereses
-   * - Pr = Préstamo (monto solicitado)
-   * - i = Tasa de interés mensual (decimal)
-   * - n = Número de pagos (meses)
+   * Calcular pago mensual
    */
   calcularPago(): void {
     if (!this.oferta || this.montoSolicitado <= 0 || this.plazoMeses <= 0) {
@@ -182,8 +177,8 @@ export class OfertaCredito implements OnInit {
    * Cerrar modal
    */
   cerrarModal(): void {
-    // Emitir evento para cerrar el modal sin navegar
-    window.history.back();
+    // Navegar atrás o al home si se cierra
+    this.router.navigate(['/menu-cliente']);
   }
 
   /**

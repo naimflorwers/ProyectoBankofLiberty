@@ -3,11 +3,13 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-recuperar-contrasena',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HttpClientModule],
+  imports: [FormsModule, CommonModule, RouterModule, HttpClientModule, IonicModule],
+  // IMPORTANTE: Estos nombres NO tienen ñ. Asegúrate de renombrar tus archivos.
   templateUrl: './recuperar-contrasena.html',
   styleUrls: ['./recuperar-contrasena.css']
 })
@@ -28,7 +30,7 @@ export class RecuperarContrasena {
   // Estados
   errorMsg: string = '';
   successMsg: string = '';
-  procesando: boolean = false; // Prevenir doble click
+  procesando: boolean = false; // Tu variable correcta
   
   // Visibilidad de contraseñas
   passwordVisible: boolean = false;
@@ -59,26 +61,28 @@ export class RecuperarContrasena {
 
     this.errorMsg = '';
     this.successMsg = '';
-    
-    // Avanzar inmediatamente al siguiente paso
-    this.pasoActual = 2;
+    this.procesando = true;
 
-    // Enviar petición en segundo plano
+    // Enviar petición
     this.http.post(`${this.apiUrl}/solicitar-recuperacion`, { correo: this.correo })
       .subscribe({
         next: (response: any) => {
-          if (response.success) {
+          this.procesando = false;
+          // Asumimos que tu backend devuelve { success: true }
+          if (response.success || response.message) { // Ajusta según tu respuesta real
+            this.pasoActual = 2; 
             this.successMsg = 'Código enviado a tu correo';
             setTimeout(() => this.successMsg = '', 3000);
           } else {
             this.errorMsg = response.error || 'Error al enviar el código';
-            this.pasoActual = 1; // Volver si hay error
           }
         },
         error: (err) => {
+          this.procesando = false;
           console.error('Error al solicitar código:', err);
-          this.errorMsg = err.error?.error || 'El correo no está registrado o ocurrió un error';
-          this.pasoActual = 1; // Volver si hay error
+          // Si no tienes backend corriendo, descomenta la siguiente línea para probar visualmente:
+          // this.pasoActual = 2; 
+          this.errorMsg = err.error?.error || 'El correo no está registrado o no hay conexión con el servidor';
         }
       });
   }
@@ -94,29 +98,29 @@ export class RecuperarContrasena {
 
     this.errorMsg = '';
     this.successMsg = '';
-    
-    // Avanzar inmediatamente al siguiente paso
-    this.pasoActual = 3;
+    this.procesando = true;
 
-    // Verificar en segundo plano
     this.http.post(`${this.apiUrl}/verificar-codigo`, { 
       correo: this.correo, 
       codigo: this.codigoIngresado 
     })
       .subscribe({
         next: (response: any) => {
-          if (response.success) {
+          this.procesando = false;
+          if (response.success || response.message) {
+            this.pasoActual = 3;
             this.successMsg = 'Código verificado';
             setTimeout(() => this.successMsg = '', 3000);
           } else {
             this.errorMsg = response.error || 'Código incorrecto';
-            this.pasoActual = 2; // Volver si hay error
           }
         },
         error: (err) => {
+          this.procesando = false;
           console.error('Error al verificar código:', err);
+          // Si no tienes backend corriendo, descomenta para probar:
+          // this.pasoActual = 3;
           this.errorMsg = err.error?.error || 'Código incorrecto o expirado';
-          this.pasoActual = 2; // Volver si hay error
         }
       });
   }
@@ -125,12 +129,8 @@ export class RecuperarContrasena {
    * Paso 3: Cambiar contraseña
    */
   cambiarContrasena(): void {
-    // Prevenir doble click
-    if (this.procesando) {
-      return;
-    }
+    if (this.procesando) return;
 
-    // Validaciones
     if (!this.nuevaContrasena || !this.confirmarContrasena) {
       this.errorMsg = 'Por favor completa todos los campos';
       return;
@@ -148,14 +148,7 @@ export class RecuperarContrasena {
 
     this.procesando = true;
     this.errorMsg = '';
-    this.successMsg = '¡Contraseña cambiada exitosamente!';
-    
-    // Redirigir inmediatamente
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 500);
 
-    // Cambiar contraseña en segundo plano
     this.http.post(`${this.apiUrl}/cambiar-contrasena`, { 
       correo: this.correo, 
       codigo: this.codigoIngresado,
@@ -164,49 +157,47 @@ export class RecuperarContrasena {
       .subscribe({
         next: (response: any) => {
           this.procesando = false;
-          if (!response.success) {
-            console.error('Error al cambiar contraseña:', response.error);
+          if (response.success || response.message) {
+            this.successMsg = '¡Contraseña cambiada exitosamente!';
+            setTimeout(() => {
+              this.router.navigate(['/login']);
+            }, 1500);
+          } else {
+             this.errorMsg = response.error || 'Error al cambiar contraseña';
           }
         },
         error: (err) => {
           this.procesando = false;
           console.error('Error al cambiar contraseña:', err);
+          // Si no tienes backend, descomenta:
+          // this.router.navigate(['/login']);
+          this.errorMsg = err.error?.error || 'Error al procesar la solicitud';
         }
       });
   }
 
-  /**
-   * Volver al paso anterior
-   */
   volverPaso(): void {
     if (this.pasoActual > 1) {
       this.pasoActual--;
       this.errorMsg = '';
       this.successMsg = '';
-      this.procesando = false; // Resetear el estado de procesando
+      this.procesando = false;
     }
   }
 
-  /**
-   * Reenviar código
-   */
   reenviarCodigo(): void {
-    // Prevenir doble click
-    if (this.procesando) {
-      return;
-    }
+    if (this.procesando) return;
 
     this.codigoIngresado = '';
     this.procesando = true;
     this.errorMsg = '';
     this.successMsg = 'Reenviando código...';
 
-    // Enviar petición sin cambiar de paso
     this.http.post(`${this.apiUrl}/solicitar-recuperacion`, { correo: this.correo })
       .subscribe({
         next: (response: any) => {
           this.procesando = false;
-          if (response.success) {
+          if (response.success || response.message) {
             this.successMsg = 'Se ha reenviado el código a tu correo';
           } else {
             this.errorMsg = response.error || 'Error al reenviar el código';
@@ -215,14 +206,11 @@ export class RecuperarContrasena {
         error: (err) => {
           this.procesando = false;
           console.error('Error al reenviar código:', err);
-          this.errorMsg = err.error?.error || 'Error al reenviar el código';
+          this.errorMsg = err.error?.error || 'Error de conexión';
         }
       });
   }
 
-  /**
-   * Toggle visibilidad de contraseña
-   */
   togglePasswordVisibility(): void {
     this.passwordVisible = !this.passwordVisible;
   }
@@ -231,9 +219,6 @@ export class RecuperarContrasena {
     this.confirmPasswordVisible = !this.confirmPasswordVisible;
   }
 
-  /**
-   * Volver al login
-   */
   volverLogin(): void {
     this.router.navigate(['/login']);
   }

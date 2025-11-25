@@ -1,182 +1,161 @@
-/* Estilos generales y reset básico */
-:host {
-  display: block;
-  font-family: Arial, sans-serif;
-  color: #f0f0f0; /* Color de texto general para la página */
-  background-color: #1a1a1a; /* Fondo oscuro de la imagen */
-  height: 100vh;      /* Ocupa toda la ventana */
-  overflow: hidden;   /* Evita scroll */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* --- FONDO GLOBAL --- */
+ion-content {
+  --background: #294c6a; 
+  height: 100%;
 }
 
-h1 {
-  font-size: 3.5em; /* Tamaño de fuente grande para el título */
-  line-height: 1.2;
-  margin-bottom: 20px;
-  color: #ffffff; /* Color blanco para el título principal */
-}
-
-h3 {
-  font-size: 2.5em; /* Tamaño de fuente grande para el título */
-  line-height: 1.2;
-  color: #FEE568; /* Color amarillo para subtítulo */
-}
-
-/* --- Navbar --- */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2c3e50;
-  padding: 15px 40px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  position: relative;
-  z-index: 10;
-}
-
-.navbar-left {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-.logo {
-  height: 100px;
-  width: 100px;
-  border-radius: 5px;
-}
-
-.nav-item {
-  color: #f0f0f0;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.1em;
-  padding: 5px 0;
-  transition: color 0.3s ease;
-}
-
-.nav-item:hover {
-  color: #ffd700;
-}
-
-/* Dropdown */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropbtn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.arrow-down {
-  width: 0;
-  height: 0;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-top: 5px solid #f0f0f0;
-}
-
-.dropdown-content {
-  display: none;
+#main-content {
+  height: 100%;
+  width: 100%;
   position: absolute;
-  background-color: #34495e;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
-  z-index: 1;
-  border-radius: 4px;
-  overflow: hidden;
-  top: 100%;
+  top: 0;
   left: 0;
 }
 
-.dropdown-content a {
-  color: #f0f0f0;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-  font-size: 0.95em;
+/* --- ESTILOS MENÚ LATERAL (MÓVIL) OSCURO --- */
+/* Fondo del menú */
+.menu-content {
+  --background: #2c3e50; /* Tu azul Navbar */
+  --color: #f0f0f0;
 }
 
-.dropdown-content a:hover {
-  background-color: #49637c;
+/* Items del menú (Links) */
+.menu-item-dark {
+  --background: transparent;
+  --color: #f0f0f0;
+  --min-height: 50px;
+  font-weight: 500;
 }
 
-.dropdown:hover .dropdown-content {
-  display: block;
+/* Iconos del menú en blanco/gris claro */
+.menu-item-dark ion-icon {
+  color: #ffd700; /* Iconos dorados para resaltar */
+  margin-right: 15px;
 }
 
-.btn-empleado {
-  background-color: #ffd700;
-  color: #333;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 5px;
+/* Botones amarillos en el menú móvil */
+.btn-yellow-mobile {
+  --background: #ffd700;
+  --background-hover: #e0b800;
+  --color: #333;
+  --border-radius: 5px;
   font-weight: bold;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.3s ease;
 }
 
-.btn-empleado:hover {
-  background-color: #e0b800;
+/* --- ESTILOS DROPDOWN (PC) --- */
+/* El contenido del desplegable */
+ion-popover {
+  --width: 200px;
 }
 
-/* --- Hero Section --- */
-.hero-section {
+.popover-item {
+  --background: #34495e; /* Fondo oscuro dropdown */
+  --color: #f0f0f0;      /* Texto blanco */
+  --background-hover: #2c3e50;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* --- ESTILOS NAVBAR GENERAL --- */
+.desktop-menu ion-button.nav-btn {
+  --color: #f0f0f0;
+  font-weight: bold;
+  font-size: 15px;
+  text-transform: none;
+  margin: 0 2px;
+}
+
+.desktop-menu ion-button.nav-btn:hover {
+  --color: #ffd700;
+}
+
+/* Botón PC "Soy Empleado" */
+.btn-empleado {
+  --background: #ffd700;
+  --background-hover: #e0b800;
+  --color: #333;
+  --border-radius: 5px;
+  font-weight: bold;
+  height: 40px;
+  margin-left: 15px;
+  font-size: 13px;
+  --box-shadow: none;
+}
+
+/* --- HERO SECTION --- */
+.hero-container {
+  min-height: calc(100vh - 70px); 
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #294c6a;
-  padding: 80px 40px;
-  height: calc(100vh - 70px); /* Altura exacta sin scroll */
-  overflow: hidden;
-  position: relative;
-  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.hero-content {
-  flex: 1;
-  max-width: 550px;
-  text-align: left;
-  margin-right: 30px;
+.h-100 {
+  height: 100%;
+  width: 100%;
+}
+
+.hero-text-block {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto; 
+}
+
+@media (min-width: 992px) {
+  .hero-text-block {
+    margin: 0; 
+  }
+}
+
+h1 {
+  font-family: Arial, sans-serif;
+  font-size: 3em; 
+  line-height: 1.2;
+  color: #ffffff;
+  margin-bottom: 30px;
 }
 
 .highlight-inversiones,
 .highlight-tarjetas {
   color: #f8e1a1;
+  font-weight: bold;
 }
 
-.btn-cliente {
+.btn-cliente-custom {
   background-color: #ffd700;
   color: #333;
   border: none;
-  padding: 15px 35px;
+  padding: 15px 40px;
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
   font-size: 1.1em;
-  margin-top: 20px;
   transition: background-color 0.3s ease;
+  outline: none;
 }
 
-.btn-cliente:hover {
+.btn-cliente-custom:hover {
   background-color: #e0b800;
 }
 
-.hero-image-container {
-  flex: 1;
+/* --- IMAGEN --- */
+.hero-image-wrapper {
+  position: relative;
+  min-height: 400px; 
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  height: 400px;
   overflow: hidden;
+}
+
+.card-image-rotate {
+  width: 320px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 5;
+  transform: rotate(8deg);
 }
 
 .circle {
@@ -186,66 +165,38 @@ h3 {
   opacity: 0.7;
 }
 
-.circle-1 {
-  width: 70px;
-  height: 70px;
-  top: 15%;
-  left: 20%;
-}
+.circle-1 { width: 70px; height: 70px; top: 15%; left: 20%; }
+.circle-2 { width: 90px; height: 90px; top: 40%; left: 15%; }
+.circle-3 { width: 60px; height: 60px; bottom: 20%; right: 20%; }
 
-.circle-2 {
-  width: 90px;
-  height: 90px;
-  top: 40%;
-  left: 10%;
-}
 
-.circle-3 {
-  width: 60px;
-  height: 60px;
-  bottom: 20%;
-  right: 15%;
-}
-
-.card-image {
-  width: 300px;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  position: relative;
-  z-index: 5;
-  transform: rotate(8deg);
-}
-
-/* Media Queries */
+/* --- MEDIA QUERIES (MÓVIL) --- */
 @media (max-width: 992px) {
-  .navbar-left { gap: 15px; }
-  .nav-item { font-size: 1em; }
-  .hero-section {
-    flex-direction: column;
-    text-align: center;
-    padding: 60px 20px;
-    height: auto;
+  .hero-container {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    justify-content: flex-start;
   }
-  .hero-content {
-    margin-right: 0;
-    margin-bottom: 30px;
-  }
-  h1 { font-size: 2.5em; }
-  .hero-image-container { height: 300px; }
-  .card-image { width: 250px; }
-  .circle-1 { width: 60px; height: 60px; top: 10%; left: 10%; }
-  .circle-2 { width: 80px; height: 80px; top: 30%; left: 0%; }
-  .circle-3 { width: 50px; height: 50px; bottom: 10%; right: 10%; }
-}
 
-@media (max-width: 768px) {
-  .navbar { flex-direction: column; padding: 10px 20px; gap: 15px; }
-  .navbar-left { flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .navbar-right { width: 100%; text-align: center; }
-  .btn-empleado { width: 80%; max-width: 300px; }
-  h1 { font-size: 2em; }
-  .btn-cliente { padding: 12px 30px; font-size: 1em; }
-  .hero-section { padding: 40px 20px; }
-  .hero-content { margin-bottom: 20px; }
+  h1 {
+    font-size: 2.2em;
+    text-align: center;
+  }
+
+  .btn-cliente-custom {
+    display: block;
+    margin: 0 auto; 
+  }
+
+  .hero-image-wrapper {
+    min-height: 300px;
+    margin-top: 20px;
+  }
+
+  .card-image-rotate {
+    width: 240px;
+  }
+  
+  .circle-1 { left: 10%; }
+  .circle-3 { right: 10%; }
 }

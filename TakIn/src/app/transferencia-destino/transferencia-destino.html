@@ -1,97 +1,120 @@
-<div class="main-container">
-	<header class="header">
-		<img src="/assets/logo.png" alt="Logo" class="logo" />
-		<span class="title">Bank of Liberty</span>
-		<span class="user-icon">&#128100;</span>
-	</header>
-	<div class="content">
-		<div class="transfer-box">
-			<h2>Transferencia</h2>
-			
-			<!-- Cuenta Origen -->
-			@if (cuentaRemitente) {
-				<div class="account-card">
-					<span class="account-name">{{ cuentaRemitente.Banco }}</span>
-					<span class="account-balance">${{ cuentaRemitente.Dinero | number:'1.2-2' }}</span>
-					<span class="account-desc">Saldo disponible</span>
-				</div>
-			}
-			
-			<div class="destino-section">
-				<div class="destino-title">Destino</div>
-				
-				<div class="destino-card">
-					<div class="destino-label">Cuenta destino</div>
-					<input 
-						type="text" 
-						[(ngModel)]="cuentaDestino" 
-						placeholder="Número de cuenta o CLABE"
-						class="destino-input"
-						[disabled]="procesando"
-					/>
-				</div>
-			</div>
-			
-			<div class="monto-section">
-				<label for="monto">Monto</label>
-				<input 
-					id="monto" 
-					type="number" 
-					[(ngModel)]="monto"
-					(ngModelChange)="onMontoChange()"
-					placeholder="0.00" 
-					class="monto-input"
-					[disabled]="procesando"
-					min="0"
-					step="0.01"
-				/>
-				@if (cuentaRemitente) {
-					<span class="saldo-info">El saldo en tu cuenta es de ${{ cuentaRemitente.Dinero | number:'1.2-2' }}</span>
-				}
-				
-				<!-- Mostrar desglose de comisión -->
-				@if (mostrarDetalleComision && monto > 0) {
-					<div class="comision-desglose">
-						<div class="comision-item">
-							<span class="comision-label">Comisión:</span>
-							<span class="comision-valor">${{ comision | number:'1.2-2' }}</span>
-						</div>
-						<div class="comision-item">
-							<span class="comision-label">Total a debitar:</span>
-							<span class="comision-valor">${{ montoTotal | number:'1.2-2' }}</span>
-						</div>
-						<div class="comision-item" [class.saldo-negativo]="cuentaRemitente && (cuentaRemitente.Dinero - montoTotal) < 0">
-							<span class="comision-label">Saldo restante:</span>
-							<span class="comision-valor">${{ cuentaRemitente ? (cuentaRemitente.Dinero - montoTotal) : 0 | number:'1.2-2' }}</span>
-						</div>
-					</div>
-				}
-			</div>
-			
-			<div class="motivo-section">
-				<label for="motivo">Concepto (opcional)</label>
-				<input 
-					id="motivo" 
-					type="text" 
-					[(ngModel)]="motivo"
-					placeholder="Motivo de la transferencia" 
-					class="monto-input"
-					[disabled]="procesando"
-					maxlength="255"
-				/>
-			</div>
-			
-			@if (error) {
-				<p style="color: red; text-align: center;">{{ error }}</p>
-			}
-			
-			<button 
-				class="continuar-btn" 
-				(click)="realizarTransferencia()"
-				[disabled]="procesando || !cuentaDestino || monto <= 0"
-			>
-				{{ procesando ? 'PROCESANDO...' : 'TRANSFERIR' }}
-			</button>
-		</div>
-	</div>
-</div>
+<ion-content [fullscreen]="true">
+  
+  <div class="main-container">
+    
+    <header class="header">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <span class="title">Bank of Liberty</span>
+      <span class="user-icon">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </span>
+    </header>
+
+    <div class="content">
+      <div class="transfer-box">
+        <h2>Transferencia</h2>
+        
+        <!-- Cuenta Origen (Tarjeta estática informativa) -->
+        @if (cuentaRemitente) {
+          <div class="account-card">
+            <span class="account-name">{{ cuentaRemitente.Banco }}</span>
+            <span class="account-balance">${{ cuentaRemitente.Dinero | number:'1.2-2' }}</span>
+            <span class="account-desc">Saldo disponible</span>
+          </div>
+        }
+        
+        <!-- Input Cuenta Destino -->
+        <div class="input-section destino-section">
+          <div class="section-label">Destino</div>
+          
+          <div class="input-card">
+            <label class="input-label">Cuenta destino</label>
+            <input 
+              type="text" 
+              [(ngModel)]="cuentaDestino" 
+              placeholder="Número de cuenta o CLABE"
+              class="custom-input"
+              [disabled]="procesando"
+            />
+          </div>
+        </div>
+        
+        <!-- Input Monto y Desglose -->
+        <div class="input-section monto-section">
+          <label for="monto" class="section-label">Monto</label>
+          <input 
+            id="monto" 
+            type="number" 
+            [(ngModel)]="monto"
+            (ngModelChange)="onMontoChange()"
+            placeholder="0.00" 
+            class="custom-input money-input"
+            [disabled]="procesando"
+            min="0"
+            step="0.01"
+          />
+          
+          <!-- Desglose de Comisiones -->
+          @if (mostrarDetalleComision && monto > 0) {
+            <div class="comision-desglose">
+              <div class="comision-item">
+                <span class="comision-label">Monto:</span>
+                <span class="comision-valor">${{ monto | number:'1.2-2' }}</span>
+              </div>
+              <div class="comision-item">
+                <span class="comision-label">Comisión:</span>
+                <span class="comision-valor">${{ comision | number:'1.2-2' }}</span>
+              </div>
+              <div class="comision-item total">
+                <span class="comision-label">Total a debitar:</span>
+                <span class="comision-valor">${{ montoTotal | number:'1.2-2' }}</span>
+              </div>
+              
+              <!-- Advertencia de saldo insuficiente visual -->
+              @if (cuentaRemitente && (cuentaRemitente.Dinero - montoTotal) < 0) {
+                <div class="saldo-insuficiente-msg">
+                  Saldo insuficiente
+                </div>
+              }
+            </div>
+          }
+        </div>
+        
+        <!-- Input Motivo -->
+        <div class="input-section motivo-section">
+          <label for="motivo" class="section-label">Concepto (opcional)</label>
+          <input 
+            id="motivo" 
+            type="text" 
+            [(ngModel)]="motivo"
+            placeholder="Motivo de la transferencia" 
+            class="custom-input"
+            [disabled]="procesando"
+            maxlength="255"
+          />
+        </div>
+        
+        <!-- Mensaje de Error General -->
+        @if (error) {
+          <p class="error-msg">{{ error }}</p>
+        }
+        
+        <!-- Botón de Acción -->
+        <button 
+          class="continuar-btn" 
+          (click)="realizarTransferencia()"
+          [disabled]="procesando || !cuentaDestino || monto <= 0"
+        >
+          {{ procesando ? 'PROCESANDO...' : 'TRANSFERIR' }}
+        </button>
+        
+        <!-- Botón Volver -->
+        <button class="volver-btn" [routerLink]="['/transferencia']" [disabled]="procesando">
+          Cancelar
+        </button>
+
+      </div>
+    </div>
+  </div>
+
+</ion-content>

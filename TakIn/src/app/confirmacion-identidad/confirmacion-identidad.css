@@ -1,34 +1,55 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #33658A;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #33658A; /* Fondo azul oscuro */
+}
+
+/* --- CONTENEDOR PRINCIPAL (Centrado Vertical y Horizontal) --- */
+.main-container {
+  width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  font-family: Arial, sans-serif;
+  padding: 20px; /* Espacio para que no toque los bordes en móvil */
 }
 
-.container {
-  width: 500px;
+/* --- TARJETA --- */
+.card-container {
+  width: 100%;
+  max-width: 500px; /* Límite para PC */
   background: #86BBD8;
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: 0px 5px 15px rgba(0,0,0,0.5);
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
 }
 
-header {
+/* --- HEADER --- */
+.card-header {
   background: #86BBD8;
   color: #fff;
   text-align: center;
-  padding: 10px;
-  font-size: 18px;
-  font-weight: bold;
+  padding: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
+.card-header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff; /* Aseguramos blanco */
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+/* --- CAJA DEL FORMULARIO --- */
 .form-box {
   background: #6aa5c9;
   margin: 20px;
@@ -39,15 +60,28 @@ header {
 
 .form-box h2 {
   font-size: 16px;
+  margin-top: 0;
   margin-bottom: 20px;
   color: #000;
   text-transform: uppercase;
+  font-weight: bold;
 }
 
-.icono {
-  font-size: 60px;
+/* --- ICONO --- */
+.icono-container {
   margin: 20px 0;
-  color: #fff;
+}
+
+.check-icon {
+  font-size: 60px;
+  color: #28a745; /* Verde éxito, o usa #fff si prefieres blanco */
+  background: white;
+  border-radius: 50%;
+}
+
+/* --- INPUT --- */
+.input-wrapper {
+  margin-bottom: 20px;
 }
 
 .input-text {
@@ -55,21 +89,43 @@ header {
   padding: 12px;
   border: none;
   border-radius: 20px;
-  margin-bottom: 20px;
   font-size: 14px;
   text-align: center;
+  outline: none;
+  box-sizing: border-box;
 }
 
+.input-text:focus {
+  box-shadow: 0 0 0 2px #2c3e50;
+}
+
+/* --- BOTÓN --- */
 .btn {
   background: #2c3e50;
   color: white;
-  padding: 10px 25px;
+  padding: 12px 30px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s;
+  width: auto;
+  min-width: 150px;
 }
 
 .btn:hover {
   background: #1a242f;
+}
+
+/* --- RESPONSIVIDAD EXTRA --- */
+@media (max-width: 400px) {
+  .form-box {
+    margin: 15px;
+    padding: 20px;
+  }
+  
+  .btn {
+    width: 100%; /* Botón ancho completo en celulares muy pequeños */
+  }
 }

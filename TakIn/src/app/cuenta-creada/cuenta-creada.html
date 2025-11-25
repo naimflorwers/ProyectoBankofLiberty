@@ -1,29 +1,40 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CUENTA CREADA COMPLETADA</title>
-    <link rel="stylesheet" href="cuenta-creada.css">
-</head>
-<body>
+<ion-content [fullscreen]="true">
+  
+  <!-- Contenedor principal que centra la tarjeta -->
+  <div class="main-wrapper">
+    
     <div class="container">
-        <div class="header">
+      <div class="header">
+        <!-- Si tienes un logo, descomenta la siguiente línea -->
+        <!-- <img src="assets/logo.png" alt="Logo" class="logo"> -->
         <h1 class="bank-title">Bank of Liberty</h1>
+      </div>
+
+      <div class="confirmation-box">
+        <div class="check-icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <h2 class="confirmation-text">Cuenta Creada Correctamente</h2>
+
+        <div class="details">
+          <div class="detail-item">
+            <strong>No. de cuenta:</strong> 
+            <a href="#">15633488</a>
+          </div>
+          <div class="detail-item">
+            <strong>Fecha y hora:</strong> 
+            <span>04/09/2025 09:45 AM</span>
+          </div>
+          <div class="detail-item">
+            <strong>Nombre:</strong> 
+            <span>Juan Pérez Gomez</span>
+          </div>
         </div>
 
-        <div class="confirmation-box">
-            <div class="check-icon">✔️</div>
-            <h2 class="confirmation-text">Cuenta Creada Correctamente</h2>
-
-            <div class="details">
-                <div><strong>No. de cuenta</strong> <a href="#">15633488</a></div>
-                <div><strong>Fecha y hora</strong> <a href="#">04/09/2025 09:45 AM</a></div>
-                <div><strong>Nombre</strong> <a href="#">Juan Pérez Gomez</a></div>
-            </div>
-
-            <button class="btn-aceptar" [routerLink]="['/menu-ejecutivo']">ACEPTAR</button>
-        </div>
+        <button class="btn-aceptar" [routerLink]="['/menu-ejecutivo']">ACEPTAR</button>
+      </div>
     </div>
-</body>
-</html>
+
+  </div>
+
+</ion-content>

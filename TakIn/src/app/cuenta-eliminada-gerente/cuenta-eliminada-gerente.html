@@ -1,35 +1,42 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CUENTA ELIMINADA COMPLETADA</title>
-    <link rel="stylesheet" href="cuenta-eliminada-gerente.css">
-</head>
-<body>
-    <div class="main-container">
-        <!-- Navbar -->
-        <header class="header">
-            <img src="assets/logo.png" alt="Logo TakIn" class="logo" />
-            <span class="title">TakIn</span>
-            <span class="user-icon">&#128100;</span>
-        </header>
+<ion-content [fullscreen]="true">
+  
+  <div class="main-wrapper">
+    
+    <div class="container">
+      
+      <!-- Header de la tarjeta -->
+      <div class="header">
+        <img src="assets/logo.png" alt="Logo TakIn" class="logo" />
+        <span class="title">TakIn</span>
+        <!-- Icono de usuario (Opcional) -->
+        <span class="user-icon" style="margin-left: auto; font-size: 1.5rem;">👤</span>
+      </div>
 
-        <!-- Contenido de confirmación -->
-        <div class="container">
-            <div class="confirmation-box">
-                <div class="check-icon">✔️</div>
-                <h2 class="confirmation-text">Cuenta Eliminada Correctamente</h2>
-
-                <div class="details">
-                    <div><strong>No. de cuenta</strong> <a href="#">15633488</a></div>
-                    <div><strong>Fecha y hora</strong> <a href="#">04/09/2025 09:45 AM</a></div>
-                    <div><strong>Nombre</strong> <a href="#">Juan Pérez Gomez</a></div>
-                </div>
-
-                <button class="btn-aceptar" [routerLink]="['/menu-gerente']">ACEPTAR</button>
-            </div>
+      <div class="confirmation-box">
+        <div class="check-icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
         </div>
+        <h2 class="confirmation-text">Cuenta Eliminada Correctamente</h2>
+
+        <div class="details">
+          <div class="detail-item">
+            <strong>No. de cuenta:</strong> 
+            <a href="#">15633488</a>
+          </div>
+          <div class="detail-item">
+            <strong>Fecha y hora:</strong> 
+            <span>04/09/2025 09:45 AM</span>
+          </div>
+          <div class="detail-item">
+            <strong>Nombre:</strong> 
+            <span>Juan Pérez Gomez</span>
+          </div>
+        </div>
+
+        <button class="btn-aceptar" [routerLink]="['/menu-gerente']">ACEPTAR</button>
+      </div>
     </div>
-</body>
-</html>
+
+  </div>
+
+</ion-content>

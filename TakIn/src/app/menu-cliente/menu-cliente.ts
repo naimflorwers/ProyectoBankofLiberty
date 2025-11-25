@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular'; // <--- Agregado para compatibilidad
 
 interface OfertaCreditoData {
   montoMaximo: number;
@@ -14,7 +15,8 @@ interface OfertaCreditoData {
 
 @Component({
   selector: 'app-menu-cliente',
-  imports: [RouterModule, CommonModule, HttpClientModule, FormsModule],
+  standalone: true, // Aseguramos que sea standalone
+  imports: [RouterModule, CommonModule, HttpClientModule, FormsModule, IonicModule],
   templateUrl: './menu-cliente.html',
   styleUrl: './menu-cliente.css'
 })
@@ -100,19 +102,7 @@ export class MenuCliente implements OnInit {
             
             // Forzar detección de cambios
             this.cdr.detectChanges();
-            console.log('🔄 Detección de cambios forzada');
             
-            // Verificar DOM después de un momento
-            setTimeout(() => {
-              const modal = document.querySelector('.modal-overlay-credito');
-              console.log('🔍 Modal en DOM?', modal ? 'SÍ' : 'NO');
-              if (modal) {
-                const styles = window.getComputedStyle(modal);
-                console.log('📐 Display:', styles.display);
-                console.log('📐 Z-index:', styles.zIndex);
-                console.log('📐 Position:', styles.position);
-              }
-            }, 100);
           } else {
             console.log('⚠️ Usuario NO elegible:', response.data?.razon);
           }

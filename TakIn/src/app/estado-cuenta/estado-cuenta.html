@@ -1,177 +1,181 @@
-<div class="estado-cuenta-container">
-  <!-- Header -->
-  <header class="header">
-    <button class="btn-back" (click)="volver()">
-      <span>←</span> Volver
-    </button>
-    <h1>Estado de Cuenta</h1>
-    <img src="assets/logo.png" alt="Logo" class="logo">
-  </header>
+<ion-content [fullscreen]="true">
+  
+  <div class="estado-cuenta-container">
+    <!-- Header -->
+    <header class="header">
+      <button class="btn-back" (click)="volver()">
+        <span>←</span> Volver
+      </button>
+      <h1>Estado de Cuenta</h1>
+      <img src="assets/logo.png" alt="Logo" class="logo">
+    </header>
 
-  <!-- Filtros -->
-  <div class="filtros-section">
-    <h2>Filtrar Movimientos</h2>
-    <div class="filtros-grid">
-      <div class="input-group">
-        <label for="fechaInicio">Fecha Inicio</label>
-        <input 
-          type="date" 
-          id="fechaInicio" 
-          [(ngModel)]="fechaInicio"
-          [max]="fechaFin">
-      </div>
+    <!-- Filtros -->
+    <div class="filtros-section">
+      <h2>Filtrar Movimientos</h2>
+      <div class="filtros-grid">
+        <div class="input-group">
+          <label for="fechaInicio">Fecha Inicio</label>
+          <input 
+            type="date" 
+            id="fechaInicio" 
+            [(ngModel)]="fechaInicio"
+            [max]="fechaFin">
+        </div>
 
-      <div class="input-group">
-        <label for="fechaFin">Fecha Fin</label>
-        <input 
-          type="date" 
-          id="fechaFin" 
-          [(ngModel)]="fechaFin"
-          [min]="fechaInicio">
-      </div>
+        <div class="input-group">
+          <label for="fechaFin">Fecha Fin</label>
+          <input 
+            type="date" 
+            id="fechaFin" 
+            [(ngModel)]="fechaFin"
+            [min]="fechaInicio">
+        </div>
 
-      <div class="input-group">
-        <label for="tipoMovimiento">Tipo</label>
-        <select id="tipoMovimiento" [(ngModel)]="tipoMovimiento" (change)="aplicarFiltros()">
-          <option value="todos">Todos</option>
-          <option value="ingresos">Ingresos</option>
-          <option value="egresos">Egresos</option>
-        </select>
-      </div>
+        <div class="input-group">
+          <label for="tipoMovimiento">Tipo</label>
+          <select id="tipoMovimiento" [(ngModel)]="tipoMovimiento" (change)="aplicarFiltros()">
+            <option value="todos">Todos</option>
+            <option value="ingresos">Ingresos</option>
+            <option value="egresos">Egresos</option>
+          </select>
+        </div>
 
-      <div class="btn-group">
-        <button class="btn-buscar" (click)="buscar()">
-          🔍 Buscar
-        </button>
-        <button class="btn-pdf" (click)="descargarPDF()" [disabled]="!estadoCuenta">
-          📄 Descargar PDF
-        </button>
-        <button class="btn-email" (click)="enviarPorCorreo()" [disabled]="!estadoCuenta">
-          📧 Enviar por Email
-        </button>
+        <div class="btn-group">
+          <button class="btn-buscar" (click)="buscar()">
+            🔍 Buscar
+          </button>
+          <button class="btn-pdf" (click)="descargarPDF()" [disabled]="!estadoCuenta">
+            📄 PDF
+          </button>
+          <button class="btn-email" (click)="enviarPorCorreo()" [disabled]="!estadoCuenta">
+            📧 Email
+          </button>
+        </div>
       </div>
     </div>
+
+    <!-- Mensajes -->
+    @if (errorMsg) {
+      <div class="message error-message">{{ errorMsg }}</div>
+    }
+
+    <!-- Loading -->
+    @if (cargando) {
+      <div class="loading">
+        <div class="spinner"></div>
+        <p>Cargando estado de cuenta...</p>
+      </div>
+    }
+
+    <!-- Estado de Cuenta -->
+    @if (estadoCuenta && !cargando) {
+      <!-- Información de la Cuenta -->
+      <div class="cuenta-info">
+        <div class="info-row">
+          <div class="info-item">
+            <span class="label">Titular:</span>
+            <span class="value">{{ estadoCuenta.cuenta.titular }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Número de Cuenta:</span>
+            <span class="value">{{ estadoCuenta.cuenta.numero }}</span>
+          </div>
+          <div class="info-item">
+            <span class="label">Tipo:</span>
+            <span class="value">{{ estadoCuenta.cuenta.tipo }}</span>
+          </div>
+        </div>
+        
+        <div class="info-row">
+          <div class="info-item">
+            <span class="label">Periodo:</span>
+            <span class="value">
+              {{ formatearFechaDisplay(estadoCuenta.periodo.inicio) }} - 
+              {{ formatearFechaDisplay(estadoCuenta.periodo.fin) }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen de Saldos -->
+      <div class="saldos-grid">
+        <div class="saldo-card">
+          <div class="saldo-label">Saldo Inicial</div>
+          <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.inicial) }}</div>
+        </div>
+        
+        <div class="saldo-card ingresos">
+          <div class="saldo-label">+ Ingresos</div>
+          <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.ingresos) }}</div>
+        </div>
+        
+        <div class="saldo-card egresos">
+          <div class="saldo-label">- Egresos</div>
+          <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.egresos) }}</div>
+        </div>
+        
+        <div class="saldo-card final">
+          <div class="saldo-label">Saldo Final</div>
+          <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.final) }}</div>
+        </div>
+      </div>
+
+      <!-- Tabla de Movimientos -->
+      <div class="movimientos-section">
+        <h2>
+          Movimientos 
+          <span class="contador">({{ movimientosFiltrados.length }})</span>
+        </h2>
+
+        @if (movimientosFiltrados.length > 0) {
+          <div class="tabla-responsive">
+            <table class="movimientos-tabla">
+              <thead>
+                <tr>
+                  <th>Fecha</th>
+                  <th>Tipo</th>
+                  <th>Descripción</th>
+                  <th>Referencia</th>
+                  <th class="text-right">Monto</th>
+                  <th class="text-right">Saldo</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (movimiento of movimientosFiltrados; track movimiento.referencia) {
+                  <tr>
+                    <td>{{ formatearFechaDisplay(movimiento.fecha) }}</td>
+                    <td>
+                      <span class="badge" [class]="obtenerClaseMovimiento(movimiento.monto)">
+                        {{ movimiento.tipo }}
+                      </span>
+                    </td>
+                    <td>{{ movimiento.descripcion }}</td>
+                    <td class="referencia">{{ movimiento.referencia }}</td>
+                    <td class="text-right" [class]="obtenerClaseMovimiento(movimiento.monto)">
+                      <strong>
+                        {{ movimiento.monto >= 0 ? '+' : '' }}{{ formatearMoneda(movimiento.monto) }}
+                      </strong>
+                    </td>
+                    <td class="text-right">{{ formatearMoneda(movimiento.saldo) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        } @else {
+          <div class="no-movimientos">
+            <p>📋 No hay movimientos en el periodo seleccionado</p>
+          </div>
+        }
+      </div>
+    }
+
+    @if (!estadoCuenta && !cargando && !errorMsg) {
+      <div class="no-data">
+        <p>Selecciona un periodo y haz clic en "Buscar" para ver tu estado de cuenta</p>
+      </div>
+    }
   </div>
 
-  <!-- Mensajes -->
-  @if (errorMsg) {
-    <div class="message error-message">{{ errorMsg }}</div>
-  }
-
-  <!-- Loading -->
-  @if (cargando) {
-    <div class="loading">
-      <div class="spinner"></div>
-      <p>Cargando estado de cuenta...</p>
-    </div>
-  }
-
-  <!-- Estado de Cuenta -->
-  @if (estadoCuenta && !cargando) {
-    <!-- Información de la Cuenta -->
-    <div class="cuenta-info">
-      <div class="info-row">
-        <div class="info-item">
-          <span class="label">Titular:</span>
-          <span class="value">{{ estadoCuenta.cuenta.titular }}</span>
-        </div>
-        <div class="info-item">
-          <span class="label">Número de Cuenta:</span>
-          <span class="value">{{ estadoCuenta.cuenta.numero }}</span>
-        </div>
-        <div class="info-item">
-          <span class="label">Tipo:</span>
-          <span class="value">{{ estadoCuenta.cuenta.tipo }}</span>
-        </div>
-      </div>
-      
-      <div class="info-row">
-        <div class="info-item">
-          <span class="label">Periodo:</span>
-          <span class="value">
-            {{ formatearFechaDisplay(estadoCuenta.periodo.inicio) }} - 
-            {{ formatearFechaDisplay(estadoCuenta.periodo.fin) }}
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Resumen de Saldos -->
-    <div class="saldos-grid">
-      <div class="saldo-card">
-        <div class="saldo-label">Saldo Inicial</div>
-        <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.inicial) }}</div>
-      </div>
-      
-      <div class="saldo-card ingresos">
-        <div class="saldo-label">+ Ingresos</div>
-        <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.ingresos) }}</div>
-      </div>
-      
-      <div class="saldo-card egresos">
-        <div class="saldo-label">- Egresos</div>
-        <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.egresos) }}</div>
-      </div>
-      
-      <div class="saldo-card final">
-        <div class="saldo-label">Saldo Final</div>
-        <div class="saldo-valor">{{ formatearMoneda(estadoCuenta.saldos.final) }}</div>
-      </div>
-    </div>
-
-    <!-- Tabla de Movimientos -->
-    <div class="movimientos-section">
-      <h2>
-        Movimientos 
-        <span class="contador">({{ movimientosFiltrados.length }})</span>
-      </h2>
-
-      @if (movimientosFiltrados.length > 0) {
-        <div class="tabla-responsive">
-          <table class="movimientos-tabla">
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Tipo</th>
-                <th>Descripción</th>
-                <th>Referencia</th>
-                <th class="text-right">Monto</th>
-                <th class="text-right">Saldo</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (movimiento of movimientosFiltrados; track movimiento.referencia) {
-                <tr>
-                  <td>{{ formatearFechaDisplay(movimiento.fecha) }}</td>
-                  <td>
-                    <span class="badge" [class]="obtenerClaseMovimiento(movimiento.monto)">
-                      {{ movimiento.tipo }}
-                    </span>
-                  </td>
-                  <td>{{ movimiento.descripcion }}</td>
-                  <td class="referencia">{{ movimiento.referencia }}</td>
-                  <td class="text-right" [class]="obtenerClaseMovimiento(movimiento.monto)">
-                    <strong>
-                      {{ movimiento.monto >= 0 ? '+' : '' }}{{ formatearMoneda(movimiento.monto) }}
-                    </strong>
-                  </td>
-                  <td class="text-right">{{ formatearMoneda(movimiento.saldo) }}</td>
-                </tr>
-              }
-            </tbody>
-          </table>
-        </div>
-      } @else {
-        <div class="no-movimientos">
-          <p>📋 No hay movimientos en el periodo seleccionado</p>
-        </div>
-      }
-    </div>
-  }
-
-  @if (!estadoCuenta && !cargando && !errorMsg) {
-    <div class="no-data">
-      <p>Selecciona un periodo y haz clic en "Buscar" para ver tu estado de cuenta</p>
-    </div>
-  }
-</div>
+</ion-content>

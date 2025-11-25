@@ -1,14 +1,11 @@
-:host {
-  display: block;
-  background-color: #2c3e50;
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #2c3e50; /* Tu fondo oscuro */
 }
 
-h3 {
-  font-size: 2.5em;
-  line-height: 1.2;
-  color: #FEE568;
+:host {
+  display: block;
+  font-family: Arial, sans-serif;
 }
 
 .page-container {
@@ -16,13 +13,17 @@ h3 {
   flex-direction: column;
   align-items: center;
   padding-bottom: 50px;
+  width: 100%;
 }
 
+/* --- HEADER --- */
 .header {
   width: 100%;
   background-color: #85b4d1;
   padding: 15px 40px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center; /* Centrado en móvil se ve mejor */
 }
 
 .header-link {
@@ -33,32 +34,45 @@ h3 {
 }
 
 .logo {
-  height: 70px;
-  width: 70px;
+  height: 60px; /* Ajustado un poco */
+  width: 60px;
+  object-fit: contain;
 }
 
+h3 {
+  font-size: 2em;
+  line-height: 1.2;
+  color: #FEE568; /* Amarillo */
+  margin: 0;
+  font-weight: bold;
+}
+
+/* --- TARJETA PRINCIPAL --- */
 .main-content {
-  width: 100%;
+  width: 90%; /* Responsivo */
   max-width: 800px;
   margin-top: 40px;
-  background-color: #85b4d1;
+  background-color: #85b4d1; /* Azul claro */
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
 .form-title {
-  padding: 15px;
+  padding: 20px 40px;
   text-align: left;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: bold;
   color: #333;
-  border-bottom: 1px solid #6a9eb8;
+  border-bottom: 2px solid #6a9eb8;
+  background-color: rgba(255,255,255,0.1);
 }
 
 .prestamo-form {
   padding: 30px 40px;
 }
 
+/* --- INPUTS --- */
 .form-group {
   margin-bottom: 25px;
 }
@@ -68,6 +82,7 @@ h3 {
   margin-bottom: 8px;
   font-weight: bold;
   color: #2c3e50;
+  font-size: 0.95em;
 }
 
 .form-group input {
@@ -80,37 +95,87 @@ h3 {
   color: #333;
   box-sizing: border-box;
   box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  outline: none;
 }
 
+.form-group input:focus {
+  box-shadow: 0 0 0 2px #2c3e50;
+}
+
+/* --- BOTONES --- */
 .btn-primary, .btn-secondary {
-  padding: 12px 30px;
+  padding: 14px 30px;
   border-radius: 8px;
   font-weight: bold;
   cursor: pointer;
   border: none;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  font-size: 1em;
+  width: 100%; /* En móvil ocupan todo el ancho */
+  max-width: 400px; /* En PC tienen límite */
 }
 
 .btn-primary:hover, .btn-secondary:hover {
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 .btn-primary {
   background-color: #2c3e50;
   color: white;
-  border: 2px solid #5f7a90;
+  border: 2px solid #2c3e50;
 }
 
 .btn-secondary {
-  background-color: #2c3e50;
-  color: white;
-  border: 2px solid #5f7a90;
+  background-color: transparent;
+  color: #2c3e50;
+  border: 2px solid #2c3e50;
   display: block;
   margin: 30px auto;
+}
+
+.btn-secondary:hover {
+  background-color: #2c3e50;
+  color: white;
 }
 
 .footer-actions {
   text-align: center;
   margin-top: 40px;
+}
+
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 600px) {
+  .header {
+    padding: 15px 20px;
+  }
+
+  .logo {
+    height: 50px;
+    width: 50px;
+  }
+
+  h3 {
+    font-size: 1.8em;
+  }
+
+  .main-content {
+    width: 95%; /* Más ancho en móvil */
+    margin-top: 20px;
+  }
+
+  .form-title {
+    padding: 15px 20px;
+    font-size: 1.2em;
+  }
+
+  .prestamo-form {
+    padding: 20px;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    max-width: 100%;
+  }
 }

@@ -1,11 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { TransferenciasService, Cuenta } from '../../services/transferencias.service';
 
 @Component({
   selector: 'app-transferencia',
-  imports: [RouterModule, CommonModule],
+  standalone: true,
+  imports: [RouterModule, CommonModule, IonicModule],
   templateUrl: './transferencia.html',
   styleUrl: './transferencia.css'
 })
@@ -44,22 +46,16 @@ export class Transferencia implements OnInit {
     console.log('🔄 Cargando cuentas para usuario:', this.idUsuario);
     this.transferenciasService.getCuentasCliente(this.idUsuario).subscribe({
       next: (cuentas) => {
-        console.log('✅ Cuentas recibidas del servidor:', cuentas);
-        console.log('📊 Cantidad de cuentas:', cuentas.length);
-        console.log('📊 Tipo de datos:', typeof cuentas, Array.isArray(cuentas));
+        console.log('✅ Cuentas recibidas:', cuentas);
         
         this.cuentas = cuentas;
         this.cargando = false;
-        
-        console.log('✅ Estado actualizado - cargando:', this.cargando);
-        console.log('✅ Estado actualizado - cuentas.length:', this.cuentas.length);
-        console.log('✅ this.cuentas:', this.cuentas);
         
         // Forzar detección de cambios
         this.cdr.detectChanges();
         
         if (cuentas.length === 0) {
-          console.warn('⚠️ No se encontraron cuentas para este usuario');
+          console.warn('⚠️ No se encontraron cuentas');
           this.error = 'No tienes cuentas disponibles';
         }
       },
@@ -82,7 +78,7 @@ export class Transferencia implements OnInit {
       return;
     }
 
-    // Guardar la cuenta seleccionada en sessionStorage para usarla en el siguiente paso
+    // Guardar la cuenta seleccionada en sessionStorage
     sessionStorage.setItem('cuentaRemitente', JSON.stringify(this.cuentaSeleccionada));
     this.router.navigate(['/transferencia-destino']);
   }

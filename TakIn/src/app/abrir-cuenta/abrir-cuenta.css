@@ -1,26 +1,27 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background-image: url('../../assets/fondo.png');
-  background-size: cover;
-  font-family: Arial, sans-serif;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: url('../../assets/fondo.png') no-repeat center center / cover;
 }
 
+/* --- CONTENEDOR PRINCIPAL --- */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   position: relative;
+  width: 100%;
+  padding: 20px; /* Margen de seguridad para móviles */
 }
 
+/* --- LOGO --- */
 .logo-link {
   display: inline-block;
-  padding: 10px;
   position: absolute;
   top: 20px;
   left: 30px;
   z-index: 10;
+  cursor: pointer;
 }
 
 .logo {
@@ -29,24 +30,29 @@
   display: block;
 }
 
+/* --- TARJETA FORMULARIO --- */
 .nuevo-usuario {
   background-color: #a9cce3;
   padding: 40px 50px;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 400px;
+  max-width: 600px; /* Un poco más ancho para que quepan los 3 nombres */
   text-align: left;
+  margin-top: 60px; /* Espacio para que el logo no tape el formulario en móviles */
 }
 
-.security-text {
-  margin: 0 0 30px 0;
-  color: #34495e;
-  font-size: 0.9em;
+.nuevo-usuario h2 {
+  margin: 0 0 20px 0;
+  color: #2c3e50;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
 }
 
+/* --- INPUTS --- */
 .input-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  width: 100%;
 }
 
 .input-group input {
@@ -58,6 +64,7 @@
   font-size: 1em;
   color: #2c3e50;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 .input-group input::placeholder {
@@ -68,37 +75,46 @@
   outline: 2px solid #3498db;
 }
 
-.password-wrapper {
-  position: relative;
+/* --- FILA DE TRES INPUTS (La Magia Responsiva) --- */
+.input-row {
+  display: flex;
+  gap: 15px; /* Espacio entre los inputs */
+  margin-bottom: 0;
 }
 
-
-.password-wrapper .submit-btn:hover {
-  background-color: #34495e;
+.input-row .input-group {
+  flex: 1; /* Todos ocupan el mismo ancho */
 }
 
-.register-link {
-  margin-top: 30px;
-  font-size: 0.9em;
-  color: #34495e;
+/* --- MENSAJES --- */
+.form-messages {
+  margin-bottom: 15px;
+}
+
+.error-message {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
   text-align: center;
+  font-size: 0.9em;
 }
 
-.register-link a {
-  color: #2c3e50;
-  font-weight: bold;
-  text-decoration: none;
+.success-message {
+  background-color: #27ae60;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 0.9em;
 }
 
-.register-link a:hover {
-  text-decoration: underline;
-}
-
+/* --- BOTÓN CREAR CUENTA --- */
 .crear-cuenta-btn {
   width: 100%;
   padding: 15px;
-  margin-top: 10px; /* Un pequeño espacio arriba */
-  background-color: #2c3e50; /* Mismo color oscuro del botón de flecha */
+  margin-top: 10px;
+  background-color: #2c3e50;
   color: white;
   border: none;
   border-radius: 10px;
@@ -110,4 +126,64 @@
 
 .crear-cuenta-btn:hover {
   background-color: #34495e;
+}
+
+.crear-cuenta-btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* --- LINKS --- */
+.login-link {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #34495e;
+  text-align: center;
+}
+
+.login-link a {
+  color: #2c3e50;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 768px) {
+  
+  /* Ajuste del Logo en celular */
+  .logo-link {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+
+  .logo {
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+  }
+
+  .login-container {
+    flex-direction: column;
+    padding-top: 20px;
+  }
+
+  .nuevo-usuario {
+    margin-top: 10px;
+    padding: 30px 20px;
+  }
+
+  /* AQUÍ HACEMOS QUE LOS 3 NOMBRES SE PONGAN EN COLUMNA */
+  .input-row {
+    flex-direction: column;
+    gap: 0;
+  }
 }

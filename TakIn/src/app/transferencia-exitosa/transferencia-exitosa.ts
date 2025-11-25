@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { PdfReciboService } from '../../services/pdf-recibo.service';
 
 interface DatosTransferencia {
@@ -10,13 +11,14 @@ interface DatosTransferencia {
   cuentaDestino: string;
   cuentaRemitente: string;
   motivo: string;
-  fecha: Date;
+  fecha: string | Date; // Puede venir como string del JSON
   folio: number;
 }
 
 @Component({
   selector: 'app-transferencia-exitosa',
-  imports: [RouterModule, CommonModule],
+  standalone: true,
+  imports: [RouterModule, CommonModule, IonicModule],
   templateUrl: './transferencia-exitosa.html',
   styleUrl: './transferencia-exitosa.css'
 })
@@ -64,7 +66,7 @@ export class TransferenciaExitosa implements OnInit {
     this.router.navigate(['/menu-cliente']);
   }
 
-  formatearFecha(fecha: Date): string {
+  formatearFecha(fecha: string | Date): string {
     const f = new Date(fecha);
     const dia = f.getDate().toString().padStart(2, '0');
     const mes = (f.getMonth() + 1).toString().padStart(2, '0');

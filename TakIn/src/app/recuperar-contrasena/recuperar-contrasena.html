@@ -1,34 +1,48 @@
-<div class="recuperar-container">
-  <a routerLink="/home">
-    <img src="assets/logo.png" alt="Logo Bank of Liberty" class="logo">
-  </a>
+<ion-content [fullscreen]="true">
+  
+  <div class="recuperar-container">
+    
+    <!-- Logo -->
+    <a routerLink="/home" class="logo-link">
+      <img src="assets/logo.png" alt="Logo Bank of Liberty" class="logo">
+    </a>
 
-  <div class="recuperar-card">
-    <!-- Indicador de pasos -->
-    <div class="pasos-indicador">
-      <div class="paso" [class.activo]="pasoActual >= 1" [class.completado]="pasoActual > 1">
-        <div class="paso-numero">1</div>
-        <div class="paso-texto">Correo</div>
-      </div>
-      <div class="paso-linea" [class.completado]="pasoActual > 1"></div>
-      <div class="paso" [class.activo]="pasoActual >= 2" [class.completado]="pasoActual > 2">
-        <div class="paso-numero">2</div>
-        <div class="paso-texto">Código</div>
-      </div>
-      <div class="paso-linea" [class.completado]="pasoActual > 2"></div>
-      <div class="paso" [class.activo]="pasoActual >= 3">
-        <div class="paso-numero">3</div>
-        <div class="paso-texto">Nueva Contraseña</div>
-      </div>
-    </div>
-
-    <h2>Recuperar Contraseña</h2>
-
-    <!-- PASO 1: Solicitar correo -->
-    @if (pasoActual === 1) {
-      <p class="description">Ingresa tu correo electrónico y te enviaremos un código de verificación.</p>
+    <div class="recuperar-card">
       
-      <div>
+      <!-- Indicador de pasos -->
+      <div class="pasos-indicador">
+        <div class="paso" [class.activo]="pasoActual >= 1" [class.completado]="pasoActual > 1">
+          <div class="paso-numero">
+            <ion-icon *ngIf="pasoActual > 1" name="checkmark-outline"></ion-icon>
+            <span *ngIf="pasoActual <= 1">1</span>
+          </div>
+          <div class="paso-texto">Correo</div>
+        </div>
+        
+        <div class="paso-linea" [class.completado]="pasoActual > 1"></div>
+        
+        <div class="paso" [class.activo]="pasoActual >= 2" [class.completado]="pasoActual > 2">
+          <div class="paso-numero">
+            <ion-icon *ngIf="pasoActual > 2" name="checkmark-outline"></ion-icon>
+            <span *ngIf="pasoActual <= 2">2</span>
+          </div>
+          <div class="paso-texto">Código</div>
+        </div>
+        
+        <div class="paso-linea" [class.completado]="pasoActual > 2"></div>
+        
+        <div class="paso" [class.activo]="pasoActual >= 3">
+          <div class="paso-numero">3</div>
+          <div class="paso-texto">Nueva</div>
+        </div>
+      </div>
+
+      <h2>Recuperar Contraseña</h2>
+
+      <!-- PASO 1: Solicitar correo -->
+      <div *ngIf="pasoActual === 1">
+        <p class="description">Ingresa tu correo electrónico y te enviaremos un código de verificación.</p>
+        
         <div class="input-group">
           <label for="correo">Correo Electrónico</label>
           <input 
@@ -40,19 +54,17 @@
             required>
         </div>
 
-        <button type="button" class="btn-principal" (click)="solicitarCodigo()">
-          Enviar Código
+        <button type="button" class="btn-principal" (click)="solicitarCodigo()" [disabled]="procesando">
+          {{ procesando ? 'Enviando...' : 'Enviar Código' }}
         </button>
       </div>
-    }
 
-    <!-- PASO 2: Verificar código -->
-    @if (pasoActual === 2) {
-      <p class="description">
-        Hemos enviado un código de 6 dígitos a <strong>{{ correo }}</strong>
-      </p>
-      
-      <div>
+      <!-- PASO 2: Verificar código -->
+      <div *ngIf="pasoActual === 2">
+        <p class="description">
+          Hemos enviado un código de 6 dígitos a <strong>{{ correo }}</strong>
+        </p>
+        
         <div class="input-group">
           <label for="codigo">Código de Verificación</label>
           <input 
@@ -62,27 +74,26 @@
             placeholder="123456" 
             [(ngModel)]="codigoIngresado" 
             maxlength="6"
-            pattern="[0-9]{6}"
+            pattern="[0-9]*" 
+            inputmode="numeric" 
             class="codigo-input"
             required>
           <small>Ingresa el código de 6 dígitos</small>
         </div>
 
-        <button type="button" class="btn-principal" (click)="verificarCodigo()">
-          Verificar Código
+        <button type="button" class="btn-principal" (click)="verificarCodigo()" [disabled]="procesando">
+          {{ procesando ? 'Verificando...' : 'Verificar Código' }}
         </button>
 
-        <button type="button" class="btn-secundario" (click)="reenviarCodigo()">
-          Reenviar Código
+        <button type="button" class="btn-secundario" (click)="reenviarCodigo()" [disabled]="procesando">
+          {{ procesando ? 'Enviando...' : 'Reenviar Código' }}
         </button>
       </div>
-    }
 
-    <!-- PASO 3: Nueva contraseña -->
-    @if (pasoActual === 3) {
-      <p class="description">Ingresa tu nueva contraseña</p>
-      
-      <div>
+      <!-- PASO 3: Nueva contraseña -->
+      <div *ngIf="pasoActual === 3">
+        <p class="description">Ingresa tu nueva contraseña</p>
+        
         <div class="input-group">
           <label for="nuevaContrasena">Nueva Contraseña</label>
           <div class="password-wrapper">
@@ -94,7 +105,7 @@
               [(ngModel)]="nuevaContrasena" 
               required>
             <button type="button" class="toggle-password" (click)="togglePasswordVisibility()" tabindex="-1">
-              👁️
+              <ion-icon [name]="passwordVisible ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
             </button>
           </div>
         </div>
@@ -110,37 +121,31 @@
               [(ngModel)]="confirmarContrasena" 
               required>
             <button type="button" class="toggle-password" (click)="toggleConfirmPasswordVisibility()" tabindex="-1">
-              👁️
+              <ion-icon [name]="confirmPasswordVisible ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
             </button>
           </div>
         </div>
 
-        <button type="button" class="btn-principal" (click)="cambiarContrasena()">
-          Cambiar Contraseña
+        <button type="button" class="btn-principal" (click)="cambiarContrasena()" [disabled]="procesando">
+          {{ procesando ? 'Guardando...' : 'Cambiar Contraseña' }}
         </button>
       </div>
-    }
 
-    <!-- Mensajes -->
-    @if (errorMsg) {
-      <div class="message error-message">{{ errorMsg }}</div>
-    }
+      <!-- Mensajes -->
+      <div *ngIf="errorMsg" class="message error-message">{{ errorMsg }}</div>
+      <div *ngIf="successMsg" class="message success-message">{{ successMsg }}</div>
 
-    @if (successMsg) {
-      <div class="message success-message">{{ successMsg }}</div>
-    }
-
-    <!-- Botones de navegación -->
-    <div class="navigation-buttons">
-      @if (pasoActual > 1 && pasoActual <= 3) {
-        <button type="button" class="btn-link" (click)="volverPaso()">
+      <!-- Botones de navegación -->
+      <div class="navigation-buttons">
+        <button *ngIf="pasoActual > 1 && pasoActual <= 3" type="button" class="btn-link" (click)="volverPaso()" [disabled]="procesando">
           ← Volver
         </button>
-      }
+        
+        <button type="button" class="btn-link" (click)="volverLogin()" [disabled]="procesando">
+          Volver al Login
+        </button>
+      </div>
       
-      <button type="button" class="btn-link" (click)="volverLogin()">
-        Volver al Login
-      </button>
     </div>
   </div>
-</div>
+</ion-content>

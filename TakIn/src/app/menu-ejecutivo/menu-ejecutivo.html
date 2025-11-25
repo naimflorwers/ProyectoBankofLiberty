@@ -1,38 +1,52 @@
-<div class="main-container">
-  <header class="header">
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-    <span class="title">TakIn</span>
-    <span class="user-icon" [routerLink]="['/home']">
-      <img src="assets/usuario.svg" alt="Usuario" class="user-img" />
-    </span>
-  </header>
+<ion-content [fullscreen]="true">
+  
+  <div class="main-container">
+    <!-- Header -->
+    <header class="header">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <span class="title">TakIn</span>
+      <span class="user-icon" [routerLink]="['/home']">
+        <!-- Usamos un icono de Ionic por defecto o tu imagen si prefieres -->
+        <img src="assets/usuario.svg" alt="Usuario" class="user-img" />
+      </span>
+    </header>
 
-  <div class="content">
-    <div class="menu-icons-row menu-title-top">
-      <img src="assets/logo.png" alt="Logo Banco" class="menu-icon" />
-      <h2>Banco TakIn</h2>
-      <img src="assets/tarjeta.png" alt="Tarjeta" class="menu-icon" />
-      <img src="assets/fondo.png" alt="Seguridad" class="menu-icon" />
-      <span class="menu-icons-text">Soluciones financieras para ti</span>
-    </div>
-    <div class="menu-options-grid">
-      <div class="option-card">
-        <img src="assets/abrir-cuenta.svg" alt="Abrir cuenta" class="cp-icon" />
-        <button class="button" [routerLink]="['/crear-cuenta']">Abrir cuenta</button>
+    <div class="content full-content">
+      
+      <!-- Título y Banner Superior -->
+      <div class="menu-icons-row menu-title-top">
+        <img src="assets/logo.png" alt="Logo Banco" class="menu-icon logo-icon" />
+        <div class="text-container">
+          <h2>Banco TakIn</h2>
+          <span class="menu-icons-text">Soluciones financieras</span>
+        </div>
+        <div class="icons-decoration">
+          <img src="assets/tarjeta.png" alt="Tarjeta" class="menu-icon card-icon" />
+        </div>
       </div>
-      <div class="option-card">
-        <img src="assets/cerrar-cuenta.svg" alt="Cerrar cuenta" class="cp-icon" />
-        <button class="button" [routerLink]="['/cerrar-cuenta']">Cerrar cuenta</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/prestamo.svg" alt="Préstamo" class="cp-icon" />
-        <button class="button" [routerLink]="['/solicitudes']">Préstamo</button>
-      </div>
-    </div>
 
-    <div class="menu-text-bottom">
-      <h2>Banco TakIn</h2>
-      <p>Soluciones financieras para ti.</p>
+      <!-- Grid de Opciones -->
+      <div class="menu-options-grid">
+        <div class="option-card">
+          <img src="assets/abrir-cuenta.svg" alt="Abrir cuenta" class="cp-icon" />
+          <button class="button" [routerLink]="['/crear-cuenta']">Abrir cuenta</button>
+        </div>
+        <div class="option-card">
+          <img src="assets/cerrar-cuenta.svg" alt="Cerrar cuenta" class="cp-icon" />
+          <button class="button" [routerLink]="['/cerrar-cuenta']">Cerrar cuenta</button>
+        </div>
+        <div class="option-card">
+          <img src="assets/prestamo.svg" alt="Préstamo" class="cp-icon" />
+          <button class="button" [routerLink]="['/solicitudes']">Préstamo</button>
+        </div>
+      </div>
+
+      <!-- Texto Inferior -->
+      <div class="menu-text-bottom">
+        <h2>Banco TakIn</h2>
+        <p>Soluciones financieras para ti.</p>
+      </div>
     </div>
   </div>
-</div>
+
+</ion-content>

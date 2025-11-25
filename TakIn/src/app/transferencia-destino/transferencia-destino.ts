@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { TransferenciasService, Cuenta, TransferenciaRequest } from '../../services/transferencias.service';
 
 @Component({
   selector: 'app-transferencia-destino',
-  imports: [RouterModule, CommonModule, FormsModule],
+  standalone: true,
+  imports: [RouterModule, CommonModule, FormsModule, IonicModule],
   templateUrl: './transferencia-destino.html',
   styleUrl: './transferencia-destino.css'
 })

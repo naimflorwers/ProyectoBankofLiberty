@@ -1,28 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OPERACION COMPLETADA</title>
-    <link rel="stylesheet" href="prestamo-aceptado-gerente.css">
-</head>
-<body>
+<ion-content [fullscreen]="true">
+  
+  <div class="main-wrapper">
+    
     <div class="container">
-        <div class="header">
+      <div class="header">
         <h1 class="bank-title">Bank of Liberty</h1>
+      </div>
+
+      <div class="confirmation-box">
+        <div class="check-icon">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
+        </div>
+        <h2 class="confirmation-text">Préstamo Aprobado</h2>
+
+        <div class="details">
+          <div class="detail-item">
+            <strong>Monto:</strong> 
+            <a href="#">$5,000.00 MXN</a>
+          </div>
+          <div class="detail-item">
+            <strong>Fecha y hora:</strong> 
+            <span>04/09/2025 09:45 AM</span>
+          </div>
+          <div class="detail-item">
+            <strong>Nombre:</strong> 
+            <span>Juan Rodriguez Lopez</span>
+          </div>
         </div>
 
-        <div class="confirmation-box">
-            <div class="check-icon">✔️</div>
-            <h2 class="confirmation-text">Prestamo Aprobado</h2>
-
-            <div class="details">
-                <div><strong>Monto</strong> <a href="#">$5,000.00 MXN</a></div>
-                <div><strong>Fecha y hora</strong> <a href="#">04/09/2025 09:45 AM</a></div>
-                <div><strong>Nombre</strong> <a href="#">Juan Rodriguez Lopez</a></div>
-            </div>
-            <button type="button" class="btn-aceptar" [routerLink]="['/menu-gerente']">ACEPTAR</button>
-        </div>
+        <button class="btn-aceptar" [routerLink]="['/menu-gerente']">ACEPTAR</button>
+      </div>
     </div>
-</body>
-</html>
+
+  </div>
+
+</ion-content>

@@ -1,98 +1,117 @@
-/* HTML y body se ajustan según el contenido */
-html {
-  height: auto;
-  min-height: 100%;
-  background-color: #33658A;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #33658A; /* Fondo azul */
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #33658A;
-  min-height: 100%;
-}
-
-/* Contenedor principal */
-.container {
-  width: 100%;
+/* --- WRAPPER CENTRADO --- */
+.main-wrapper {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding-bottom: 20px; /* espacio debajo del contenido */
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Navbar / Header */
+/* --- TARJETA --- */
+.container {
+  width: 100%;
+  max-width: 600px; /* Límite ancho PC */
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* --- HEADER --- */
 .header {
   background-color: #86BBD8;
   width: 100%;
-  padding: 8px 20px;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
-.header .logo {
-  height: 70px;
-  width: 70px;
+.logo {
+  height: 40px;
+  width: 40px;
+  margin-right: 15px;
+  object-fit: contain;
 }
 
-.header .bank-title {
+.title {
   font-size: 20px;
   font-weight: bold;
-  margin-left: 15px;
+  color: #000;
 }
 
-/* Caja de confirmación */
+/* --- CUERPO --- */
 .confirmation-box {
   background-color: #ffffff;
   padding: 30px;
-  margin: 20px;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 8px;
   text-align: center;
 }
 
 .check-icon {
-  font-size: 60px;
+  font-size: 70px;
   color: green;
   margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 
 .confirmation-text {
   margin-bottom: 30px;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
+  color: #333;
 }
 
+/* --- DETALLES --- */
 .details {
   text-align: left;
-  max-width: 300px;
+  max-width: 350px;
   margin: 0 auto 30px auto;
   font-size: 16px;
+  color: #444;
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
 }
 
-.details div {
-  margin: 10px 0;
+.detail-item {
+  margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
 }
 
 .details a {
   color: #007BFF;
   text-decoration: none;
+  font-weight: bold;
 }
 
-/* Botón ACEPTAR */
+/* --- BOTÓN --- */
 .btn-aceptar {
   background-color: #20316b;
   color: white;
   border: none;
-  padding: 10px 25px;
+  padding: 12px 40px;
   font-size: 14px;
+  font-weight: bold;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
   transition: background 0.2s ease-in-out, transform 0.2s ease-in-out;
+  width: 100%;
+  max-width: 200px;
 }
 
 .btn-aceptar:hover {
@@ -100,3 +119,24 @@ body {
   transform: scale(1.05);
 }
 
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 500px) {
+  .container {
+    width: 100%;
+  }
+
+  .confirmation-text {
+    font-size: 18px;
+  }
+
+  .details {
+    font-size: 14px;
+    padding: 15px;
+  }
+
+  .detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

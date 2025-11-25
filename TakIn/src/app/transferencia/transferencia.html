@@ -1,46 +1,70 @@
-<div class="main-container">
-  <header class="header">
-    <img src="/assets/logo.png" alt="Logo" class="logo" />
-    <span class="title">Bank of Liberty</span>
-    <span class="user-icon">&#128100;</span>
-  </header>
-  <div class="content">
-    <div class="transfer-box">
-      <h2>Selecciona tu cuenta</h2>
-      
-      <!-- Mensaje de carga -->
-      @if (cargando) {
-        <p>Cargando cuentas...</p>
-      }
-      
-      <!-- Mensaje de error -->
-      @if (error) {
-        <p style="color: red;">{{ error }}</p>
-      }
-      
-      <div class="tarjetas-title">Mis Cuentas</div>
-      
-      <!-- Lista de cuentas -->
-      @if (cuentas.length === 0 && !cargando) {
-        <p>No tienes cuentas disponibles</p>
-      }
-      
-      @for (cuenta of cuentas; track cuenta.Numcuenta) {
-        <div class="account-card" 
-             [class.selected]="cuentaSeleccionada?.Numcuenta === cuenta.Numcuenta"
-             (click)="seleccionarCuenta(cuenta)">
-          <span class="account-name">{{ cuenta.Banco }}</span>
-          <span class="account-balance">${{ cuenta.Dinero | number:'1.2-2' }}</span>
-          <span class="account-desc">{{ cuenta.Numcuenta }}<br>Saldo disponible</span>
+<ion-content [fullscreen]="true">
+  
+  <div class="main-container">
+    
+    <!-- Header -->
+    <header class="header">
+      <!-- Logo con enlace al home o menú -->
+      <a routerLink="/menu-cliente" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+        <span class="title">Bank of Liberty</span>
+      </a>
+      <span class="user-icon">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </span>
+    </header>
+
+    <div class="content">
+      <div class="transfer-box">
+        <h2>Selecciona tu cuenta</h2>
+        
+        <!-- Mensaje de carga -->
+        <div *ngIf="cargando" class="loading-msg">
+          <div class="spinner"></div>
+          <p>Cargando cuentas...</p>
         </div>
-      }
-      
-      <button type="button" 
-              class="continuar-btn" 
-              [disabled]="!cuentaSeleccionada"
-              (click)="continuar()">
-        CONTINUAR
-      </button>
+        
+        <!-- Mensaje de error -->
+        <div *ngIf="error" class="error-msg">
+          <p>{{ error }}</p>
+        </div>
+        
+        <div class="tarjetas-title">Mis Cuentas</div>
+        
+        <!-- Lista de cuentas -->
+        <div *ngIf="cuentas.length === 0 && !cargando && !error" class="empty-msg">
+          <p>No tienes cuentas disponibles</p>
+        </div>
+        
+        <div class="accounts-list">
+          <div *ngFor="let cuenta of cuentas" 
+               class="account-card" 
+               [class.selected]="cuentaSeleccionada?.Numcuenta === cuenta.Numcuenta"
+               (click)="seleccionarCuenta(cuenta)">
+            
+            <div class="card-header-row">
+              <span class="account-name">{{ cuenta.Banco || 'TakIn' }}</span>
+              <ion-icon name="wallet-outline" class="card-icon"></ion-icon>
+            </div>
+            
+            <span class="account-balance">${{ cuenta.Dinero | number:'1.2-2' }}</span>
+            
+            <div class="card-footer-row">
+              <span class="account-number">**** {{ cuenta.Numcuenta.toString().slice(-4) }}</span>
+              <span class="account-label">Saldo disponible</span>
+            </div>
+          </div>
+        </div>
+        
+        <button type="button" 
+                class="continuar-btn" 
+                [disabled]="!cuentaSeleccionada"
+                (click)="continuar()">
+          CONTINUAR
+        </button>
+      </div>
     </div>
+
   </div>
-</div>
+
+</ion-content>

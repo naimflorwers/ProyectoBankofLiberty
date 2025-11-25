@@ -1,6 +1,7 @@
-// src/app/app.routes.ts
 import { Routes } from '@angular/router';
-import { ClienteGuard, EjecutivoGuard, GerenteGuard } from './guards/role.guard';
+// Importamos el nuevo EmpleadoGuard
+import { ClienteGuard, EjecutivoGuard, GerenteGuard, EmpleadoGuard } from './guards/role.guard';
+
 import { Home } from './home/home';
 import { Login } from './login/login'; 
 import { AbrirCuenta } from './abrir-cuenta/abrir-cuenta';
@@ -32,11 +33,9 @@ import { ConfirmacionIdentidad } from './confirmacion-identidad/confirmacion-ide
 import { OperacionCompleta } from './operacion-completa/operacion-completa';
 import { OperacionCompletada } from './operacion-completada/operacion-completada';
 import { TransferenciaExitosa } from './transferencia-exitosa/transferencia-exitosa';
-import { RecuperarContrasena } from './recuperar-contrasena/recuperar-contrasena';
+import { RecuperarContrasena } from './recuperar-contrasena/recuperar-contrasena'; // Asegúrate que la carpeta no tenga ñ
 import { EstadoCuenta } from './estado-cuenta/estado-cuenta';
 import { OfertaCredito } from './oferta-credito/oferta-credito';
-import path from 'path';
-
 
 export const routes: Routes = [
   {
@@ -55,56 +54,62 @@ export const routes: Routes = [
     path: 'abrir-cuenta',
     component: AbrirCuenta,
   },
+  
+  // --- RUTAS COMPARTIDAS (Usan EmpleadoGuard: Ejecutivo O Gerente) ---
   {
     path: 'solicitudes',
     component: Solicitudes,
-    canActivate: [EjecutivoGuard,GerenteGuard]
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
   },
   {
     path: 'prestamo',
     component: Prestamo,
-    canActivate: [EjecutivoGuard,GerenteGuard]
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
   },  
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'crear-cuenta',
+    component: CrearCuenta,
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
   },
+  {
+    path: 'cerrar-cuenta',
+    component: CerrarCuenta,
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
+  },
+  {
+    path: 'cuenta-eliminada',
+    component: CuentaEliminada,
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
+  },
+  {
+    path: 'cuenta-creada',  
+    component: CuentaCreada,
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
+  },
+  {
+    path: 'prestamo-aceptado',
+    component: PrestamoAceptado,
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
+  },
+  {
+    path: 'credito',
+    component: Credito,
+    canActivate: [EmpleadoGuard] // <--- CAMBIO CLAVE
+  },
+
+  // --- RUTAS EXCLUSIVAS EJECUTIVO ---
   {
     path: 'menu-ejecutivo',
     component: MenuEjecutivo,
     canActivate: [EjecutivoGuard]
   },
   {
-    path: 'crear-cuenta',
-    component: CrearCuenta,
-    canActivate: [EjecutivoGuard,GerenteGuard]
+    path: 'asignar-roles',
+    component: AsignarRoles,
+    canActivate: [EjecutivoGuard]
   },
-  {
-    path: 'cerrar-cuenta',
-    component: CerrarCuenta,
-    canActivate: [EjecutivoGuard,GerenteGuard]
-  },
-  {
-    path: 'cuenta-eliminada',
-    component: CuentaEliminada,
-    canActivate: [EjecutivoGuard,GerenteGuard]
-  },
-  {
-    path: 'cuenta-creada',  
-    component: CuentaCreada,
-    canActivate: [EjecutivoGuard,GerenteGuard]
-  },
-  {
-    path: 'prestamo-aceptado',
-    component: PrestamoAceptado,
-    canActivate: [EjecutivoGuard,GerenteGuard]
-  },
-  {
-    path: 'credito',
-    component: Credito,
-    canActivate: [EjecutivoGuard,GerenteGuard]
-  },
+
+  // --- RUTAS EXCLUSIVAS GERENTE ---
   {
     path: 'crear-cuenta-gerente',
     component: CrearCuentaGerente,
@@ -150,11 +155,9 @@ export const routes: Routes = [
     component: PrestamoAceptadoGerente,
     canActivate: [GerenteGuard]
   },
+
+  // --- RUTAS CLIENTE ---
   {
-    path: 'asignar-roles',
-    component: AsignarRoles,
-    canActivate: [EjecutivoGuard]
-  },{
     path: 'menu-cliente',
     component: MenuCliente,
     canActivate: [ClienteGuard]
@@ -208,5 +211,12 @@ export const routes: Routes = [
     path: 'oferta-credito',
     component: OfertaCredito,
     canActivate: [ClienteGuard]
-  }
+  },
+
+  // Default
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
 ];

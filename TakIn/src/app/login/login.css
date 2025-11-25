@@ -1,56 +1,68 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  /* Ruta corregida para encontrar la imagen */
-  background-image: url('../../assets/fondo.png');
-  background-size: cover;
-  font-family: Arial, sans-serif;
+/* --- CONFIGURACIÓN DE IONIC --- */
+ion-content {
+  /* Fondo de imagen cubriendo toda la pantalla */
+  --background: url('../../assets/fondo.png') no-repeat center center / cover;
+  --padding-bottom: 20px;
 }
 
+/* --- CONTENEDOR PRINCIPAL --- */
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100vh; /* Ocupa toda la altura disponible */
   position: relative;
+  width: 100%;
+  padding: 20px; /* Padding para que no pegue a los bordes en celular */
 }
 
+/* --- LOGO --- */
 .logo {
   position: absolute;
   top: 30px;
   left: 40px;
   width: 150px;
   height: 150px;
+  object-fit: contain;
+  z-index: 10;
 }
 
+/* --- TARJETA DE LOGIN --- */
 .login-card {
-  background-color: #a9cce3;
+  background-color: #a9cce3; /* Tu azul claro original */
   padding: 40px 50px;
   border-radius: 15px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 400px;
   text-align: left;
+  position: relative;
+  z-index: 5;
 }
 
 .login-card h2 {
   margin: 0 0 5px 0;
   color: #2c3e50;
+  font-family: Arial, sans-serif;
   font-size: 1.2em;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-weight: bold;
 }
 
 .security-text {
   margin: 0 0 30px 0;
   color: #34495e;
   font-size: 0.9em;
+  font-family: Arial, sans-serif;
 }
 
+/* --- INPUTS --- */
 .input-group {
   margin-bottom: 20px;
 }
 
+/* Estilo idéntico a tu original para los inputs */
 .input-group input {
   width: 100%;
   padding: 15px 20px;
@@ -59,7 +71,8 @@
   background-color: #eaf2f8;
   font-size: 1em;
   color: #2c3e50;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Importante para que el padding no rompa el ancho */
+  font-family: Arial, sans-serif;
 }
 
 .input-group input::placeholder {
@@ -70,11 +83,28 @@
   outline: 2px solid #3498db;
 }
 
+/* --- BOTONES DENTRO DEL INPUT --- */
 .password-wrapper {
   position: relative;
 }
 
-.password-wrapper .submit-btn {
+/* Botón Ojo */
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 60px; /* Separado del botón enviar */
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #7f8c8d;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+}
+
+/* Botón Enviar Redondo */
+.submit-btn {
   position: absolute;
   top: 50%;
   right: 8px;
@@ -90,16 +120,18 @@
   align-items: center;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 1.2em;
 }
 
-.password-wrapper .submit-btn:hover {
+.submit-btn:hover {
   background-color: #34495e;
 }
 
 .password-wrapper input {
-  padding-right: 60px;
+  padding-right: 100px; /* Espacio extra para que no escribas sobre los botones */
 }
 
+/* --- MENSAJES Y LINKS --- */
 .error-message {
   margin-top: 15px;
   padding: 10px;
@@ -123,11 +155,6 @@
   transition: color 0.3s ease;
 }
 
-.forgot-password-link a:hover {
-  color: #3498db;
-  text-decoration: underline;
-}
-
 .register-link {
   margin-top: 10px;
   font-size: 0.9em;
@@ -141,6 +168,24 @@
   text-decoration: none;
 }
 
-.register-link a:hover {
-  text-decoration: underline;
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 768px) {
+  /* En celular, centramos el logo arriba de la tarjeta */
+  .logo {
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-bottom: 20px;
+    width: 120px;
+    height: 120px;
+  }
+
+  .login-container {
+    flex-direction: column; /* Apilar logo y tarjeta */
+    padding-top: 40px;
+  }
+
+  .login-card {
+    padding: 30px 25px; /* Menos padding interno en celular */
+  }
 }

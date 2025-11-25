@@ -1,205 +1,212 @@
-<div class="main-container">
-  <header class="header">
-    <img src="assets/logo.png" alt="Logo" class="logo" />
-    <span class="title">TakIn</span>
-    <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
-  </header>
+<ion-content [fullscreen]="true">
+  
+  <div class="main-container">
+    <header class="header">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <span class="title">TakIn</span>
+      <span class="user-icon" [routerLink]="['/home']">&#128100;</span>
+    </header>
 
-  <div class="content full-content">
-    <div class="cards-section">
-      <h2 class="cards-title">Tus Tarjetas</h2>
-      <div class="cards-list">
-        <div class="card-item credito">
-          <img src="assets/tarjeta.png" alt="Tarjeta Crédito" class="card-img" />
-          <div class="card-info">
-            <span class="card-type">Crédito</span>
-            <span class="card-balance">Saldo: $12,500.00</span>
+    <div class="content full-content">
+      <!-- Sección de Tarjetas -->
+      <div class="cards-section">
+        <h2 class="cards-title">Tus Tarjetas</h2>
+        <div class="cards-list">
+          <div class="card-item credito">
+            <img src="assets/tarjeta.png" alt="Tarjeta Crédito" class="card-img" />
+            <div class="card-info">
+              <span class="card-type">Crédito</span>
+              <span class="card-balance">Saldo: $12,500.00</span>
+            </div>
+          </div>
+          <div class="card-item debito">
+            <img src="assets/tarjeta.png" alt="Tarjeta Débito" class="card-img" />
+            <div class="card-info">
+              <span class="card-type">Débito</span>
+              <span class="card-balance">Saldo: $3,200.00</span>
+            </div>
           </div>
         </div>
-        <div class="card-item debito">
-          <img src="assets/tarjeta.png" alt="Tarjeta Débito" class="card-img" />
-          <div class="card-info">
-            <span class="card-type">Débito</span>
-            <span class="card-balance">Saldo: $3,200.00</span>
-          </div>
+      </div>
+
+      <!-- Grid de Opciones -->
+      <div class="menu-options-grid">
+        <div class="option-card">
+          <img src="assets/abrir-cuenta.svg" alt="Transferencia" class="cp-icon" />
+          <button class="button" [routerLink]="['/transferencia']">Transferencia</button>
+        </div>
+        <div class="option-card">
+          <img src="assets/cerrar-cuenta.svg" alt="Ingresar Dinero" class="cp-icon" />
+          <button class="button" [routerLink]="['/ingresar-dinero']">Ingresar Dinero</button>
+        </div>
+        <div class="option-card">
+          <img src="assets/prestamo.svg" alt="Retirar Dinero" class="cp-icon" />
+          <button class="button" [routerLink]="['/retirar-dinero']">Retirar Dinero</button>
+        </div>
+        <div class="option-card">
+          <img src="assets/prestamo.svg" alt="Estado de Cuenta" class="cp-icon" />
+          <button class="button" [routerLink]="['/estado-cuenta']">Estado de Cuenta</button>
         </div>
       </div>
+
+      <div class="menu-text menu-text-bottom">
+        <h2>¡Accede a tus opciones!</h2>
+        <p>Todo lo que necesitas, en un solo lugar.</p>
+      </div>
     </div>
 
-    <div class="menu-options-grid">
-      <div class="option-card">
-        <img src="assets/abrir-cuenta.svg" alt="Transferencia" class="cp-icon" />
-        <button class="button" [routerLink]="['/transferencia']">Transferencia</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/cerrar-cuenta.svg" alt="Ingresar Dinero" class="cp-icon" />
-        <button class="button" [routerLink]="['/ingresar-dinero']">Ingresar Dinero</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/prestamo.svg" alt="Retirar Dinero" class="cp-icon" />
-        <button class="button" [routerLink]="['/retirar-dinero']">Retirar Dinero</button>
-      </div>
-      <div class="option-card">
-        <img src="assets/prestamo.svg" alt="Estado de Cuenta" class="cp-icon" />
-        <button class="button" [routerLink]="['/estado-cuenta']">Estado de Cuenta</button>
-      </div>
-    </div>
-    <div class="menu-text menu-text-bottom">
-      <h2>¡Accede a tus opciones!</h2>
-      <p>Todo lo que necesitas, en un solo lugar.</p>
-    </div>
-  </div>
-
-  <!-- Modal de Oferta de Crédito -->
-  <div *ngIf="mostrarModalCredito" class="modal-overlay-credito" (click)="cerrarModal()">
-    
-    <!-- Loading Spinner -->
-    <div *ngIf="cargando" class="spinner-container" (click)="$event.stopPropagation()">
-      <div class="spinner"></div>
-      <p>Cargando...</p>
-    </div>
-
-    <!-- Oferta de Crédito - Modal Compacto -->
-    <div *ngIf="!cargando && !errorMsg && oferta && !mostrarFormulario" 
-         class="modal-content-compacto" 
-         (click)="$event.stopPropagation()">
-      <button class="close-btn-modal" (click)="cerrarModal()">&times;</button>
+    <!-- Modal de Oferta de Crédito -->
+    <div *ngIf="mostrarModalCredito" class="modal-overlay-credito" (click)="cerrarModal()">
       
-      <div *ngIf="oferta.elegible" class="oferta-body-compacto">
-        <div class="icon-header">
-          <span class="icon-grande">💳</span>
-        </div>
+      <!-- Loading Spinner -->
+      <div *ngIf="cargando" class="spinner-container" (click)="$event.stopPropagation()">
+        <div class="spinner"></div>
+        <p>Cargando...</p>
+      </div>
+
+      <!-- Oferta de Crédito - Modal Compacto -->
+      <div *ngIf="!cargando && !errorMsg && oferta && !mostrarFormulario" 
+           class="modal-content-compacto" 
+           (click)="$event.stopPropagation()">
+        <button class="close-btn-modal" (click)="cerrarModal()">&times;</button>
         
-        <h2 class="titulo-oferta">¡Oferta Especial!</h2>
-        <p class="subtitulo-oferta">Línea de Crédito Pre-aprobada</p>
+        <div *ngIf="oferta.elegible" class="oferta-body-compacto">
+          <div class="icon-header">
+            <span class="icon-grande">💳</span>
+          </div>
+          
+          <h2 class="titulo-oferta">¡Oferta Especial!</h2>
+          <p class="subtitulo-oferta">Línea de Crédito Pre-aprobada</p>
+          
+          <div class="monto-principal">
+            {{ formatearMoneda(oferta.montoMaximo) }}
+          </div>
+
+          <div class="detalles-compactos">
+            <div class="detalle-compacto">
+              <span class="label-detalle">Tasa:</span>
+              <span class="valor-detalle">{{ oferta.tasaMensual }}%</span>
+            </div>
+            <div class="detalle-compacto">
+              <span class="label-detalle">Plazo:</span>
+              <span class="valor-detalle">{{ oferta.plazoMaximo }} meses</span>
+            </div>
+          </div>
+
+          <div class="beneficios-compactos">
+            <span class="beneficio-item">✓ Sin comisiones</span>
+            <span class="beneficio-item">✓ Aprobación rápida</span>
+          </div>
+
+          <button (click)="solicitarCredito()" class="btn-solicitar-compacto">
+            Solicitar Ahora
+          </button>
+          <button (click)="cerrarModal()" class="btn-cancelar-compacto">
+            Más tarde
+          </button>
+        </div>
+
+        <div *ngIf="!oferta.elegible" class="no-elegible-compacto">
+          <span class="icon-warning">⚠️</span>
+          <h2>No Elegible</h2>
+          <p>{{ oferta.razon || 'No cumples con los requisitos mínimos.' }}</p>
+          <button (click)="cerrarModal()" class="btn-cerrar-modal">Entendido</button>
+        </div>
+      </div>
+
+      <!-- Formulario de Solicitud - Compacto -->
+      <div *ngIf="mostrarFormulario && oferta" 
+           class="formulario-content-compacto" 
+           (click)="$event.stopPropagation()">
+        <button class="close-btn-modal" (click)="cerrarModal()">&times;</button>
+        <button class="btn-volver" (click)="volverAOferta()">← Volver</button>
         
-        <div class="monto-principal">
-          {{ formatearMoneda(oferta.montoMaximo) }}
+        <div class="formulario-header-compacto">
+          <h2>Solicitar Crédito</h2>
         </div>
 
-        <div class="detalles-compactos">
-          <div class="detalle-compacto">
-            <span class="label-detalle">Tasa:</span>
-            <span class="valor-detalle">{{ oferta.tasaMensual }}%</span>
+        <div class="formulario-body-compacto">
+          <div class="form-group-compacto">
+            <label>Monto a Solicitar</label>
+            <input
+              type="number"
+              [(ngModel)]="montoSolicitado"
+              [max]="oferta.montoMaximo"
+              min="1000"
+              step="1000"
+              (input)="calcularPago()"
+              class="form-control-compacto"
+            />
+            <small>Máx: {{ formatearMoneda(oferta.montoMaximo) }}</small>
           </div>
-          <div class="detalle-compacto">
-            <span class="label-detalle">Plazo:</span>
-            <span class="valor-detalle">{{ oferta.plazoMaximo }} meses</span>
+
+          <div class="form-group-compacto">
+            <label>Plazo</label>
+            <select
+              [(ngModel)]="plazoMeses"
+              (change)="calcularPago()"
+              class="form-control-compacto"
+            >
+              <option [value]="6">6 meses</option>
+              <option [value]="12">12 meses</option>
+              <option [value]="18">18 meses</option>
+              <option [value]="24">24 meses</option>
+              <option [value]="36">36 meses</option>
+            </select>
           </div>
-        </div>
 
-        <div class="beneficios-compactos">
-          <span class="beneficio-item">✓ Sin comisiones</span>
-          <span class="beneficio-item">✓ Aprobación rápida</span>
-        </div>
+          <div class="form-row-compacto">
+            <div class="form-group-compacto">
+              <label>Ingreso Mensual</label>
+              <input
+                type="number"
+                [(ngModel)]="ingresoMensual"
+                min="0"
+                step="1000"
+                (input)="calcularPago()"
+                class="form-control-compacto"
+              />
+            </div>
 
-        <button (click)="solicitarCredito()" class="btn-solicitar-compacto">
-          Solicitar Ahora
-        </button>
-        <button (click)="cerrarModal()" class="btn-cancelar-compacto">
-          Más tarde
-        </button>
-      </div>
+            <div class="form-group-compacto">
+              <label>Gastos Mensuales</label>
+              <input
+                type="number"
+                [(ngModel)]="gastosMensuales"
+                min="0"
+                step="1000"
+                (input)="calcularPago()"
+                class="form-control-compacto"
+              />
+            </div>
+          </div>
 
-      <div *ngIf="!oferta.elegible" class="no-elegible-compacto">
-        <span class="icon-warning">⚠️</span>
-        <h2>No Elegible</h2>
-        <p>{{ oferta.razon || 'No cumples con los requisitos mínimos.' }}</p>
-        <button (click)="cerrarModal()" class="btn-cerrar-modal">Entendido</button>
-      </div>
-    </div>
+          <div *ngIf="pagoMensual > 0" class="resultados-compactos">
+            <div class="resultado-compacto">
+              <span>Pago Mensual:</span>
+              <strong>{{ formatearMoneda(pagoMensual) }}</strong>
+            </div>
+            <div class="resultado-compacto">
+              <span>Total a Pagar:</span>
+              <strong>{{ formatearMoneda(totalAPagar) }}</strong>
+            </div>
 
-    <!-- Formulario de Solicitud - Compacto -->
-    <div *ngIf="mostrarFormulario && oferta" 
-         class="formulario-content-compacto" 
-         (click)="$event.stopPropagation()">
-      <button class="close-btn-modal" (click)="cerrarModal()">&times;</button>
-      <button class="btn-volver" (click)="volverAOferta()">← Volver</button>
-      
-      <div class="formulario-header-compacto">
-        <h2>Solicitar Crédito</h2>
-      </div>
+            <div class="estado-compacto" [class.aprobado]="aprobado" [class.rechazado]="!aprobado">
+              <span *ngIf="aprobado">✓ Pre-aprobado</span>
+              <span *ngIf="!aprobado">✗ No aprobado - Excede capacidad</span>
+            </div>
+          </div>
 
-      <div class="formulario-body-compacto">
-        <div class="form-group-compacto">
-          <label>Monto a Solicitar</label>
-          <input
-            type="number"
-            [(ngModel)]="montoSolicitado"
-            [max]="oferta.montoMaximo"
-            min="1000"
-            step="1000"
-            (input)="calcularPago()"
-            class="form-control-compacto"
-          />
-          <small>Máx: {{ formatearMoneda(oferta.montoMaximo) }}</small>
-        </div>
-
-        <div class="form-group-compacto">
-          <label>Plazo</label>
-          <select
-            [(ngModel)]="plazoMeses"
-            (change)="calcularPago()"
-            class="form-control-compacto"
+          <button
+            (click)="enviarSolicitud()"
+            [disabled]="!aprobado || pagoMensual === 0 || ingresoMensual === 0"
+            class="btn-enviar-compacto"
           >
-            <option [value]="6">6 meses</option>
-            <option [value]="12">12 meses</option>
-            <option [value]="18">18 meses</option>
-            <option [value]="24">24 meses</option>
-            <option [value]="36">36 meses</option>
-          </select>
+            Enviar Solicitud
+          </button>
         </div>
-
-        <div class="form-row-compacto">
-          <div class="form-group-compacto">
-            <label>Ingreso Mensual</label>
-            <input
-              type="number"
-              [(ngModel)]="ingresoMensual"
-              min="0"
-              step="1000"
-              (input)="calcularPago()"
-              class="form-control-compacto"
-            />
-          </div>
-
-          <div class="form-group-compacto">
-            <label>Gastos Mensuales</label>
-            <input
-              type="number"
-              [(ngModel)]="gastosMensuales"
-              min="0"
-              step="1000"
-              (input)="calcularPago()"
-              class="form-control-compacto"
-            />
-          </div>
-        </div>
-
-        <div *ngIf="pagoMensual > 0" class="resultados-compactos">
-          <div class="resultado-compacto">
-            <span>Pago Mensual:</span>
-            <strong>{{ formatearMoneda(pagoMensual) }}</strong>
-          </div>
-          <div class="resultado-compacto">
-            <span>Total a Pagar:</span>
-            <strong>{{ formatearMoneda(totalAPagar) }}</strong>
-          </div>
-
-          <div class="estado-compacto" [class.aprobado]="aprobado" [class.rechazado]="!aprobado">
-            <span *ngIf="aprobado">✓ Pre-aprobado</span>
-            <span *ngIf="!aprobado">✗ No aprobado - Excede capacidad</span>
-          </div>
-        </div>
-
-        <button
-          (click)="enviarSolicitud()"
-          [disabled]="!aprobado || pagoMensual === 0 || ingresoMensual === 0"
-          class="btn-enviar-compacto"
-        >
-          Enviar Solicitud
-        </button>
       </div>
     </div>
   </div>
-</div>
+
+</ion-content>

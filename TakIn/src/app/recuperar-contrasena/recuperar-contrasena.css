@@ -1,11 +1,9 @@
-:host {
-  display: block;
-  min-height: 100vh;
-  background-image: url('../../assets/fondo.png');
-  background-size: cover;
-  font-family: Arial, sans-serif;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: url('../../assets/fondo.png') no-repeat center center / cover;
 }
 
+/* --- CONTENEDOR PRINCIPAL --- */
 .recuperar-container {
   display: flex;
   justify-content: center;
@@ -15,14 +13,21 @@
   padding: 20px;
 }
 
-.logo {
+/* --- LOGO --- */
+.logo-link {
   position: absolute;
   top: 30px;
   left: 40px;
+  z-index: 10;
+  display: block;
+}
+
+.logo {
   width: 150px;
   height: 150px;
 }
 
+/* --- TARJETA --- */
 .recuperar-card {
   background-color: #a9cce3;
   padding: 40px 50px;
@@ -31,6 +36,7 @@
   width: 100%;
   max-width: 500px;
   text-align: left;
+  margin-top: 50px;
 }
 
 .recuperar-card h2 {
@@ -38,6 +44,8 @@
   color: #2c3e50;
   font-size: 1.5em;
   text-align: center;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
 }
 
 .description {
@@ -46,15 +54,16 @@
   margin-bottom: 25px;
   font-size: 0.95em;
   line-height: 1.5;
+  font-family: Arial, sans-serif;
 }
 
-/* Indicador de pasos */
+/* --- INDICADOR DE PASOS --- */
 .pasos-indicador {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .paso {
@@ -76,6 +85,7 @@
   font-weight: bold;
   margin-bottom: 5px;
   transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
 }
 
 .paso.activo .paso-numero {
@@ -92,6 +102,7 @@
   font-size: 0.75em;
   color: #555;
   text-align: center;
+  font-family: Arial, sans-serif;
 }
 
 .paso-linea {
@@ -107,7 +118,7 @@
   background-color: #28a745;
 }
 
-/* Formulario */
+/* --- FORMULARIO --- */
 .input-group {
   margin-bottom: 20px;
 }
@@ -118,6 +129,7 @@
   color: #2c3e50;
   font-weight: 600;
   font-size: 0.95em;
+  font-family: Arial, sans-serif;
 }
 
 .input-group input {
@@ -129,17 +141,11 @@
   font-size: 1em;
   color: #2c3e50;
   box-sizing: border-box;
-  transition: all 0.3s ease;
+  font-family: Arial, sans-serif;
 }
 
 .input-group input:focus {
   outline: 2px solid #3498db;
-  background-color: white;
-}
-
-.input-group input:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 .input-group small {
@@ -147,8 +153,10 @@
   margin-top: 5px;
   color: #7f8c8d;
   font-size: 0.85em;
+  text-align: center;
 }
 
+/* Input especial para el código numérico */
 .codigo-input {
   text-align: center;
   font-size: 1.5em !important;
@@ -171,12 +179,15 @@
   transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 1.2em;
+  font-size: 1.5em;
   cursor: pointer;
   padding: 5px;
+  color: #7f8c8d;
+  display: flex;
+  align-items: center;
 }
 
-/* Botones */
+/* --- BOTONES --- */
 .btn-principal {
   width: 100%;
   padding: 15px;
@@ -193,12 +204,10 @@
 
 .btn-principal:hover:not(:disabled) {
   background-color: #1a4d7a;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(42, 107, 178, 0.3);
 }
 
 .btn-principal:disabled {
-  opacity: 0.6;
+  background-color: #95a5a6;
   cursor: not-allowed;
 }
 
@@ -215,17 +224,11 @@
   transition: all 0.3s ease;
 }
 
-.btn-secundario:hover:not(:disabled) {
-  background-color: #2a6bb2;
-  color: white;
+.btn-secundario:hover {
+  background-color: rgba(42, 107, 178, 0.1);
 }
 
-.btn-secundario:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* Mensajes */
+/* --- MENSAJES --- */
 .message {
   padding: 12px 15px;
   border-radius: 8px;
@@ -244,13 +247,12 @@
   color: white;
 }
 
-/* Botones de navegación */
+/* --- NAVEGACIÓN --- */
 .navigation-buttons {
   margin-top: 25px;
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 .btn-link {
@@ -261,41 +263,37 @@
   cursor: pointer;
   text-decoration: underline;
   padding: 5px 10px;
-  transition: color 0.3s ease;
 }
 
-.btn-link:hover:not(:disabled) {
-  color: #1a4d7a;
-}
-
-.btn-link:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* Responsive */
+/* --- RESPONSIVIDAD (MÓVIL) --- */
 @media (max-width: 600px) {
-  .recuperar-card {
-    padding: 30px 25px;
+  .logo-link {
+    position: relative;
+    top: auto;
+    left: auto;
+    text-align: center;
+    margin-bottom: 20px;
   }
 
   .logo {
     width: 100px;
     height: 100px;
-    top: 15px;
-    left: 15px;
+    margin: 0 auto;
   }
 
-  .pasos-indicador {
-    padding: 0 5px;
+  .recuperar-container {
+    flex-direction: column;
+    padding-top: 40px;
+  }
+
+  .recuperar-card {
+    padding: 30px 20px;
+    margin-top: 10px;
   }
 
   .paso-numero {
-    width: 35px;
-    height: 35px;
-  }
-
-  .paso-texto {
-    font-size: 0.7em;
+    width: 32px;
+    height: 32px;
+    font-size: 0.9em;
   }
 }

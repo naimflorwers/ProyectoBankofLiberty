@@ -1,7 +1,11 @@
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #f5f7fa; /* Fondo gris muy claro */
+}
+
 :host {
   display: block;
   min-height: 100vh;
-  background-color: #f5f7fa;
 }
 
 .estado-cuenta-container {
@@ -52,6 +56,7 @@
 .logo {
   width: 60px;
   height: 60px;
+  object-fit: contain;
 }
 
 /* Filtros */
@@ -96,6 +101,8 @@
   font-size: 1em;
   transition: all 0.3s ease;
   background-color: #f8f9fa;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .input-group input:focus,
@@ -108,10 +115,12 @@
 .btn-group {
   display: flex;
   gap: 10px;
+  flex-wrap: wrap; /* Para que bajen en celular */
 }
 
 .btn-buscar,
-.btn-pdf {
+.btn-pdf,
+.btn-email {
   padding: 12px 20px;
   border: none;
   border-radius: 8px;
@@ -120,6 +129,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   flex: 1;
+  min-width: 100px; /* Tamaño mínimo para botón */
 }
 
 .btn-buscar {
@@ -152,14 +162,6 @@
 .btn-email {
   background-color: #27ae60;
   color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1em;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  flex: 1;
 }
 
 .btn-email:hover:not(:disabled) {

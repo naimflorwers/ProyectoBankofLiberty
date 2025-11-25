@@ -1,37 +1,36 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>EliminarCuenta</title>
-    <link rel="stylesheet" href="cerrar-cuenta.css">
-</head>
-<body>
-<div class="container">
+<ion-content [fullscreen]="true">
   
-  <div class="header">
-    <img src="assets/logo.png" alt="Logo" class="logo">
-    <span class="title">TakIn</span>
+  <div class="main-container">
+    
+    <!-- Header personalizado (dentro del contenido para respetar tu diseño) -->
+    <div class="header-custom">
+      <!-- Asegúrate de que la ruta routerLink apunte a tu home -->
+      <a routerLink="/home" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+        <img src="assets/logo.png" alt="Logo" class="logo">
+        <span class="title">TakIn</span>
+      </a>
+    </div>
+
+    <!-- Tarjeta del Formulario -->
+    <div class="form-card">
+      <form>
+        <div class="row-full">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Ingresa tu nombre" />
+        </div>
+
+        <div class="row-full">
+          <label>Número de cuenta bancaria</label>
+          <input type="text" placeholder="Ingresa tu número de cuenta" />
+        </div>
+
+        <div class="button-container">
+          <!-- routerLink lleva a la pantalla de confirmación -->
+          <button type="button" [routerLink]="['/cuenta-eliminada']">CANCELAR CUENTA</button>
+        </div>
+      </form>
+    </div>
+
   </div>
 
- 
-  <div class="form-card">
-    <form>
-      <div class="row-full">
-        <label>Nombre completo</label>
-        <input type="text" />
-      </div>
-
-      <div class="row-full">
-        <label>Número de cuenta bancaria</label>
-        <input type="text" />
-      </div>
-
-      <div class="button-container">
-        <button type="button" [routerLink]="['/cuenta-eliminada']">CANCELAR CUENTA</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-</body>
-</html>
+</ion-content>

@@ -1,67 +1,116 @@
-/* Fondo general */
-body {
-  background-color: #33658A; 
-  margin: 0;
-  font-family: Arial, sans-serif;
+/* --- CONFIGURACIÓN IONIC --- */
+ion-content {
+  --background: #33658A; /* Fondo general azul */
 }
 
+/* --- WRAPPER CENTRADO --- */
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
+/* --- TARJETA --- */
 .container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 50px;
-  background: #86BBD8; /* azul */
+  width: 100%;
+  max-width: 800px; /* Un ancho razonable para formularios */
+  background: #86BBD8; /* Azul claro */
   border-radius: 12px;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  padding: 40px; /* Padding amplio en PC */
+  box-sizing: border-box;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
-  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 10px;
+  font-family: 'Orbitron', sans-serif; /* Asegúrate de tener la fuente o usará sans-serif */
   color: #000;
+  font-weight: bold;
+  font-size: 1.8rem;
 }
 
 h3 {
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   color: #000;
+  text-align: center;
+  font-size: 1.2rem;
 }
 
+/* --- FORMULARIO --- */
 .form-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 label {
   font-weight: bold;
   color: #000;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
 }
 
 input,
 select {
-  padding: 10px;
+  padding: 12px 15px;
   border-radius: 20px;
   border: none;
   outline: none;
   font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
 }
 
-/* Botón */
+/* Estilo para el select */
+.select-wrapper {
+  position: relative;
+}
+
+/* --- BOTÓN --- */
 .btn {
   background: #333;
   color: white;
-  padding: 12px 25px;
+  padding: 15px 30px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   display: block;
-  margin: 20px auto 0;
-  transition: 0.3s;
+  width: 100%;
+  max-width: 300px;
+  margin: 30px auto 0;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.3s;
 }
 
 .btn:hover {
   background: #555;
+}
+
+/* --- RESPONSIVIDAD (MÓVIL) --- */
+@media (max-width: 768px) {
+  .container {
+    padding: 25px 20px; /* Menos padding en celular */
+    width: 95%;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+  }
+
+  input, select {
+    padding: 10px 12px;
+  }
 }

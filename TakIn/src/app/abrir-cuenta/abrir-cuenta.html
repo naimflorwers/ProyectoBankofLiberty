@@ -1,45 +1,59 @@
-<div class="login-container">
-  <a routerLink="/home" class="logo-link">  <img src="assets/logo.png" alt="Logo TakIn" class="logo">
-</a>
+<ion-content [fullscreen]="true">
+  
+  <div class="login-container">
+    
+    <!-- Logo -->
+    <a routerLink="/home" class="logo-link">
+      <img src="assets/logo.png" alt="Logo TakIn" class="logo">
+    </a>
 
-  <div class="nuevo-usuario">
-    <h2>Nuevo Usuario</h2>
+    <div class="nuevo-usuario">
+      <h2>Nuevo Usuario</h2>
 
-    <form (ngSubmit)="register()">
-      <div class="input-row">
-        <div class="input-group">
-          <input [(ngModel)]="nombre" name="nombre" type="text" placeholder="Nombre" required />
+      <form (ngSubmit)="register()">
+        
+        <!-- Fila de Nombres: En PC es una fila, en Celular será columna -->
+        <div class="input-row">
+          <div class="input-group">
+            <input [(ngModel)]="nombre" name="nombre" type="text" placeholder="Nombre" required />
+          </div>
+          <div class="input-group">
+            <input [(ngModel)]="apellidoPaterno" name="apellidoPaterno" type="text" placeholder="Apellido paterno" required />
+          </div>
+          <div class="input-group">
+            <input [(ngModel)]="apellidoMaterno" name="apellidoMaterno" type="text" placeholder="Apellido materno" required />
+          </div>
         </div>
+
         <div class="input-group">
-          <input [(ngModel)]="apellidoPaterno" name="apellidoPaterno" type="text" placeholder="Apellido paterno" required />
+          <input [(ngModel)]="correo" name="correo" type="email" placeholder="Correo electrónico" required />
         </div>
+
         <div class="input-group">
-          <input [(ngModel)]="apellidoMaterno" name="apellidoMaterno" type="text" placeholder="Apellido materno" required />
+          <input [(ngModel)]="curp" name="curp" type="text" placeholder="CURP" />
         </div>
-      </div>
 
-      <div class="input-group">
-        <input [(ngModel)]="correo" name="correo" type="email" placeholder="Correo electrónico" required />
-      </div>
+        <div class="input-group">
+          <input [(ngModel)]="contrasena" name="contrasena" type="password" placeholder="Contraseña" required />
+        </div>
 
-      <div class="input-group">
-        <input [(ngModel)]="curp" name="curp" type="text" placeholder="CURP" />
-      </div>
+        <!-- Mensajes de estado -->
+        <div class="form-messages">
+          <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
+          <div *ngIf="successMsg" class="success-message">{{ successMsg }}</div>
+        </div>
 
-      <div class="input-group">
-        <input [(ngModel)]="contrasena" name="contrasena" type="password" placeholder="Contraseña" required />
-      </div>
+        <button type="submit" class="crear-cuenta-btn" [disabled]="loading">
+          {{ loading ? 'Creando...' : 'Crear Cuenta' }}
+        </button>
+      
+      </form>
 
-      <div class="form-messages">
-        <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
-        <div *ngIf="successMsg" class="success">{{ successMsg }}</div>
-      </div>
+      <p class="login-link">
+        ¿Ya tienes una cuenta? <a routerLink="/login">Iniciar sesión</a>
+      </p>
+    </div>
 
-      <button type="submit" class="crear-cuenta-btn" [disabled]="loading">{{ loading ? 'Creando...' : 'Crear Cuenta' }}</button>
-    </form>
-
-    <p class="login-link">
-      ¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a>
-    </p>
   </div>
-</div>
+
+</ion-content>

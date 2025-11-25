@@ -49,3 +49,20 @@ export class GerenteGuard implements CanActivate {
     return false;
   }
 }
+
+// --- NUEVO GUARDIÁN: Permite acceso a Ejecutivo O Gerente ---
+@Injectable({ providedIn: 'root' })
+export class EmpleadoGuard implements CanActivate {
+  constructor(private router: Router) {}
+  canActivate(): boolean {
+    if (isBrowser()) {
+      const rol = localStorage.getItem('rol');
+      // Aceptamos si es cualquiera de los dos roles de empleados
+      if (rol === 'ejecutivo' || rol === 'gerente') {
+        return true;
+      }
+    }
+    this.router.navigate(['/login']);
+    return false;
+  }
+}

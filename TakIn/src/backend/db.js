@@ -1,7 +1,7 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-    host: 'ec2-3-131-82-171.us-east-2.compute.amazonaws.com',  
+    host: 'ec2-13-59-90-209.us-east-2.compute.amazonaws.com',  
     user: 'TakInRemoto',                                
     password: '#g~Opc1OB)Qa;4,c',                     
     database: 'Liberty'                                 
