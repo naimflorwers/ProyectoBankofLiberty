@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { UsuariosService } from '../../services/usuarios.service'; 
+import { UsuariosService } from '../../services/usuarios.service';
+import { SessionService } from '../services/session.service';
 import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 
@@ -20,7 +21,7 @@ export class Login {
   passwordVisible: boolean = false;
   errorMsg: string = '';
 
-  constructor(private usuariosService: UsuariosService, private router: Router) {}
+  constructor(private usuariosService: UsuariosService, private router: Router, private sessionService: SessionService) {}
 
   togglePassword() {
     this.passwordVisible = !this.passwordVisible;
@@ -49,6 +50,9 @@ export class Login {
             console.error('Error guardando en localStorage:', e);
           }
         
+          // Start session timer: 30 seconds
+          this.sessionService.startSession(30 * 1000);
+
           const rol = String(res.rol).trim().toLowerCase();
           if (rol === 'cliente') {
             this.router.navigate(['/menu-cliente']);

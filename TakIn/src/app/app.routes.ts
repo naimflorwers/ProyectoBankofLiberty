@@ -36,6 +36,8 @@ import { TransferenciaExitosa } from './transferencia-exitosa/transferencia-exit
 import { RecuperarContrasena } from './recuperar-contrasena/recuperar-contrasena'; // Asegúrate que la carpeta no tenga ñ
 import { EstadoCuenta } from './estado-cuenta/estado-cuenta';
 import { OfertaCredito } from './oferta-credito/oferta-credito';
+import { NotFound } from './notfound/notfound';
+import { ServerError } from './server-error/server-error';
 
 export const routes: Routes = [
   {
@@ -219,4 +221,14 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  // Server error page
+  {
+    path: '500',
+    component: ServerError
+  },
+  // Wildcard — 404 Not Found
+  {
+    path: '**',
+    component: NotFound
+  }
 ];
