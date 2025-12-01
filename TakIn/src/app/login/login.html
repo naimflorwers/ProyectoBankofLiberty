@@ -40,6 +40,15 @@
       <!-- Mensaje de Error -->
       <div *ngIf="errorMsg" class="error-message">{{ errorMsg }}</div>
 
+      <!-- Botón de Autenticación Biométrica -->
+      <div *ngIf="biometricAvailable" class="biometric-section">
+        <button type="button" class="biometric-btn" (click)="authenticateWithBiometric()">
+          <ion-icon name="finger-print"></ion-icon>
+          <span>Autenticarse con {{ biometricType || 'Biometría' }}</span>
+        </button>
+        <p class="biometric-hint">O continúa con tu correo y contraseña</p>
+      </div>
+
       <!-- Links de ayuda -->
       <p class="forgot-password-link">
         <a href="#" (click)="recuperarContrasena($event)">¿Olvidaste tu contraseña?</a>

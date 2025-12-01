@@ -1,5 +1,13 @@
 {
 	"appId": "com.proyectobankofliberty.app",
 	"appName": "Banco",
-	"webDir": "dist/TakIn/browser"
+	"webDir": "dist/TakIn/browser",
+	"server": {
+		"androidScheme": "https"
+	},
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 0
+		}
+	}
 }
