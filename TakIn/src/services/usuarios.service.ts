@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  // Tu URL real (¡Esto está excelente!)
+  
   private apiUrl = 'http://penyrphf.icu:3000/api';
 
   constructor(private http: HttpClient) {}
@@ -29,11 +29,11 @@ export class UsuariosService {
     return this.http.get(`${this.apiUrl}/usuario/${id}`);
   }
 
-  // --- AQUÍ ESTÁ EL TRUCO ---
+  
   login(correo: string, contrasena: string): Observable<any> {
-    // Limpiamos los datos antes de enviarlos
-    const correoLimpio = correo.trim().toLowerCase(); // Quita espacios y pasa a minúsculas
-    const passLimpia = contrasena.trim();             // Quita espacios accidentales
+    
+    const correoLimpio = correo.trim().toLowerCase(); 
+    const passLimpia = contrasena.trim();             
 
     return this.http.post(`${this.apiUrl}/login`, { 
         correo: correoLimpio, 
