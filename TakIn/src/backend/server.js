@@ -21,8 +21,8 @@ app.use('/api', estadoCuentaRoutes);
 app.use('/api', creditoRoutes);
 app.use('/api', transferenciaRoutes);
 
-app.listen(80, () => {
-  console.log('✅ Servidor corriendo en http://penyrphf.icu');
+app.listen(3000, () => {
+  console.log('✅ Servidor corriendo en http://penyrphf.icu:3000');
   
   // Verificar configuración de email al iniciar
   const emailService = require('./services/emailService');
