@@ -7,7 +7,6 @@ const recuperacionRoutes = require('./routes/recuperacion');
 const estadoCuentaRoutes = require('./routes/estadoCuenta');
 const creditoRoutes = require('./routes/credito');
 const transferenciaRoutes = require('./routes/transferenciaRoutes');
-const cors = require('cors'); // <--- AGREGA ESTO
 
 console.log('Iniciando server.js...');
 
