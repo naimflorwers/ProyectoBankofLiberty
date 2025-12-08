@@ -1,13 +1,14 @@
 import { Component, signal, OnInit } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { SessionService } from './services/session.service';
 
+// --- CAMBIO IMPORTANTE: Importamos los componentes Standalone ---
+import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ReactiveFormsModule, IonicModule],
+  standalone: true, // Esto confirma que es componente independiente
+  // --- CAMBIO IMPORTANTE: Agregamos IonApp y IonRouterOutlet aquí ---
+  imports: [IonApp, IonRouterOutlet], 
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
@@ -17,7 +18,6 @@ export class App implements OnInit {
   constructor(private sessionService: SessionService) {}
 
   ngOnInit(): void {
-    // If running in browser restore session timer; guard for SSR
     try {
       if (typeof window !== 'undefined' && typeof window.localStorage !== 'undefined') {
         const v = localStorage.getItem('session_expires');
@@ -28,7 +28,6 @@ export class App implements OnInit {
             if (remaining > 0) {
               this.sessionService.startSession(remaining);
             } else {
-              // expired already
               this.sessionService.logout();
             }
           }

@@ -21,7 +21,7 @@ export interface OfertaCreditoData {
   styleUrls: ['./oferta-credito.css']
 })
 export class OfertaCredito implements OnInit {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'http://penyrphf.icu:3000/api';
   
   usuario: any = null;
   oferta: OfertaCreditoData | null = null;

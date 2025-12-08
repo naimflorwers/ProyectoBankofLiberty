@@ -57,7 +57,7 @@ export class EstadoCuenta implements OnInit {
   // Usuario actual
   usuario: any = null;
   
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'http://penyrphf.icu:3000/api';
 
   constructor(
     private http: HttpClient,

@@ -57,7 +57,7 @@ export interface Transferencia {
   providedIn: 'root'
 })
 export class TransferenciasService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'http://penyrphf.icu:3000/api';
 
   constructor(private http: HttpClient) {}
 

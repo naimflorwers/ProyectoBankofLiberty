@@ -113,7 +113,7 @@ npm start
 
 ### Obtener Cuentas
 ```http
-GET http://localhost:3000/api/cuentas/1
+GET http://penyrphf.icu:3000/api/cuentas/1
 ```
 **Response:**
 ```json
@@ -130,7 +130,7 @@ GET http://localhost:3000/api/cuentas/1
 
 ### Realizar Transferencia
 ```http
-POST http://localhost:3000/api/transferencia
+POST http://penyrphf.icu:3000/api/transferencia
 Content-Type: application/json
 
 {
@@ -167,12 +167,12 @@ Content-Type: application/json
 
 ### Historial de Transferencias
 ```http
-GET http://localhost:3000/api/historial/1
+GET http://penyrphf.icu:3000/api/historial/1
 ```
 
 ### Detalle de Transferencia
 ```http
-GET http://localhost:3000/api/transferencia/1
+GET http://penyrphf.icu:3000/api/transferencia/1
 ```
 
 ## ✅ Validaciones del Stored Procedure

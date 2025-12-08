@@ -59,7 +59,7 @@ node server.js
 
 Deberías ver:
 ```
-✅ Servidor corriendo en http://localhost:3000
+✅ Servidor corriendo en http://penyrphf.icu:3000
 [EMAIL] Transporter de correo configurado
 ✅ [EMAIL] Conexión SMTP verificada correctamente
 ```

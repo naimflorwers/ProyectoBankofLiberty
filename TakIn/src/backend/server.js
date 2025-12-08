@@ -7,6 +7,7 @@ const recuperacionRoutes = require('./routes/recuperacion');
 const estadoCuentaRoutes = require('./routes/estadoCuenta');
 const creditoRoutes = require('./routes/credito');
 const transferenciaRoutes = require('./routes/transferenciaRoutes');
+const cors = require('cors'); // <--- AGREGA ESTO
 
 console.log('Iniciando server.js...');
 
@@ -22,7 +23,7 @@ app.use('/api', creditoRoutes);
 app.use('/api', transferenciaRoutes);
 
 app.listen(3000, () => {
-  console.log('✅ Servidor corriendo en http://localhost:3000');
+  console.log('✅ Servidor corriendo en http://penyrphf.icu:3000');
   
   // Verificar configuración de email al iniciar
   const emailService = require('./services/emailService');

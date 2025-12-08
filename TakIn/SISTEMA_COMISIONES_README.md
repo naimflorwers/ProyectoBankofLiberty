@@ -388,7 +388,7 @@ DROP PROCEDURE IF EXISTS sp_realizar_transferencia;
 - Abre la consola del navegador (F12) y busca errores
 - Verifica que la ruta `/api/comision` funcione:
   ```
-  http://localhost:3000/api/comision?monto=1000
+  http://penyrphf.icu:3000/api/comision?monto=1000
   ```
 
 ---

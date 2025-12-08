@@ -21,7 +21,7 @@ interface OfertaCreditoData {
   styleUrl: './menu-cliente.css'
 })
 export class MenuCliente implements OnInit {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'http://penyrphf.icu:3000/api';
   
   // Control del modal
   mostrarModalCredito = false;
