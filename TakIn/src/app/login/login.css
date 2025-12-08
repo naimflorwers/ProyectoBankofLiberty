@@ -168,6 +168,42 @@ ion-content {
   text-decoration: none;
 }
 
+/* --- SECCIÓN BIOMÉTRICA --- */
+.biometric-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.biometric-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.biometric-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.biometric-btn:active {
+  transform: translateY(0);
+}
+
+.biometric-btn ion-icon {
+  font-size: 1.5em;
+}
+
 /* --- RESPONSIVIDAD (MÓVIL) --- */
 @media (max-width: 768px) {
   /* En celular, centramos el logo arriba de la tarjeta */
@@ -187,5 +223,10 @@ ion-content {
 
   .login-card {
     padding: 30px 25px; /* Menos padding interno en celular */
+  }
+
+  .biometric-btn {
+    width: 100%;
+    padding: 14px 20px;
   }
 }

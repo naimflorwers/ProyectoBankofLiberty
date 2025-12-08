@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --host 0.0.0.0 --port 4200",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:TakIn": "node dist/TakIn/server/server.mjs"
+    "serve:ssr:TakIn": "node dist/TakIn/server/server.mjs",
+    "ionic:build": "ng build",
+    "ionic:serve": "ng serve --host 0.0.0.0 --port 4200"
   },
   "prettier": {
     "printWidth": 100,
@@ -31,8 +33,11 @@
     "@angular/platform-server": "^20.2.0",
     "@angular/router": "^20.2.0",
     "@angular/ssr": "^20.2.2",
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
     "@ionic/angular": "^8.7.10",
     "bcrypt": "^6.0.0",
+    "capacitor-native-biometric": "^4.2.2",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "jspdf": "^3.0.3",
@@ -46,6 +51,8 @@
     "@angular/build": "^20.2.2",
     "@angular/cli": "^20.2.2",
     "@angular/compiler-cli": "^20.2.0",
+    "@capacitor/cli": "^6.1.2",
+    "@ionic/angular-toolkit": "latest",
     "@types/express": "^5.0.1",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^20.17.19",
@@ -55,7 +62,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.9.2",
-    "@ionic/angular-toolkit": "latest"
+    "typescript": "~5.9.2"
   }
 }

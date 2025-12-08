@@ -1,8 +1,47 @@
 /* src/styles.css */
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Asegura que el cuerpo de la página ocupe toda la altura */
-  font-family: Arial, sans-serif; /* Puedes definir una fuente global aquí */
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  touch-action: manipulation;
+}
+
+body {
+  overscroll-behavior-y: none;
+}
+
+ion-app {
+  width: 100%;
+  height: 100%;
+}
+
+ion-content {
+  --background: transparent;
+}
+
+ion-menu {
+  z-index: 10000 !important;
+}
+
+ion-router-outlet {
+  pointer-events: auto !important;
+}
+
+.ion-page {
+  pointer-events: auto !important;
+}
+
+/* Asegurar que el contenido pueda hacer scroll */
+ion-content::part(scroll) {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
