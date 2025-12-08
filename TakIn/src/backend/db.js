@@ -1,10 +1,11 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-    host: 'ec2-3-138-190-88.us-east-2.compute.amazonaws.com',  
+    host: 'ec2-3-17-205-242.us-east-2.compute.amazonaws.com',  
     user: 'TakInRemoto',                                
     password: '#g~Opc1OB)Qa;4,c',                     
-    database: 'Liberty'                                 
+    database: 'Liberty',
+    multipleStatements: true                                
 });
 
 db.connect((err) => {

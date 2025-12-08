@@ -1,0 +1,9 @@
+{
+	"appId": "com.proyectobankofliberty.app",
+	"appName": "Banco Liberty",
+	"webDir": "dist/TakIn/browser",
+	"server": {
+		"url": "http://localhost/index.html",
+		"cleartext": true
+	}
+}

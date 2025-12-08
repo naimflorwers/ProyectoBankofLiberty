@@ -6,6 +6,7 @@ const transferenciasRoutes = require('./routes/transferencias');
 const recuperacionRoutes = require('./routes/recuperacion');
 const estadoCuentaRoutes = require('./routes/estadoCuenta');
 const creditoRoutes = require('./routes/credito');
+const transferenciaRoutes = require('./routes/transferenciaRoutes');
 
 console.log('Iniciando server.js...');
 
@@ -18,6 +19,7 @@ app.use('/api', transferenciasRoutes);
 app.use('/api', recuperacionRoutes);
 app.use('/api', estadoCuentaRoutes);
 app.use('/api', creditoRoutes);
+app.use('/api', transferenciaRoutes);
 
 app.listen(3000, () => {
   console.log('✅ Servidor corriendo en http://localhost:3000');
