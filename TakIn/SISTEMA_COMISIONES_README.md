@@ -5,20 +5,9 @@
 
 ## 📋 RESUMEN DE CAMBIOS
 
-### **Comisiones Implementadas (Proporcionales):**
-- **$5 por cada $100** transferidos
-- **$10 por cada $1,500** transferidos
-- **El sistema aplica LA MENOR comisión** (más justo para el cliente)
-
-### **Ejemplos de Cálculo:**
-| Monto         | Comisión por $100 | Comisión por $1,500 | Comisión Aplicada |
-|---------------|-------------------|---------------------|-------------------|
-| $100          | $5                | $10                 | **$5**            |
-| $500          | $25               | $10                 | **$10**           |
-| $1,000        | $50               | $10                 | **$10**           |
-| $1,500        | $75               | $10                 | **$10**           |
-| $3,000        | $150              | $20                 | **$20**           |
-| $5,000        | $250              | $40                 | **$40**           |
+### **Comisiones Implementadas:**
+- **Monto < $1,500**: Comisión de **$5.00**
+- **Monto ≥ $1,500**: Comisión de **$10.00**
 
 ### **Funcionamiento:**
 - Al usuario se le cobra: **Monto a transferir + Comisión**
@@ -106,36 +95,7 @@ npm start
 
 ## 🧪 PRUEBAS
 
-### **Prueba 1: Transferencia de $100**
-
-**SQL:**
-```sql
-CALL sp_realizar_transferencia(
-    '1234567890',
-    '0987654321',
-    100.00,
-    'Prueba $100',
-    @resultado,
-    @id,
-    @comision,
-    @total
-);
-SELECT @resultado, @comision, @total;
-```
-
-**Cálculo:**
-- Comisión por $100: CEILING(100/100) * $5 = 1 * $5 = **$5**
-- Comisión por $1,500: CEILING(100/1500) * $10 = 1 * $10 = **$10**
-- Comisión aplicada: **$5** (la menor)
-
-**Resultado esperado:**
-- Comisión: $5.00
-- Total cobrado: $105.00
-- Monto que llega al destino: $100.00
-
----
-
-### **Prueba 2: Transferencia de $500**
+### **Prueba 1: Comisión de $5 (monto < $1,500)**
 
 **SQL:**
 ```sql
@@ -143,7 +103,7 @@ CALL sp_realizar_transferencia(
     '1234567890',
     '0987654321',
     500.00,
-    'Prueba $500',
+    'Prueba comisión $5',
     @resultado,
     @id,
     @comision,
@@ -152,27 +112,22 @@ CALL sp_realizar_transferencia(
 SELECT @resultado, @comision, @total;
 ```
 
-**Cálculo:**
-- Comisión por $100: CEILING(500/100) * $5 = 5 * $5 = **$25**
-- Comisión por $1,500: CEILING(500/1500) * $10 = 1 * $10 = **$10**
-- Comisión aplicada: **$10** (la menor)
-
 **Resultado esperado:**
-- Comisión: $10.00
-- Total cobrado: $510.00
+- Comisión: $5.00
+- Total cobrado: $505.00
 - Monto que llega al destino: $500.00
 
 ---
 
-### **Prueba 3: Transferencia de $3,000**
+### **Prueba 2: Comisión de $10 (monto ≥ $1,500)**
 
 **SQL:**
 ```sql
 CALL sp_realizar_transferencia(
     '1234567890',
     '0987654321',
-    3000.00,
-    'Prueba $3,000',
+    1500.00,
+    'Prueba comisión $10',
     @resultado,
     @id,
     @comision,
@@ -181,15 +136,10 @@ CALL sp_realizar_transferencia(
 SELECT @resultado, @comision, @total;
 ```
 
-**Cálculo:**
-- Comisión por $100: CEILING(3000/100) * $5 = 30 * $5 = **$150**
-- Comisión por $1,500: CEILING(3000/1500) * $10 = 2 * $10 = **$20**
-- Comisión aplicada: **$20** (la menor)
-
 **Resultado esperado:**
-- Comisión: $20.00
-- Total cobrado: $3,020.00
-- Monto que llega al destino: $3,000.00
+- Comisión: $10.00
+- Total cobrado: $1,510.00
+- Monto que llega al destino: $1,500.00
 
 ---
 
@@ -273,25 +223,23 @@ ORDER BY FechaTransferencia DESC;
 ## 🎯 FLUJO COMPLETO DEL USUARIO
 
 1. **Usuario ingresa monto**: $1,000
-2. **Sistema calcula comisión**:
-   - Opción A: CEILING(1000/100) * $5 = 10 * $5 = $50
-   - Opción B: CEILING(1000/1500) * $10 = 1 * $10 = $10
-   - Comisión aplicada: **$10** (la menor)
-   - Total a cobrar: $1,010
+2. **Sistema calcula**:
+   - Comisión: $5 (porque es < $1,500)
+   - Total a cobrar: $1,005
 3. **Sistema valida**:
-   - ¿Saldo suficiente? ($1,010)
+   - ¿Saldo suficiente? ($1,005)
    - ✅ Sí → Continuar
    - ❌ No → Error "Saldo insuficiente"
 4. **Sistema ejecuta**:
-   - Resta $1,010 de cuenta origen
+   - Resta $1,005 de cuenta origen
    - Suma $1,000 a cuenta destino
-   - Guarda comisión de $10 en el banco
+   - Guarda comisión de $5 en el banco
 5. **Usuario ve confirmación**:
    ```
    ✓ Transferencia exitosa
    Monto Transferido: $1,000.00
-   Comisión:          $10.00
-   Total Cobrado:     $1,010.00
+   Comisión:          $5.00
+   Total Cobrado:     $1,005.00
    ```
 
 ---
