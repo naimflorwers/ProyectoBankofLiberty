@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
   // Tu URL real (¡Esto está excelente!)
-  private apiUrl = 'http://penyrphf.icu:3000/api';
+  private apiUrl = 'http://penyrphf.icu/api';
 
   constructor(private http: HttpClient) {}
 
