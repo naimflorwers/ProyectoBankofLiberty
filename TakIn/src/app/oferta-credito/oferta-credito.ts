@@ -20,7 +20,7 @@ templateUrl: './oferta-credito.html',
   styleUrls: ['./oferta-credito.css']
 })
 export class OfertaCredito implements OnInit {
-  private apiUrl = 'http://penyrphf.icu:3000/api';
+  private apiUrl = '/api';
   
   usuario: any = null;
   oferta: OfertaCreditoData | null = null;

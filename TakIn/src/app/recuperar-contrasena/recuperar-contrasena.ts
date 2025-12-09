@@ -34,7 +34,7 @@ export class RecuperarContrasena {
   passwordVisible: boolean = false;
   confirmPasswordVisible: boolean = false;
 
-  private apiUrl = 'http://penyrphf.icu:3000/api';
+  private apiUrl = '/api';
 
   constructor(
     private http: HttpClient,

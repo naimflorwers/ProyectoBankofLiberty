@@ -21,7 +21,7 @@ templateUrl: './menu-cliente.html',
   styleUrl: './menu-cliente.css'
 })
 export class MenuCliente implements OnInit {
-  private apiUrl = 'http://penyrphf.icu:3000/api';
+  private apiUrl = '/api';
   
   // Control del modal
   mostrarModalCredito = false;

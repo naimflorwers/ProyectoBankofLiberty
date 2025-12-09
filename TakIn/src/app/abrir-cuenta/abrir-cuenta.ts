@@ -45,7 +45,7 @@ export class AbrirCuenta {
     };
 
     this.loading = true;
-    this.http.post('http://penyrphf.icu:3000/api/registro', payload).subscribe({
+    this.http.post('/api/registro', payload).subscribe({
       next: (res: any) => {
         this.loading = false;
         this.successMsg = 'Cuenta creada correctamente. Redirigiendo a iniciar sesión...';
