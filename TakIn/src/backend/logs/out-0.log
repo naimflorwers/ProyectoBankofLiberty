@@ -54,3 +54,75 @@
 2025-12-09 03:51:53 +00:00: 💳 Consultando movimientos para cuenta: 1234567890
 2025-12-09 03:51:53 +00:00: ✅ Estado de cuenta generado exitosamente
 2025-12-09 03:51:53 +00:00: 📈 Resumen: { movimientos: 0, ingresos: 0, egresos: 0, saldoFinal: 12552.45 }
+2025-12-09 04:16:33 +00:00: [dotenv@17.2.3] injecting env (9) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+2025-12-09 04:16:33 +00:00: [dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+2025-12-09 04:16:34 +00:00: Iniciando server.js...
+2025-12-09 04:16:34 +00:00: ✅ Servidor corriendo en http://penyrphf.icu:3000
+2025-12-09 04:16:34 +00:00: [EMAIL] Transporter de correo configurado
+2025-12-09 04:16:34 +00:00: ¡Conectado exitosamente a la base de datos de AWS EC2!
+2025-12-09 04:16:34 +00:00: ✅ [EMAIL] Conexión SMTP verificada correctamente
+2025-12-09 04:17:11 +00:00: 🔍 Verificando elegibilidad para usuario: 1
+2025-12-09 04:17:11 +00:00: 📌 GET /api/cuentas/1 - Buscando cuentas...
+2025-12-09 04:17:11 +00:00: ✅ Cuentas encontradas: 1
+2025-12-09 04:17:11 +00:00: Datos: [
+  {
+    Numcuenta: '1234567890',
+    Banco: 'Liberty Bank',
+    Dinero: 12552.45,
+    Clabe: '123456789012345678',
+    NumTelefono: '5512345678'
+  }
+]
+2025-12-09 04:17:25 +00:00: 🔍 Verificando elegibilidad para usuario: 1
+2025-12-09 04:18:15 +00:00: 🔍 Verificando elegibilidad para usuario: 1
+2025-12-09 04:18:16 +00:00: 📌 GET /api/cuentas/1 - Buscando cuentas...
+2025-12-09 04:18:16 +00:00: ✅ Cuentas encontradas: 1
+2025-12-09 04:18:16 +00:00: Datos: [
+  {
+    Numcuenta: '1234567890',
+    Banco: 'Liberty Bank',
+    Dinero: 12552.45,
+    Clabe: '123456789012345678',
+    NumTelefono: '5512345678'
+  }
+]
+2025-12-09 04:18:30 +00:00: 📊 Estado de Cuenta - Request: { idUsuario: 1, fechaInicio: '2025-11-08', fechaFin: '2025-12-08' }
+2025-12-09 04:18:30 +00:00: 👤 Usuario encontrado: {
+  Nombre: 'Carlos',
+  ApellidoPaterno: 'González',
+  ApellidoMaterno: 'Ramírez',
+  Correo: 'yamirperezlopez800@gmail.com',
+  Numcuenta: '1234567890',
+  Saldo: 12552.45,
+  Banco: 'Liberty Bank'
+}
+2025-12-09 04:18:30 +00:00: 💳 Consultando movimientos para cuenta: 1234567890
+2025-12-09 04:18:30 +00:00: ✅ Estado de cuenta generado exitosamente
+2025-12-09 04:18:30 +00:00: 📈 Resumen: { movimientos: 0, ingresos: 0, egresos: 0, saldoFinal: 12552.45 }
+2025-12-09 04:18:30 +00:00: 🔍 Verificando elegibilidad para usuario: 1
+2025-12-09 04:18:44 +00:00: 📊 Estado de Cuenta - Request: { idUsuario: 1, fechaInicio: '2025-09-01', fechaFin: '2026-01-04' }
+2025-12-09 04:18:44 +00:00: 👤 Usuario encontrado: {
+  Nombre: 'Carlos',
+  ApellidoPaterno: 'González',
+  ApellidoMaterno: 'Ramírez',
+  Correo: 'yamirperezlopez800@gmail.com',
+  Numcuenta: '1234567890',
+  Saldo: 12552.45,
+  Banco: 'Liberty Bank'
+}
+2025-12-09 04:18:44 +00:00: 💳 Consultando movimientos para cuenta: 1234567890
+2025-12-09 04:18:44 +00:00: ✅ Estado de cuenta generado exitosamente
+2025-12-09 04:18:44 +00:00: 📈 Resumen: { movimientos: 3, ingresos: 0, egresos: NaN, saldoFinal: 12552.45 }
+2025-12-09 04:18:51 +00:00: 🔍 Verificando elegibilidad para usuario: 1
+2025-12-09 04:18:53 +00:00: 📌 GET /api/cuentas/1 - Buscando cuentas...
+2025-12-09 04:18:53 +00:00: ✅ Cuentas encontradas: 1
+2025-12-09 04:18:53 +00:00: Datos: [
+  {
+    Numcuenta: '1234567890',
+    Banco: 'Liberty Bank',
+    Dinero: 12552.45,
+    Clabe: '123456789012345678',
+    NumTelefono: '5512345678'
+  }
+]
+2025-12-09 04:19:01 +00:00: 🔍 Verificando elegibilidad para usuario: 1
