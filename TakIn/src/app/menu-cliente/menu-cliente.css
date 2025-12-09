@@ -1,8 +1,5 @@
-/* --- CONFIGURACIÓN IONIC --- */
-ion-content {
-  /* Usamos tu imagen de fondo, asegurando que cubra todo */
-  --background: url('../../assets/fondo.png') no-repeat center center / cover;
-}
+/* Estilos del componente */
+
 
 /* --- ESTRUCTURA PRINCIPAL --- */
 .main-container {
@@ -14,7 +11,7 @@ ion-content {
   display: flex;
   flex-direction: column;
   font-family: 'Montserrat', Arial, sans-serif;
-  overflow: hidden; /* Evitar scroll doble con ion-content */
+  overflow: hidden; /* Evitar scroll doble */
   animation: fadeInMenu 1.2s cubic-bezier(.77,0,.18,1) both;
 }
 

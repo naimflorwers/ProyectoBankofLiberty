@@ -1,5 +1,5 @@
 .error-content {
-  --background: #294c6a;
+  background: #294c6a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,10 +84,10 @@
 }
 
 .btn-home {
-  --background: #ffd700;
+  background: #ffd700;
   --background-hover: #e0b800;
   --background-activated: #d4a700;
-  --color: #294c6a;
+  color: #294c6a;
   --color-hover: #294c6a;
   --border-radius: 8px;
   font-weight: 600;

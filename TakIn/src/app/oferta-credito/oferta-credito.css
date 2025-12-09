@@ -1,8 +1,5 @@
-/* --- CONFIGURACIÓN IONIC --- */
-ion-content {
-  /* Fondo semitransparente oscuro ya que es un modal overlay */
-  --background: rgba(0, 0, 0, 0.6);
-}
+/* Estilos del componente */
+
 
 .oferta-container {
   position: fixed;

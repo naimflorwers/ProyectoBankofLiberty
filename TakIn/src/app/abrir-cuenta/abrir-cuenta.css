@@ -1,7 +1,5 @@
-/* --- CONFIGURACIÓN IONIC --- */
-ion-content {
-  --background: url('../../assets/fondo.png') no-repeat center center / cover;
-}
+/* Estilos del componente */
+
 
 /* --- CONTENEDOR PRINCIPAL --- */
 .login-container {

@@ -1,7 +1,5 @@
-/* --- CONFIGURACIÓN IONIC --- */
-ion-content {
-  --background: #33658A; /* Fondo azul oscuro */
-}
+/* Estilos del componente */
+
 
 /* --- CONTENEDOR PRINCIPAL (Centrado Vertical y Horizontal) --- */
 .main-container {

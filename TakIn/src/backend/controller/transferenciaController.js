@@ -4,7 +4,7 @@ const db = require('../db'); // Importamos la conexión que acabamos de editar
 // Definimos la función que hará la transferencia
 exports.realizarTransferencia = (req, res) => {
     
-    // 1. Recibimos los datos que vienen desde la App (Ionic) o Postman
+    // 1. Recibimos los datos que vienen desde la aplicación web o Postman
     // Deben coincidir con los nombres que envíes en el JSON
     const { cuentaRemitente, cuentaDestino, monto, motivo } = req.body;
 

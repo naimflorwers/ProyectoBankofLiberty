@@ -1,7 +1,5 @@
-/* --- CONFIGURACIÓN IONIC --- */
-ion-content {
-  --background: #33658A; /* Tu fondo azul */
-}
+/* Estilos del componente */
+
 
 /* --- WRAPPER PARA CENTRAR EN PANTALLA --- */
 .main-wrapper {

@@ -7,9 +7,9 @@ html, body {
   font-family: Arial, sans-serif; /* Puedes definir una fuente global aquí */
 }
 
-/* Estilos globales para reemplazar componentes Ionic */
+/* Estilos globales del proyecto */
 
-/* Contenedor de página (reemplaza ion-content) */
+/* Contenedor de página */
 .page-content {
   width: 100%;
   height: 100vh;
@@ -18,7 +18,7 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* Botones estándar (reemplaza ion-button) */
+/* Botones estándar */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -59,7 +59,7 @@ html, body {
   font-size: 18px;
 }
 
-/* Iconos (reemplaza ion-icon) */
+/* Iconos */
 .icon {
   display: inline-flex;
   align-items: center;

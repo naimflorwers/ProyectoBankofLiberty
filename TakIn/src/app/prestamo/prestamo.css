@@ -1,7 +1,5 @@
-/* --- CONFIGURACIÓN IONIC --- */
-ion-content {
-  --background: #2c3e50; /* Tu fondo oscuro */
-}
+/* Estilos del componente */
+
 
 :host {
   display: block;

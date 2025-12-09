@@ -221,31 +221,31 @@
 }
 
 .popover-item {
-  --background: #34495e; /* Fondo oscuro dropdown */
-  --color: #f0f0f0;      /* Texto blanco */
+  background: #34495e; /* Fondo oscuro dropdown */
+  color: #f0f0f0;      /* Texto blanco */
   --background-hover: #2c3e50;
   font-weight: bold;
   font-size: 14px;
 }
 
 /* --- ESTILOS NAVBAR GENERAL --- */
-.desktop-menu ion-button.nav-btn {
-  --color: #f0f0f0;
+.desktop-menu .nav-btn {
+  color: #f0f0f0;
   font-weight: bold;
   font-size: 15px;
   text-transform: none;
   margin: 0 2px;
 }
 
-.desktop-menu ion-button.nav-btn:hover {
-  --color: #ffd700;
+.desktop-menu .nav-btn:hover {
+  color: #ffd700;
 }
 
 /* Botón PC "Soy Empleado" */
 .btn-empleado {
-  --background: #ffd700;
+  background: #ffd700;
   --background-hover: #e0b800;
-  --color: #333;
+  color: #333;
   --border-radius: 5px;
   font-weight: bold;
   height: 40px;
