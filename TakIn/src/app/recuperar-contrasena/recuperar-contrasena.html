@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<div class="page-content">
   
   <div class="recuperar-container">
     
@@ -13,7 +13,7 @@
       <div class="pasos-indicador">
         <div class="paso" [class.activo]="pasoActual >= 1" [class.completado]="pasoActual > 1">
           <div class="paso-numero">
-            <ion-icon *ngIf="pasoActual > 1" name="checkmark-outline"></ion-icon>
+            <span *ngIf="pasoActual > 1" class="icon"></span>
             <span *ngIf="pasoActual <= 1">1</span>
           </div>
           <div class="paso-texto">Correo</div>
@@ -23,7 +23,7 @@
         
         <div class="paso" [class.activo]="pasoActual >= 2" [class.completado]="pasoActual > 2">
           <div class="paso-numero">
-            <ion-icon *ngIf="pasoActual > 2" name="checkmark-outline"></ion-icon>
+            <span *ngIf="pasoActual > 2" class="icon"></span>
             <span *ngIf="pasoActual <= 2">2</span>
           </div>
           <div class="paso-texto">Código</div>
@@ -105,7 +105,7 @@
               [(ngModel)]="nuevaContrasena" 
               required>
             <button type="button" class="toggle-password" (click)="togglePasswordVisibility()" tabindex="-1">
-              <ion-icon [name]="passwordVisible ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+              <span class="icon">{{passwordVisible ? "" : ""}}</span>
             </button>
           </div>
         </div>
@@ -121,7 +121,7 @@
               [(ngModel)]="confirmarContrasena" 
               required>
             <button type="button" class="toggle-password" (click)="toggleConfirmPasswordVisibility()" tabindex="-1">
-              <ion-icon [name]="confirmPasswordVisible ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+              <span class="icon">{{confirmPasswordVisible ? "" : ""}}</span>
             </button>
           </div>
         </div>
@@ -148,4 +148,4 @@
       
     </div>
   </div>
-</ion-content>
+</div>

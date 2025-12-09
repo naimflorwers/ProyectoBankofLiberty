@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { PdfReciboService } from '../../services/pdf-recibo.service';
 
 interface DatosTransferencia {
@@ -18,8 +17,8 @@ interface DatosTransferencia {
 @Component({
   selector: 'app-transferencia-exitosa',
   standalone: true,
-  imports: [RouterModule, CommonModule, IonicModule],
-  templateUrl: './transferencia-exitosa.html',
+  imports: [RouterModule, CommonModule],
+templateUrl: './transferencia-exitosa.html',
   styleUrl: './transferencia-exitosa.css'
 })
 export class TransferenciaExitosa implements OnInit {

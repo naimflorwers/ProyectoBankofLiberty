@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { IonicModule } from '@ionic/angular';
 
 interface Movimiento {
   fecha: string;
@@ -36,8 +35,8 @@ interface EstadoCuentaData {
 @Component({
   selector: 'app-estado-cuenta',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule, IonicModule],
-  templateUrl: './estado-cuenta.html',
+  imports: [CommonModule, FormsModule, RouterModule, HttpClientModule],
+templateUrl: './estado-cuenta.html',
   styleUrls: ['./estado-cuenta.css']
 })
 export class EstadoCuenta implements OnInit {

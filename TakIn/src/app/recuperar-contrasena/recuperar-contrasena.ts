@@ -3,13 +3,11 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-recuperar-contrasena',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule, HttpClientModule, IonicModule],
-  // IMPORTANTE: Estos nombres NO tienen ñ. Asegúrate de renombrar tus archivos.
+  imports: [FormsModule, CommonModule, RouterModule, HttpClientModule],
   templateUrl: './recuperar-contrasena.html',
   styleUrls: ['./recuperar-contrasena.css']
 })

@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<div class="page-content">
   
   <!-- Contenedor Flex para centrar todo -->
   <div class="login-container">
@@ -26,12 +26,12 @@
           
           <!-- Botón Ojo (Toggle) -->
           <button type="button" class="toggle-password" (click)="togglePassword()" tabindex="-1">
-            <ion-icon [name]="passwordVisible ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+            <span class="icon">{{passwordVisible ? "" : ""}}</span>
           </button>
           
           <!-- Botón Enviar (Flecha) -->
           <button type="submit" class="submit-btn">
-            <ion-icon name="arrow-forward-outline"></ion-icon>
+            <span class="icon"></span>
           </button>
         </div>
 
@@ -51,4 +51,4 @@
     </div>
 
   </div>
-</ion-content>
+</div>

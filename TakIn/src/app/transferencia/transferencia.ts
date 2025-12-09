@@ -1,14 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { TransferenciasService, Cuenta } from '../../services/transferencias.service';
 
 @Component({
   selector: 'app-transferencia',
   standalone: true,
-  imports: [RouterModule, CommonModule, IonicModule],
-  templateUrl: './transferencia.html',
+  imports: [RouterModule, CommonModule],
+templateUrl: './transferencia.html',
   styleUrl: './transferencia.css'
 })
 export class Transferencia implements OnInit {

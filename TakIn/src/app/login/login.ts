@@ -4,15 +4,14 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { UsuariosService } from '../../services/usuarios.service';
 import { SessionService } from '../services/session.service';
-import { IonicModule } from '@ionic/angular';
 import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login-cliente',
   standalone: true,
-  imports: [FormsModule, CommonModule, HttpClientModule, RouterModule, IonicModule],
+  imports: [FormsModule, CommonModule, HttpClientModule, RouterModule],
   providers: [UsuariosService],
-  templateUrl: './login.html',
+templateUrl: './login.html',
   styleUrls: ['./login.css']
 })
 export class Login {

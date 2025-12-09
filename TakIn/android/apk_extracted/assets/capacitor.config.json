@@ -1,6 +1,0 @@
-{
-  "appId": "com.proyectobankofliberty.app",
-  "appName": "Banco Liberty",
-  "webDir": "dist/TakIn",
-  "bundledWebRuntime": false
-}

@@ -3,7 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular'; // <--- Agregado para compatibilidad
+import { SessionService } from '../services/session.service';
 
 interface OfertaCreditoData {
   montoMaximo: number;
@@ -15,9 +15,9 @@ interface OfertaCreditoData {
 
 @Component({
   selector: 'app-menu-cliente',
-  standalone: true, // Aseguramos que sea standalone
-  imports: [RouterModule, CommonModule, HttpClientModule, FormsModule, IonicModule],
-  templateUrl: './menu-cliente.html',
+  standalone: true,
+  imports: [RouterModule, CommonModule, HttpClientModule, FormsModule],
+templateUrl: './menu-cliente.html',
   styleUrl: './menu-cliente.css'
 })
 export class MenuCliente implements OnInit {

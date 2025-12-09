@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular'; // <--- Importante para ion-content
 
 export interface OfertaCreditoData {
   montoMaximo: number;
@@ -16,8 +15,8 @@ export interface OfertaCreditoData {
 @Component({
   selector: 'app-oferta-credito',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, IonicModule],
-  templateUrl: './oferta-credito.html',
+  imports: [CommonModule, FormsModule, HttpClientModule],
+templateUrl: './oferta-credito.html',
   styleUrls: ['./oferta-credito.css']
 })
 export class OfertaCredito implements OnInit {

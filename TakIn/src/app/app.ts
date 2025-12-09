@@ -1,14 +1,11 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { SessionService } from './services/session.service';
-
-// --- CAMBIO IMPORTANTE: Importamos los componentes Standalone ---
-import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  standalone: true, // Esto confirma que es componente independiente
-  // --- CAMBIO IMPORTANTE: Agregamos IonApp y IonRouterOutlet aquí ---
-  imports: [IonApp, IonRouterOutlet], 
+  standalone: true,
+  imports: [RouterOutlet], 
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })

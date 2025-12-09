@@ -1,6 +1,6 @@
 /* --- FONDO GLOBAL --- */
-ion-content {
-  --background: #294c6a; 
+.page-content {
+  background: #294c6a; 
   height: 100%;
 }
 
@@ -12,40 +12,212 @@ ion-content {
   left: 0;
 }
 
-/* --- ESTILOS MENÚ LATERAL (MÓVIL) OSCURO --- */
-/* Fondo del menú */
-.menu-content {
-  --background: #2c3e50; /* Tu azul Navbar */
-  --color: #f0f0f0;
+/* --- MENÚ LATERAL (MÓVIL) --- */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100vh;
+  background: #2c3e50;
+  color: #f0f0f0;
+  transition: right 0.3s ease;
+  z-index: 1000;
+  overflow-y: auto;
 }
 
-/* Items del menú (Links) */
+.side-menu.menu-open {
+  right: 0;
+}
+
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.menu-close-btn {
+  background: none;
+  border: none;
+  color: #f0f0f0;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-content {
+  padding: 20px 0;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .menu-item-dark {
-  --background: transparent;
-  --color: #f0f0f0;
-  --min-height: 50px;
+  min-height: 50px;
   font-weight: 500;
 }
 
-/* Iconos del menú en blanco/gris claro */
-.menu-item-dark ion-icon {
-  color: #ffd700; /* Iconos dorados para resaltar */
+.menu-item-dark a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.menu-item-dark a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item-dark .icon {
   margin-right: 15px;
+  color: #ffd700;
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.menu-overlay.show {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Botones amarillos en el menú móvil */
 .btn-yellow-mobile {
-  --background: #ffd700;
-  --background-hover: #e0b800;
-  --color: #333;
-  --border-radius: 5px;
+  background: #ffd700;
+  color: #333;
+  border-radius: 5px;
   font-weight: bold;
 }
 
-/* --- ESTILOS DROPDOWN (PC) --- */
-/* El contenido del desplegable */
-ion-popover {
-  --width: 200px;
+.btn-yellow-mobile:hover {
+  background: #e0b800;
+}
+
+/* --- HEADER --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.desktop-menu {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+@media (max-width: 1199px) {
+  .desktop-menu {
+    display: none;
+  }
+}
+
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 1199px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  padding: 5px 10px;
+}
+
+/* --- DROPDOWN --- */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 200px;
+  background: #34495e;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 20px;
+  color: #f0f0f0;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Estilos de navegación */
+.nav-btn {
+  background: transparent;
+  color: #f0f0f0;
+  border: none;
+  padding: 8px 15px;
+  font-size: 14px;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-empleado {
+  background: #ffd700;
+  color: #333;
+  font-weight: bold;
 }
 
 .popover-item {
@@ -88,6 +260,42 @@ ion-popover {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-col {
+  flex: 1;
+  min-width: 300px;
+}
+
+.hero-text-col {
+  max-width: 600px;
+  padding: 20px;
+}
+
+.hero-image-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 991px) {
+  .hero-row {
+    flex-direction: column;
+  }
+  
+  .hero-text-col {
+    text-align: center;
+    max-width: 100%;
+  }
 }
 
 .h-100 {

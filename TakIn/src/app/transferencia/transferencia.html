@@ -1,4 +1,4 @@
-<ion-content [fullscreen]="true">
+<div class="page-content">
   
   <div class="main-container">
     
@@ -10,7 +10,7 @@
         <span class="title">Bank of Liberty</span>
       </a>
       <span class="user-icon">
-        <ion-icon name="person-circle-outline"></ion-icon>
+        <span class="icon"></span>
       </span>
     </header>
 
@@ -44,7 +44,7 @@
             
             <div class="card-header-row">
               <span class="account-name">{{ cuenta.Banco || 'TakIn' }}</span>
-              <ion-icon name="wallet-outline" class="card-icon"></ion-icon>
+              <span class="icon"></span>
             </div>
             
             <span class="account-balance">${{ cuenta.Dinero | number:'1.2-2' }}</span>
@@ -67,4 +67,4 @@
 
   </div>
 
-</ion-content>
+</div>

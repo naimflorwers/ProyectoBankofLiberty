@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-abrir-cuenta',
   standalone: true,
-  imports: [RouterModule, CommonModule, FormsModule, HttpClientModule, IonicModule],
-  templateUrl: './abrir-cuenta.html',
+  imports: [RouterModule, CommonModule, FormsModule, HttpClientModule],
+templateUrl: './abrir-cuenta.html',
   styleUrl: './abrir-cuenta.css'
 })
 export class AbrirCuenta {
