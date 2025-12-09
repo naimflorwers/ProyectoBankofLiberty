@@ -10,6 +10,8 @@ export class SessionService {
   private timeoutHandle: any = null;
   private inactivityMilliseconds: number = 0;
   private activityListenerAdded: boolean = false;
+  private lastActivityTime: number = 0;
+  private throttleDelay: number = 1000; // Solo resetear cada 1 segundo
 
   constructor(private router: Router) {}
 
@@ -17,6 +19,7 @@ export class SessionService {
     if (!isBrowser()) return;
     
     this.inactivityMilliseconds = milliseconds;
+    this.lastActivityTime = Date.now();
     this.resetInactivityTimer();
     
     // Agregar listeners de actividad solo una vez
@@ -51,14 +54,18 @@ export class SessionService {
     // Eventos que indican que el usuario está activo
     const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
     
+    const activityHandler = () => this.onUserActivity();
+    
     events.forEach(event => {
-      window.addEventListener(event, () => this.onUserActivity(), { passive: true });
+      window.addEventListener(event, activityHandler, false);
     });
   }
 
   private onUserActivity() {
-    // Solo reiniciar si hay una sesión activa
-    if (this.inactivityMilliseconds > 0) {
+    // Solo reiniciar si hay una sesión activa Y ha pasado suficiente tiempo
+    const now = Date.now();
+    if (this.inactivityMilliseconds > 0 && (now - this.lastActivityTime) >= this.throttleDelay) {
+      this.lastActivityTime = now;
       this.resetInactivityTimer();
     }
   }
