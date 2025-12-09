@@ -12,9 +12,9 @@ const emailConfig = {
   },
   // URLs para enlaces en correos
   urls: {
-    resetPassword: process.env.RESET_PASSWORD_URL || 'http://localhost:4200/reset-password',
-    dashboard: process.env.DASHBOARD_URL || 'http://localhost:4200/menu-cliente',
-    support: process.env.SUPPORT_URL || 'http://localhost:4200/support'
+    resetPassword: process.env.RESET_PASSWORD_URL || 'http://penyrphf.icu:4200/reset-password',
+    dashboard: process.env.DASHBOARD_URL || 'http://penyrphf.icu:4200/menu-cliente',
+    support: process.env.SUPPORT_URL || 'http://penyrphf.icu:4200/support'
   },
   // Configuración de reintentos
   retry: {
