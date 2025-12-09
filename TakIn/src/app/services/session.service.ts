@@ -8,25 +8,59 @@ function isBrowser(): boolean {
 @Injectable({ providedIn: 'root' })
 export class SessionService {
   private timeoutHandle: any = null;
+  private inactivityMilliseconds: number = 0;
+  private activityListenerAdded: boolean = false;
 
   constructor(private router: Router) {}
 
   startSession(milliseconds: number) {
     if (!isBrowser()) return;
-    const expireAt = Date.now() + milliseconds;
+    
+    this.inactivityMilliseconds = milliseconds;
+    this.resetInactivityTimer();
+    
+    // Agregar listeners de actividad solo una vez
+    if (!this.activityListenerAdded) {
+      this.setupActivityListeners();
+      this.activityListenerAdded = true;
+    }
+  }
+
+  private resetInactivityTimer() {
+    if (!isBrowser()) return;
+    
+    const expireAt = Date.now() + this.inactivityMilliseconds;
     try {
       localStorage.setItem('session_expires', String(expireAt));
     } catch (e) {
       console.error('Error setting session_expires', e);
     }
 
-    // Clear any existing timeout
+    // Limpiar timeout anterior
     this.clearTimeout();
 
-    // Schedule auto-logout
+    // Programar logout por INACTIVIDAD
     this.timeoutHandle = setTimeout(() => {
       this.logout();
-    }, milliseconds);
+    }, this.inactivityMilliseconds);
+  }
+
+  private setupActivityListeners() {
+    if (!isBrowser()) return;
+
+    // Eventos que indican que el usuario está activo
+    const events = ['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'click'];
+    
+    events.forEach(event => {
+      window.addEventListener(event, () => this.onUserActivity(), { passive: true });
+    });
+  }
+
+  private onUserActivity() {
+    // Solo reiniciar si hay una sesión activa
+    if (this.inactivityMilliseconds > 0) {
+      this.resetInactivityTimer();
+    }
   }
 
   clearTimeout() {
@@ -46,6 +80,9 @@ export class SessionService {
   }
 
   logout() {
+    // Limpiar flags de actividad
+    this.inactivityMilliseconds = 0;
+    
     // Clear storage keys used for authentication
     if (isBrowser()) {
       try {
