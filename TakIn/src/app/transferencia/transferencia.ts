@@ -68,17 +68,27 @@ export class Transferencia implements OnInit {
   }
 
   seleccionarCuenta(cuenta: Cuenta): void {
+    console.log('🖱️ Cuenta seleccionada:', cuenta);
     this.cuentaSeleccionada = cuenta;
+    this.cdr.detectChanges();
+    console.log('✅ Estado actualizado. Cuenta seleccionada:', this.cuentaSeleccionada);
   }
 
   continuar(): void {
+    console.log('🔄 Intentando continuar. Cuenta seleccionada:', this.cuentaSeleccionada);
+    
     if (!this.cuentaSeleccionada) {
+      console.error('❌ No hay cuenta seleccionada');
       alert('Por favor selecciona una cuenta');
       return;
     }
 
+    console.log('💾 Guardando cuenta en sessionStorage:', this.cuentaSeleccionada);
+    
     // Guardar la cuenta seleccionada en sessionStorage
     sessionStorage.setItem('cuentaRemitente', JSON.stringify(this.cuentaSeleccionada));
+    
+    console.log('🚀 Navegando a transferencia-destino');
     this.router.navigate(['/transferencia-destino']);
   }
 }
